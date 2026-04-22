@@ -26,6 +26,7 @@ import ExportAsUrlDialog from '../ExportAsUrlDialog.js';
 import ExportAsSvgDialog from '../ExportAsSvgDialog.js'
 import { graphvizVersion } from '../graphvizVersion.js';
 import UpdatedSnackbar from '../UpdatedSnackbar.js';
+import { backendGetState, backendRpc, backendSubscribe } from '../backendSync.js';
 import packageJSON from '../../package.json';
 
 const styles = theme => ({
@@ -141,6 +142,22 @@ class Index extends React.Component {
         this.setFocus(null);
       }
     }
+
+    this.backendMounted = true;
+    this.connectBackendSync();
+  }
+
+  componentWillUnmount() {
+    this.backendMounted = false;
+    if (this.backendUnsubscribe) {
+      this.backendUnsubscribe();
+    }
+    if (this.backendPushTimer) {
+      clearTimeout(this.backendPushTimer);
+    }
+    if (this.backendReconnectTimer) {
+      clearTimeout(this.backendReconnectTimer);
+    }
   }
 
   setPersistentState = (updater) => {
@@ -161,9 +178,101 @@ class Index extends React.Component {
           }
           localStorage.setItem(key, value);
         });
+        if (!this.suppressBackendPush && Object.prototype.hasOwnProperty.call(obj, 'dotSrc')) {
+          this.queueBackendDotPush(obj.dotSrc);
+        }
       }
       return obj;
     });
+  }
+
+  scheduleBackendReconnect = () => {
+    if (!this.backendMounted || this.backendReconnectTimer) {
+      return;
+    }
+    this.backendReconnectTimer = window.setTimeout(() => {
+      this.backendReconnectTimer = null;
+      this.connectBackendSync();
+    }, 2000);
+  }
+
+  connectBackendSync = async () => {
+    try {
+      const health = await backendGetState();
+      this.backendConnected = true;
+      if (this.backendReconnectTimer) {
+        clearTimeout(this.backendReconnectTimer);
+        this.backendReconnectTimer = null;
+      }
+      if (this.backendUnsubscribe) {
+        this.backendUnsubscribe();
+      }
+      this.backendUnsubscribe = backendSubscribe(
+        (snapshot) => this.handleBackendSnapshot(snapshot),
+        () => {
+          this.backendConnected = false;
+          if (this.backendUnsubscribe) {
+            this.backendUnsubscribe();
+            this.backendUnsubscribe = null;
+          }
+          this.scheduleBackendReconnect();
+        },
+      );
+      if (health && health.dot) {
+        const localDot = this.state.dotSrc || '';
+        const backendHasContent = health.summary && (health.summary.nodeCount > 0 || health.summary.edgeCount > 0);
+        if (backendHasContent || !localDot.trim()) {
+          this.handleBackendSnapshot(health);
+        } else {
+          this.queueBackendDotPush(localDot, true);
+        }
+      }
+    } catch (error) {
+      this.backendConnected = false;
+      this.scheduleBackendReconnect();
+    }
+  }
+
+  handleBackendSnapshot = (snapshot) => {
+    if (!snapshot || typeof snapshot.dot !== 'string') {
+      return;
+    }
+    if (snapshot.dot === this.state.dotSrc) {
+      return;
+    }
+    this.suppressBackendPush = true;
+    this.setPersistentState({
+      dotSrc: snapshot.dot,
+      forceNewDotSrc: true,
+      dotSrcLastChangeTime: Date.now(),
+    });
+    window.setTimeout(() => {
+      this.suppressBackendPush = false;
+    }, 0);
+  }
+
+  queueBackendDotPush = (dotSrc, force = false) => {
+    if (!this.backendConnected) {
+      return;
+    }
+    if (this.suppressBackendPush && !force) {
+      return;
+    }
+    this.pendingBackendDotSrc = dotSrc;
+    if (this.backendPushTimer) {
+      clearTimeout(this.backendPushTimer);
+    }
+    this.backendPushTimer = window.setTimeout(() => {
+      const pendingDotSrc = this.pendingBackendDotSrc;
+      this.pendingBackendDotSrc = null;
+      if (!pendingDotSrc || !this.backendConnected) {
+        return;
+      }
+      backendRpc('setDot', { dot: pendingDotSrc }).catch((error) => {
+        // Keep the connection alive; invalid DOT should not disable sync.
+        console.warn('Backend setDot failed:', error);
+      });
+    }, force ? 0 : 250);
   }
 
   handleTextChangeFromGraph = (text) => {

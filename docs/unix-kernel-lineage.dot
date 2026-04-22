@@ -1,0 +1,48 @@
+strict digraph UnixKernelLineage {
+  rankdir=TB;
+  graph [splines=ortho, nodesep=0.45, ranksep=0.7, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fillcolor="#eef2ff", color="#4f46e5", margin="0.12,0.08"];
+  edge [color="#64748b", fontname="Helvetica", fontsize=10];
+
+  bell [label="Bell Labs\nUnix project"];
+  unix1 [label="UNIX v1\n1971"];
+  unix6 [label="UNIX v6\n1975"];
+  unix7 [label="UNIX v7\n1979"];
+  research [label="Research Unix\n8th/9th/10th editions"];
+
+  bsd [label="BSD 4.x\nBerkeley"];
+  systemv [label="System V\nAT&T"];
+  sysiii [label="System III"];
+  svr4 [label="System V Release 4\nSVR4"];
+
+  freebsd [label="FreeBSD"];
+  netbsd [label="NetBSD"];
+  openbsd [label="OpenBSD"];
+  dragonfly [label="DragonFly BSD"];
+
+  solaris [label="Solaris\n(then OpenSolaris)"];
+  aix [label="AIX"];
+  hpux [label="HP-UX"];
+  irix [label="IRIX"];
+  unixware [label="UnixWare"];
+  illumos [label="illumos"];
+  macos [label="macOS / XNU\n(BSD + Mach)"];
+  linux [label="Linux\n(unix-like, not descended)", fillcolor="#fff7ed", color="#ea580c"];
+
+  bell -> unix1 -> unix6 -> unix7 -> research;
+  unix7 -> bsd;
+  unix7 -> systemv;
+  systemv -> sysiii -> svr4;
+  bsd -> freebsd;
+  bsd -> netbsd;
+  bsd -> openbsd;
+  bsd -> dragonfly;
+  svr4 -> solaris;
+  svr4 -> aix;
+  svr4 -> hpux;
+  svr4 -> irix;
+  svr4 -> unixware;
+  solaris -> illumos;
+  bsd -> macos [style=dashed, label="BSD userland/base"];
+  unix7 -> linux [style=dotted, label="inspired by UNIX"];
+}
