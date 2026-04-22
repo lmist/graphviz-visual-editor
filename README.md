@@ -1,6 +1,6 @@
 # graphviz-visual-editor
 
-Try it at http://magjac.com/graphviz-visual-editor.
+Try the original at http://magjac.com/graphviz-visual-editor.
 
 A web application for interactive visual editing of [Graphviz](http://www.graphviz.org) graphs described in the [DOT](https://www.graphviz.org/doc/info/lang.html) language.
 
@@ -10,7 +10,7 @@ A web application for interactive visual editing of [Graphviz](http://www.graphv
 ## Installation ##
 
 ```
-git clone https://github.com/magjac/graphviz-visual-editor
+git clone https://github.com/lmist/graphviz-visual-editor
 cd graphviz-visual-editor
 npm install
 make
@@ -27,7 +27,7 @@ npm run build
 
 ## Backend RPC + Live Sync ##
 
-This repo can run with a local backend RPC service that keeps the graph state in sync with the editor.
+This repo includes a backend RPC service that keeps graph state in sync with the editor and with the separate Graphviz Visual Editor MCP server.
 The backend does **not** open a browser.
 
 Run the backend in one terminal:
@@ -36,14 +36,15 @@ Run the backend in one terminal:
 npm run backend
 ```
 
-Then run the editor in another terminal:
+Then run the local development editor in another terminal:
 
 ```
-npm run start
+npm run start:local
 ```
 
-By default the editor connects to `http://127.0.0.1:3001`.
+In local development, the editor connects to `http://127.0.0.1:3001`.
 You can override that with `REACT_APP_GRAPHVIZ_RPC_URL`.
+In production, `npm start` serves the built app and RPC endpoints from the same origin.
 
 The backend exposes JSON-RPC methods for:
 
@@ -56,33 +57,6 @@ The backend exposes JSON-RPC methods for:
 - `deleteEdge`
 
 It also publishes live change events over Server-Sent Events at `/events`, so any open editor tab can stay synchronized.
-
-## MCP Server ##
-
-This repo also includes a local [MCP](https://modelcontextprotocol.io) server that **attaches to an already-running Graphviz Visual Editor tab**.
-It does **not** launch a browser.
-
-Run it with:
-
-```
-npm run mcp
-```
-
-By default it scans common local Chrome DevTools ports and looks for a tab whose URL matches the Graphviz Visual Editor.
-You can override detection with environment variables:
-
-- `GRAPHVIZ_CDP_URL` — explicit Chrome DevTools websocket URL
-- `GRAPHVIZ_CDP_PORTS` — comma-separated list of local DevTools ports to scan
-- `GRAPHVIZ_TARGET_URL` — substring to match against the page URL
-- `GRAPHVIZ_TARGET_PATTERN` — comma-separated regular expressions used to match page URLs
-
-The server exposes tools for attaching to an existing instance, reading/writing DOT, adding/removing nodes and edges, and reading live SVG output.
-It also publishes these resources:
-
-- `graphviz://connection`
-- `graphviz://current/dot`
-- `graphviz://current/svg`
-- `graphviz://current/summary`
 
 Learn more from the Create React App [README](https://github.com/facebook/create-react-app#npm-run-build-or-yarn-build) and [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment).
 

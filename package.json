@@ -22,12 +22,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/magjac/graphviz-visual-editor.git"
+    "url": "https://github.com/lmist/graphviz-visual-editor.git"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
-    "@modelcontextprotocol/sdk": "^1.29.0",
     "@mui/codemod": "^5.15.14",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
@@ -47,15 +46,15 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-scripts": "^5.0.1",
     "tss-react": "^4.9.12",
-    "typeface-roboto": "^1.1.13",
-    "zod": "^4.3.6"
+    "typeface-roboto": "^1.1.13"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
+    "start": "node server.js",
+    "start:local": "react-scripts --max_old_space_size=4096 start",
     "start:coverage": "react-scripts --max_old_space_size=4096 -r @cypress/instrument-cra start",
+    "prebuild": "node bin/generate-graphviz-version.js > src/graphvizVersion.js && node bin/generate-nodes.js > src/shapes.js && python3 bin/generate-versions.py CHANGELOG.md > src/versions.json && python3 bin/generate-versions.py graphviz/CHANGELOG.md > src/graphviz-versions.json && npx peggy --format es --output src/dotParser.js.tmp src/dotGrammar.pegjs && echo \"/* eslint-disable */\" | cat - src/dotParser.js.tmp > src/dotParser.js && rm src/dotParser.js.tmp",
     "build": "react-scripts --max_old_space_size=4096 build",
     "backend": "node backend-rpc.js",
-    "mcp": "node mcp-server.js",
     "test": "react-scripts test --env=jsdom --verbose=false",
     "test:coverage": "react-scripts test --env=jsdom --coverage --coverageDirectory=./coverage-jest",
     "integration-test": "cypress run --config video=${CI:-false} --browser=chrome --headless --record --key a12725d3-851c-4e67-b432-079b4fb1a875",

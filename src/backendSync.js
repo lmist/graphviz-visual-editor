@@ -1,10 +1,24 @@
-const DEFAULT_BACKEND_URL =
-  typeof process !== 'undefined' && process.env.REACT_APP_GRAPHVIZ_RPC_URL
-    ? process.env.REACT_APP_GRAPHVIZ_RPC_URL
-    : 'http://127.0.0.1:3001';
-
 function getBaseUrl() {
-  return DEFAULT_BACKEND_URL.replace(/\/$/, '');
+  const configuredUrl =
+    typeof process !== 'undefined' && process.env.REACT_APP_GRAPHVIZ_RPC_URL
+      ? process.env.REACT_APP_GRAPHVIZ_RPC_URL
+      : '';
+
+  if (configuredUrl) {
+    return configuredUrl.replace(/\/$/, '');
+  }
+
+  if (typeof window !== 'undefined') {
+    const isLocalCra =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+    if (isLocalCra && window.location.port === '3000') {
+      return 'http://127.0.0.1:3001';
+    }
+    return window.location.origin.replace(/\/$/, '');
+  }
+
+  return '';
 }
 
 async function request(path, options = {}) {
