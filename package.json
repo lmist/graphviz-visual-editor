@@ -52,7 +52,7 @@
     "start": "node server.js",
     "start:local": "react-scripts --max_old_space_size=4096 start",
     "start:coverage": "react-scripts --max_old_space_size=4096 -r @cypress/instrument-cra start",
-    "prebuild": "node bin/generate-graphviz-version.js > src/graphvizVersion.js && node bin/generate-nodes.js > src/shapes.js && python3 bin/generate-versions.py CHANGELOG.md > src/versions.json && python3 bin/generate-versions.py graphviz/CHANGELOG.md > src/graphviz-versions.json && npx peggy --format es --output src/dotParser.js.tmp src/dotGrammar.pegjs && echo \"/* eslint-disable */\" | cat - src/dotParser.js.tmp > src/dotParser.js && rm src/dotParser.js.tmp",
+    "prebuild": "make",
     "build": "react-scripts --max_old_space_size=4096 build",
     "backend": "node backend-rpc.js",
     "test": "react-scripts test --env=jsdom --verbose=false",
