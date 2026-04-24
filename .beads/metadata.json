@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "graphviz_visual_editor",
+  "project_id": "2a262028-f12f-4e41-aa24-30b75d721b1e"
+}
