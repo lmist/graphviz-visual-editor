@@ -9,6 +9,7 @@ export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as FormControl } from './FormControl.jsx';
 export { default as Icon } from './Icon.jsx';
 export { default as Input } from './Input.jsx';
+export { default as SvgIcon } from './SvgIcon.jsx';
 export { default as Table, TableSizeContext } from './Table.jsx';
 export { default as TableHead } from './TableHead.jsx';
 export { default as Typography } from './Typography.jsx';
