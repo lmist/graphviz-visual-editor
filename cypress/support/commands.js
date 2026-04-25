@@ -406,7 +406,10 @@ Cypress.Commands.add("settingsDialog", () => {
 });
 
 Cypress.Commands.add("fitSwitch", () => {
-  return cy.settingsDialog().find('#fit-switch');
+  return cy.settingsDialog()
+    .find('input#fit-switch')
+    .parents('.MuiFormControlLabel-root')
+    .find('.MuiSwitch-root');
 });
 
 Cypress.Commands.add("engineSelector", () => {
@@ -426,11 +429,17 @@ Cypress.Commands.add("transitionDurationInput", () => {
 });
 
 Cypress.Commands.add("pathTweenSwitch", () => {
-  return cy.settingsDialog().find('#path-tween-switch');
+  return cy.settingsDialog()
+    .find('input#path-tween-switch')
+    .parents('.MuiFormControlLabel-root')
+    .find('.MuiSwitch-root');
 });
 
 Cypress.Commands.add("shapeTweenSwitch", () => {
-  return cy.settingsDialog().find('#shape-tween-switch');
+  return cy.settingsDialog()
+    .find('input#shape-tween-switch')
+    .parents('.MuiFormControlLabel-root')
+    .find('.MuiSwitch-root');
 });
 
 Cypress.Commands.add("tweenPrecisionForm", () => {
