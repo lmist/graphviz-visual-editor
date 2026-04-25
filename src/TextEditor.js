@@ -8,7 +8,6 @@ import ErrorOutlineIcon from './components/icons/ErrorOutlineIcon.jsx';
 import { COLORS } from './design/tokens.js';
 const AceEditor = typeof ace == 'function' ? ace : ace.default;
 
-const AceEditor = typeof ace == 'function' ? ace : ace.default;
 const SELECTED_WORD_CLASS = 'gv-ace-selected-word';
 
 const errorButtonStyle = {
