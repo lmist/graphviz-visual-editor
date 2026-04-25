@@ -5,6 +5,7 @@
 // (`src/components/ui`) so primitive implementations can move without
 // touching call sites.
 
+export { default as Accordion } from './Accordion.jsx';
 export { default as AccordionDetails } from './AccordionDetails.jsx';
 export { default as AccordionSummary } from './AccordionSummary.jsx';
 export { default as Card } from './Card.jsx';
