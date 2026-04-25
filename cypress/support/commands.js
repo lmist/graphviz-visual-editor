@@ -417,11 +417,11 @@ Cypress.Commands.add("engineSelector", () => {
 });
 
 Cypress.Commands.add("engineMenu", () => {
-  return cy.get('#menu-engine');
+  return cy.get('[role=listbox]');
 });
 
 Cypress.Commands.add("engineMenuAlternative", (engine) => {
-  return cy.engineMenu().find('#' + engine);
+  return cy.engineMenu().find('li#' + engine);
 });
 
 Cypress.Commands.add("transitionDurationInput", () => {
