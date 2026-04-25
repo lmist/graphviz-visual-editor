@@ -1,24 +1,25 @@
 import React from 'react';
-import { withStyles } from 'tss-react/mui';
 import ace from 'react-ace';
 const AceEditor = typeof ace == 'function' ? ace : ace.default;
 import 'ace-builds/src-noconflict/mode-dot.js';
 import 'ace-builds/src-noconflict/theme-github.js';
 import 'ace-builds/src-noconflict/ext-searchbox.js';
-import { IconButton } from '@mui/material';
-import { ErrorOutline } from '@mui/icons-material';
+import IconButton from './components/ui/IconButton.jsx';
+import ErrorOutlineIcon from './components/icons/ErrorOutlineIcon.jsx';
+import { COLORS } from './design/tokens.js';
 
-const styles = {
-  errorButton: {
-    position: 'absolute',
-    top: 'calc(64px + 12px)',
-  },
-  aceSelectedWord: {
-    position: 'absolute',
-    background: '#d8f4fd',
-    border: '1px solid #02c1ff',
-  },
+const SELECTED_WORD_CLASS = 'gv-ace-selected-word';
+
+const errorButtonStyle = {
+  position: 'absolute',
+  top: 'calc(64px + 12px)',
 };
+
+const markerStyle = `.${SELECTED_WORD_CLASS} {
+  position: absolute;
+  background: ${COLORS.accent};
+  border: 2px solid ${COLORS.fg};
+}`;
 
 class TextEditor extends React.Component {
 
@@ -62,7 +63,6 @@ class TextEditor extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     var annotations = null;
     if (this.props.error) {
       annotations = [{
@@ -95,7 +95,7 @@ class TextEditor extends React.Component {
       startCol: location.start.column - 1,
       endRow: location.end.line - 1,
       endCol: location.end.column - 1,
-      className: classes.aceSelectedWord,
+      className: SELECTED_WORD_CLASS,
       type: 'background',
     }));
     // FIXME: There must be a better way...
@@ -110,6 +110,7 @@ class TextEditor extends React.Component {
     }
     return (
       <div id="text-editor-wrapper" ref={div => this.div = div}>
+        <style>{markerStyle}</style>
         <AceEditor
           // FIXME: Remove workaround when https://github.com/securingsincity/react-ace/issues/767 is fixed
           key={this.props.holdOff}
@@ -138,21 +139,20 @@ class TextEditor extends React.Component {
         />
         <IconButton
           id="error-button"
-          className={classes.errorButton}
           style={{
+            ...errorButtonStyle,
             left: `calc(${this.props.width} - 2 * 12px - 12px - ${scrollbarWidth}px`,
             display: this.props.error ? 'block' : 'none',
             zIndex: 1,
           }}
-          color="inherit"
           aria-label="Error"
           onClick={this.handleErrorButtonClick}
-          size="large">
-          <ErrorOutline color="error" />
+        >
+          <ErrorOutlineIcon style={{ color: COLORS.error }} />
         </IconButton>
       </div>
     );
   }
 }
 
-export default withStyles(TextEditor, styles);
+export default TextEditor;
