@@ -46,15 +46,18 @@ function Radio({
   value,
   checked,
   onChange,
+  onCheckedChange: externalOnCheckedChange,
   disabled = false,
   color, // eslint-disable-line no-unused-vars
   className,
   style,
   ...rest
 }) {
-  const handleCheckedChange = onChange
-    ? (nextChecked, event) => onChange(event, nextChecked)
-    : undefined;
+  // Consume onCheckedChange so it doesn't leak into {...rest} and onto DOM
+  // nodes via Base UI's CompositeItem (gviz-gnr). Prefer the external handler;
+  // otherwise translate MUI's onChange(event, checked) signature.
+  const handleCheckedChange = externalOnCheckedChange
+    || (onChange ? (nextChecked, event) => onChange(event, nextChecked) : undefined);
 
   const mergedStyle = {
     ...rootStyle,
