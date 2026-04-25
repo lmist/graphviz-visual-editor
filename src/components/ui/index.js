@@ -27,6 +27,7 @@ export { default as Fade } from './Fade.jsx';
 export { default as FormHelperText } from './FormHelperText.jsx';
 export { default as FormLabel } from './FormLabel.jsx';
 export { default as Icon } from './Icon.jsx';
+export { default as IconButton } from './IconButton.jsx';
 export { default as Input } from './Input.jsx';
 export { default as InputAdornment } from './InputAdornment.jsx';
 export { default as InputLabel } from './InputLabel.jsx';
