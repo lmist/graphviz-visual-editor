@@ -13,6 +13,7 @@ export { default as FormHelperText } from './FormHelperText.jsx';
 export { default as Icon } from './Icon.jsx';
 export { default as Input } from './Input.jsx';
 export { default as InputAdornment } from './InputAdornment.jsx';
+export { default as InputLabel } from './InputLabel.jsx';
 export { default as SvgIcon } from './SvgIcon.jsx';
 export { default as Table, TableSizeContext } from './Table.jsx';
 export { default as TableBody } from './TableBody.jsx';
