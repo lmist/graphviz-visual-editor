@@ -1,8 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-import PropTypes from 'prop-types';
-import { Paper } from '@mui/material';
-import { withStyles } from 'tss-react/mui';
+import { Paper } from '../components/ui';
 import withRoot from '../withRoot.js';
 import ButtonAppBar from '../ButtonAppBar.js';
 import Graph from '../Graph.js';
@@ -28,23 +26,21 @@ import UpdatedSnackbar from '../UpdatedSnackbar.js';
 import { backendGetState, backendRpc, backendSubscribe } from '../backendSync.js';
 import packageJSON from '../../package.json';
 
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-  },
-  paper: {
-    // viewport height - app bar - 2 * padding
-    height: "calc(100vh - 64px - 2 * 12px)",
-  },
-  paperWhenUpdatedSnackbarIsOpen: {
-    marginTop: "64px",
-    height: "calc(100vh - 64px - 64px - 2 * 12px)",
-  },
-  paperWhenFullscreen: {
-    height: "calc(100vh)",
-    overflow: "hidden"
-  },
-});
+const rootStyle = {
+  textAlign: 'center',
+};
+const paperStyle = {
+  // viewport height - app bar - 2 * padding
+  height: "calc(100vh - 64px - 2 * 12px)",
+};
+const paperWhenUpdatedSnackbarIsOpenStyle = {
+  marginTop: "64px",
+  height: "calc(100vh - 64px - 64px - 2 * 12px)",
+};
+const paperWhenFullscreenStyle = {
+  height: "calc(100vh)",
+  overflow: "hidden",
+};
 
 const defaultElevation = 2;
 const focusedElevation = 8;
@@ -825,7 +821,6 @@ class Index extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     const editorIsOpen = !this.state.nodeFormatDrawerIsOpen && !this.state.edgeFormatDrawerIsOpen && !this.state.fullscreen;
     const textEditorHasFocus = this.state.focusedPane === 'TextEditor';
     const nodeFormatDrawerHasFocus = this.state.focusedPane === 'NodeFormatDrawer';
@@ -856,9 +851,9 @@ class Index extends React.Component {
         graph: 6,
       }
     }
-    const paperClass = this.state.updatedSnackbarIsOpen ? classes.paperWhenUpdatedSnackbarIsOpen : this.state.fullscreen ? classes.paperWhenFullscreen : classes.paper ;
+    const paperPaneStyle = this.state.updatedSnackbarIsOpen ? paperWhenUpdatedSnackbarIsOpenStyle : this.state.fullscreen ? paperWhenFullscreenStyle : paperStyle;
     return (
-      <div className={classes.root}>
+      <div style={rootStyle}>
         <script src={process.env.PUBLIC_URL.replace(/\.$/, '') + "@hpcc-js/wasm/dist/graphviz.umd.js"} type="javascript/worker"></script>
         {!this.state.fullscreen &&
           <ButtonAppBar
@@ -975,7 +970,7 @@ class Index extends React.Component {
         >
           {!this.state.fullscreen && (
           <div style={{ padding: '12px' }}>
-            <Paper elevation={leftPaneElevation} className={paperClass}>
+            <Paper elevation={leftPaneElevation} style={paperPaneStyle}>
               {this.state.nodeFormatDrawerIsOpen &&
                 <FormatDrawer
                   type='node'
@@ -1022,7 +1017,7 @@ class Index extends React.Component {
           )}
           {this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen && (
             <div style={{ padding: '12px' }}>
-              <Paper elevation={midPaneElevation} className={paperClass}>
+              <Paper elevation={midPaneElevation} style={paperPaneStyle}>
                 <InsertPanels
                     onClick={this.handleInsertPanelsClick}
                     onNodeShapeClick={this.handleNodeShapeClick}
@@ -1033,7 +1028,7 @@ class Index extends React.Component {
             </div>
           )}
           <div style={{ padding: this.state.fullscreen ? 0 : '12px' }}>
-            <Paper elevation={rightPaneElevation} className={paperClass}>
+            <Paper elevation={rightPaneElevation} style={paperPaneStyle}>
               <Graph
                 hasFocus={graphHasFocus}
                 dotSrc={this.state.dotSrc}
@@ -1098,8 +1093,4 @@ class Index extends React.Component {
   }
 }
 
-Index.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withRoot(withStyles(Index, styles));
+export default withRoot(Index);
