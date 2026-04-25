@@ -2,6 +2,7 @@
   "database": "dolt",
   "backend": "dolt",
   "dolt_mode": "server",
+  "dolt_server_port": 3307,
   "dolt_database": "gviz",
   "project_id": "8618eb36-287d-4a7c-a737-816f57965ca6"
 }
