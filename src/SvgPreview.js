@@ -2,30 +2,24 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card } from '@mui/material';
-import { CardContent } from '@mui/material';
-import { withStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
+import { COLORS, SPACING } from './design/tokens.js';
 
 const previewWidth = 400;
 const previewHeight = 250;
-const previewMarginUnits = 1;
-const previewPadUnits = 0.5;
+const previewPad = SPACING.xs;
+const previewMargin = SPACING.sm;
 
-const styles = theme => ({
-  card: {
-    position: 'fixed',
-    zIndex: 1,
-    width: previewWidth + theme.spacing(previewPadUnits * 2).replace('px', ''),
-    height: previewHeight + theme.spacing(previewPadUnits * 2).replace('px', ''),
-  },
-  cardContent: {
-    padding: theme.spacing(previewPadUnits),
+const sectionStyle = {
+  position: 'fixed',
+  zIndex: 1,
+  width: previewWidth + previewPad * 2,
+  height: previewHeight + previewPad * 2,
+  padding: previewPad,
+  border: `1px solid ${COLORS.fg}`,
+  background: COLORS.bg,
+};
 
-  },
-});
-
-const SvgPreview = ({ classes, svg, width, height }) => {
+const SvgPreview = ({ svg, width, height }) => {
 
   const [preview, setPreview] = useState(false);
   const [x, setX] = useState(0);
@@ -60,9 +54,6 @@ const SvgPreview = ({ classes, svg, width, height }) => {
     setPreview(false);
   };
 
-  const theme = useTheme();
-  const previewMargin = +theme.spacing(previewMarginUnits).replace('px', '');
-
   return (
     <React.Fragment>
       <div
@@ -72,23 +63,20 @@ const SvgPreview = ({ classes, svg, width, height }) => {
       >
       </div>
       {preview &&
-        <Card
+        <section
           id="preview-pop-up"
-          className={classes.card}
-          raised
           style={{
+            ...sectionStyle,
             left: x + previewMargin,
             top: y + previewMargin,
           }}
         >
-          <CardContent className={classes.cardContent}>
-            <div
-              ref={div => divPreview = div}
-              dangerouslySetInnerHTML={{__html: svg}}
-            >
-            </div>
-          </CardContent>
-        </Card>
+          <div
+            ref={div => divPreview = div}
+            dangerouslySetInnerHTML={{__html: svg}}
+          >
+          </div>
+        </section>
       }
     </React.Fragment>
   );
@@ -98,7 +86,6 @@ SvgPreview.propTypes = {
   svg: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(SvgPreview, styles);
+export default SvgPreview;
