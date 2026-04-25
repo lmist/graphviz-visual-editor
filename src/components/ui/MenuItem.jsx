@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { COLORS, SPACING, TYPOGRAPHY } from '../../design/tokens.js';
+import { COLORS, SPACING, TYPOGRAPHY, MOTION } from '../../design/tokens.js';
 
 // Single primitive shared by both Menu.Popup and Select.Popup contexts.
 // The parent popup decides ARIA role: pass role="option" inside Select,
@@ -24,6 +24,7 @@ const baseStyle = {
   cursor: 'pointer',
   userSelect: 'none',
   whiteSpace: 'nowrap',
+  transition: `background-color ${MOTION.duration} ${MOTION.easing}, color ${MOTION.duration} ${MOTION.easing}`,
 };
 
 const disabledStyle = {
@@ -33,6 +34,7 @@ const disabledStyle = {
 };
 
 function MenuItem({
+  id,
   value,
   children,
   onClick,
@@ -48,17 +50,23 @@ function MenuItem({
     ...style,
   };
 
+  // Hover invert: swap fg/bg so the hovered row reads as a hard black bar
+  // with white text. This matches STYLE.md's "honest, not decorative"
+  // rule — accent is reserved for selection/focus, not casual hover.
   const handleMouseEnter = (e) => {
     if (disabled) return;
-    e.currentTarget.style.background = COLORS.accent;
+    e.currentTarget.style.background = COLORS.fg;
+    e.currentTarget.style.color = COLORS.bg;
   };
   const handleMouseLeave = (e) => {
     if (disabled) return;
     e.currentTarget.style.background = COLORS.bg;
+    e.currentTarget.style.color = COLORS.fg;
   };
 
   return (
     <li
+      id={id}
       role={role}
       aria-disabled={disabled || undefined}
       data-value={value}
@@ -76,6 +84,7 @@ function MenuItem({
 }
 
 MenuItem.propTypes = {
+  id: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.node,
   onClick: PropTypes.func,
