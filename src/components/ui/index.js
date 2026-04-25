@@ -9,6 +9,7 @@ export { default as Accordion } from './Accordion.jsx';
 export { default as AccordionDetails } from './AccordionDetails.jsx';
 export { default as AccordionSummary } from './AccordionSummary.jsx';
 export { default as Card } from './Card.jsx';
+export { default as CardContent } from './CardContent.jsx';
 export { default as Checkbox } from './Checkbox.jsx';
 export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as Divider } from './Divider.jsx';
