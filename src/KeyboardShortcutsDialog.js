@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { IconButton } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { Table } from '@mui/material';
-import { TableBody } from '@mui/material';
-import { TableCell } from '@mui/material';
-import { TableRow } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import Dialog from './components/ui/Dialog.jsx';
+import DialogContent from './components/ui/DialogContent.jsx';
+import DialogContentText from './components/ui/DialogContentText.jsx';
+import DialogTitle from './components/ui/DialogTitle.jsx';
+import IconButton from './components/ui/IconButton.jsx';
+import Table from './components/ui/Table.jsx';
+import TableBody from './components/ui/TableBody.jsx';
+import TableCell from './components/ui/TableCell.jsx';
+import TableRow from './components/ui/TableRow.jsx';
 
 const keyboardShortcuts = [
   {key: 'Ctrl-A', description: 'Select all nodes and edges.'},
@@ -27,15 +26,15 @@ const keyboardShortcuts = [
   {key: '?', description: 'Show keyboard shortcuts.'},
 ];
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  table: {
-    marginBottom: theme.spacing(2),
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const tableStyle = {
+  marginBottom: 16,
+};
 
 class KeyboardShortcutsDialog extends React.Component {
 
@@ -44,54 +43,51 @@ class KeyboardShortcutsDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>
-        <Dialog id="keyboard-shortcuts-dialog"
-          open
-          onClose={this.handleClose}
-          scroll={'paper'}
-          aria-labelledby="form-dialog-title"
-        >
-          <div className={classes.title}>
-            <DialogTitle id="form-dialog-title">Keyboard shortcuts in the graph</DialogTitle>
-            <IconButton
-              id="close-button"
-              aria-label="Close"
-              onClick={this.handleClose}
-              size="large">
-              <CloseIcon />
-            </IconButton>
-          </div>
-          <DialogContent>
-            <Table className={classes.table}>
-              <TableBody>
-                {keyboardShortcuts.map(keyboardShortcut => {
-                  return (
-                    <TableRow key={keyboardShortcut.key}>
-                      <TableCell component="th" scope="row" padding="none">
-                        {keyboardShortcut.key}
-                      </TableCell>
-                      <TableCell size="small">
-                        {keyboardShortcut.description}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-            <DialogContentText variant="body1">
-              For keyboard shortcuts in the text editor, please visit <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank" rel="noreferrer noopener">Ace Default Keyboard Shortcuts</a>
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-      </div>
+      <Dialog id="keyboard-shortcuts-dialog"
+        open
+        onClose={this.handleClose}
+        scroll={'paper'}
+        aria-labelledby="form-dialog-title"
+      >
+        <div style={titleRowStyle}>
+          <DialogTitle id="form-dialog-title">Keyboard shortcuts in the graph</DialogTitle>
+          <IconButton
+            id="close-button"
+            aria-label="Close"
+            onClick={this.handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <DialogContent>
+          <Table size="small" style={tableStyle}>
+            <TableBody>
+              {keyboardShortcuts.map(keyboardShortcut => {
+                return (
+                  <TableRow key={keyboardShortcut.key}>
+                    <TableCell component="th" scope="row" padding="none">
+                      {keyboardShortcut.key}
+                    </TableCell>
+                    <TableCell>
+                      {keyboardShortcut.description}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          <DialogContentText variant="body1">
+            For keyboard shortcuts in the text editor, please visit <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank" rel="noreferrer noopener">Ace Default Keyboard Shortcuts</a>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     );
   }
 }
 
 KeyboardShortcutsDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  onKeyboardShortcutsDialogClose: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(KeyboardShortcutsDialog, styles));
+export default withRoot(KeyboardShortcutsDialog);
