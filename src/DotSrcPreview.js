@@ -1,27 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './design/scrollbar.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-
-const styles = {
-  scrollbars: {
-    width: 200,
-    height: '6em !important',
-  },
-  pre: {
-    margin: 0,
-  }
-};
+import styles from './DotSrcPreview.module.css';
 
 class DotSrcPreview extends React.Component {
 
   render() {
-    const { classes } = this.props;
     return (
-      <PerfectScrollbar className={classes.scrollbars}>
-        <pre className={classes.pre}>
+      <PerfectScrollbar className={styles.scrollbars}>
+        <pre className={styles.pre}>
           {this.props.dotSrc}
         </pre>
       </PerfectScrollbar>
@@ -32,7 +21,6 @@ class DotSrcPreview extends React.Component {
 DotSrcPreview.propTypes = {
   dotSrc: PropTypes.string.isRequired,
   numLines: PropTypes.number.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(DotSrcPreview, styles);
+export default DotSrcPreview;
