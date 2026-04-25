@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { Close as CloseIcon } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import { Button } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { DialogActions } from '@mui/material';
-import { Table } from '@mui/material';
-import { TableHead } from '@mui/material';
-import { TableRow } from '@mui/material';
-import { TableCell } from '@mui/material';
-import { TableBody } from '@mui/material';
-import { TableSortLabel } from '@mui/material';
-import { Tooltip } from '@mui/material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import DeleteIcon from './components/icons/DeleteIcon.jsx';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Tooltip,
+} from './components/ui/index.js';
 import moment from 'moment';
-import { Delete as DeleteIcon } from '@mui/icons-material';
 import DoYouWantToDeleteDialog from './DoYouWantToDeleteDialog.js';
 import SvgPreview from './SvgPreview.js';
 import DotSrcPreview from './DotSrcPreview.js';
@@ -59,6 +60,20 @@ const rows = [
   { id: 'svg', numeric: false, disablePadding: false, label: 'Preview' },
   { id: 'delete', numeric: false, disablePadding: false, label: 'Delete' },
 ];
+
+const rootStyle = {
+  userSelect: 'none',
+};
+
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const tableStyle = {
+  minWidth: 700,
+};
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
@@ -107,19 +122,6 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
 };
-
-const styles = theme => ({
-  root: {
-    userSelect: 'none',
-  },
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  table: {
-    minWidth: 700,
-  },
-});
 
 class OpenFromBrowserDialog extends React.Component {
 
@@ -181,7 +183,6 @@ class OpenFromBrowserDialog extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     const { orderBy } = this.state;
     const { order } = this.state;
     const projects = {
@@ -207,14 +208,14 @@ class OpenFromBrowserDialog extends React.Component {
         <Dialog
           id="open-from-browser-dialog"
           maxWidth={false}
-          className={classes.root}
+          style={rootStyle}
           open
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <div className={classes.title}>
+          <div style={titleRowStyle}>
             <DialogTitle id="form-dialog-title">Open graph from browser</DialogTitle>
-            <IconButton aria-label="Close" onClick={this.handleClose} size="large">
+            <IconButton aria-label="Close" onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>
           </div>
@@ -222,7 +223,7 @@ class OpenFromBrowserDialog extends React.Component {
             <DialogContentText>
               Open a graph from the browser&apos;s local storage.
             </DialogContentText>
-            <Table className={classes.table}>
+            <Table style={tableStyle}>
               <EnhancedTableHead
                 order={order}
                 orderBy={orderBy}
@@ -264,7 +265,7 @@ class OpenFromBrowserDialog extends React.Component {
                         id="delete"
                         aria-label="Delete"
                         onClick={this.handleDelete(name)}
-                        size="large">
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
@@ -275,10 +276,10 @@ class OpenFromBrowserDialog extends React.Component {
             </Table>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.onClose} color="secondary" id="cancel">
+            <Button onClick={this.props.onClose} id="cancel">
               Cancel
             </Button>
-            <Button onClick={this.handleOpen} color="secondary" id="open">
+            <Button onClick={this.handleOpen} id="open">
               Open
             </Button>
           </DialogActions>
@@ -296,13 +297,14 @@ class OpenFromBrowserDialog extends React.Component {
 }
 
 OpenFromBrowserDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   dotSrc: PropTypes.string.isRequired,
   dotSrcLastChangeTime: PropTypes.number.isRequired,
+  svg: PropTypes.string,
   projects: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   onOpen: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
 };
 
-export default withRoot(withStyles(OpenFromBrowserDialog, styles));
+export default withRoot(OpenFromBrowserDialog);
