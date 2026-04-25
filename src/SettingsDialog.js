@@ -42,13 +42,19 @@ const contentStyle = {
 };
 
 const formControlStyle = {
-  margin: 8,
+  marginTop: 8,
+  marginBottom: 8,
+  marginLeft: 8,
+  marginRight: 8,
   minWidth: 120,
 };
 
-const formControlLabelStyle = {
-  margin: -4,
+const formGroupStyle = {
+  marginTop: 8,
+  marginLeft: 8,
 };
+
+const formControlLabelStyle = {};
 
 const radioGroupStyle = {
   marginTop: 8,
@@ -191,7 +197,7 @@ class SettingsDialog extends React.Component {
             <DialogContentText>
               These settings affects how the graph is viewed. They do not affect the graph itself.
             </DialogContentText>
-            <FormGroup row>
+            <FormGroup row style={formGroupStyle}>
               <FormControlLabel
                 style={formControlLabelStyle}
                 control={
@@ -221,7 +227,7 @@ class SettingsDialog extends React.Component {
                 step={0.1}
               />
             </FormControl>
-            <FormGroup row>
+            <FormGroup row style={formGroupStyle}>
               <FormControlLabel
                 style={formControlLabelStyle}
                 control={
@@ -234,7 +240,7 @@ class SettingsDialog extends React.Component {
                 label="Enable path tweening during transitions"
               />
             </FormGroup>
-            <FormGroup row>
+            <FormGroup row style={formGroupStyle}>
               <FormControlLabel
                 style={formControlLabelStyle}
                 control={
