@@ -1,6 +1,5 @@
 import React from 'react';
 import ace from 'react-ace';
-const AceEditor = typeof ace == 'function' ? ace : ace.default;
 import 'ace-builds/src-noconflict/mode-dot.js';
 import 'ace-builds/src-noconflict/theme-github.js';
 import 'ace-builds/src-noconflict/ext-searchbox.js';
@@ -8,6 +7,7 @@ import IconButton from './components/ui/IconButton.jsx';
 import ErrorOutlineIcon from './components/icons/ErrorOutlineIcon.jsx';
 import { COLORS } from './design/tokens.js';
 
+const AceEditor = typeof ace == 'function' ? ace : ace.default;
 const SELECTED_WORD_CLASS = 'gv-ace-selected-word';
 
 const errorButtonStyle = {
