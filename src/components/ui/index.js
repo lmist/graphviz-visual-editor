@@ -5,4 +5,4 @@
 // (`src/components/ui`) so primitive implementations can move without
 // touching call sites. Empty until E2 primitive tasks land.
 
-export {};
+export { default as TableHead } from './TableHead.jsx';
