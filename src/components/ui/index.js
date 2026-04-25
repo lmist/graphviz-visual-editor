@@ -15,6 +15,7 @@ export { default as CardContent } from './CardContent.jsx';
 export { default as Checkbox } from './Checkbox.jsx';
 export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as Dialog } from './Dialog.jsx';
+export { default as DialogActions } from './DialogActions.jsx';
 export { default as DialogContent } from './DialogContent.jsx';
 export { default as DialogContentText } from './DialogContentText.jsx';
 export { default as DialogTitle } from './DialogTitle.jsx';

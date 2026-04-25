@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { Close as CloseIcon } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import { Button } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { DialogActions } from '@mui/material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import Button from './components/ui/Button.jsx';
+import Dialog from './components/ui/Dialog.jsx';
+import DialogActions from './components/ui/DialogActions.jsx';
+import DialogContent from './components/ui/DialogContent.jsx';
+import DialogContentText from './components/ui/DialogContentText.jsx';
+import DialogTitle from './components/ui/DialogTitle.jsx';
+import IconButton from './components/ui/IconButton.jsx';
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  content: {
-    overflowY: 'visible',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const contentStyle = {
+  overflowY: 'visible',
+};
 
 class DoYouWantToDeleteDialog extends React.Component {
 
@@ -27,52 +26,47 @@ class DoYouWantToDeleteDialog extends React.Component {
     this.props.onClose();
   };
 
-  handleDelete = (event) => {
+  handleDelete = () => {
     const askForConfirmationIfExist = false;
     this.props.onDelete(this.props.name, askForConfirmationIfExist);
   };
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>
-        <Dialog
-          id="delete-graph-dialog"
-          className={classes.root}
-          open
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <div className={classes.title}>
-            <DialogTitle id="form-dialog-title">Delete {this.props.name}?</DialogTitle>
-            <IconButton aria-label="Close" onClick={this.handleClose} size="large">
-              <CloseIcon />
-            </IconButton>
-          </div>
-          <DialogContent classes={{root: classes.content}}>
-            <DialogContentText>
-              Do you want to delete <b>{this.props.name}</b> from the browser&apos;s local storage?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="secondary" id="cancel">
-              Cancel
-            </Button>
-            <Button onClick={this.handleDelete} color="secondary" id ="delete">
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      <Dialog
+        id="delete-graph-dialog"
+        open
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <div style={titleRowStyle}>
+          <DialogTitle id="form-dialog-title">Delete {this.props.name}?</DialogTitle>
+          <IconButton aria-label="Close" onClick={this.handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <DialogContent style={contentStyle}>
+          <DialogContentText>
+            Do you want to delete <b>{this.props.name}</b> from the browser&apos;s local storage?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} id="cancel" autoFocus>
+            Cancel
+          </Button>
+          <Button onClick={this.handleDelete} id="delete">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }
 
 DoYouWantToDeleteDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(DoYouWantToDeleteDialog, styles));
+export default withRoot(DoYouWantToDeleteDialog);
