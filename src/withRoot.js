@@ -1,50 +1,22 @@
 import React from 'react';
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
-import { CssBaseline } from '@mui/material';
+import { cssVariables } from './design/tokens.js';
 
-// A theme with custom primary and secondary color.
-// It's optional.
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#4ed1f8", // Blueish
-    },
-    secondary: {
-      main: "#19ccaa", // Greenish
-    },
-  },
-  components: {
-    MuiCheckbox: {
-      defaultProps: {
-        color: "secondary",
-      },
-    },
-    MuiRadio: {
-      defaultProps: {
-        color: "secondary",
-      },
-    },
-    MuiSwitch: {
-      defaultProps: {
-        color: "secondary",
-      },
-    },
-  },
-});
+const STYLE_ELEMENT_ID = 'brutalist-design-tokens';
+
+function ensureDesignTokensInjected() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById(STYLE_ELEMENT_ID)) return;
+  const style = document.createElement('style');
+  style.id = STYLE_ELEMENT_ID;
+  style.textContent = cssVariables;
+  document.head.appendChild(style);
+}
+
+ensureDesignTokensInjected();
 
 function withRoot(Component) {
   function WithRoot(props) {
-    // ThemeProvider makes the theme available down the React tree
-    // thanks to React context.
-    return (
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...props} />
-        </ThemeProvider>
-      </StyledEngineProvider>
-    );
+    return <Component {...props} />;
   }
 
   return WithRoot;

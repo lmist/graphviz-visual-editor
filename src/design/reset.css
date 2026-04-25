@@ -1,8 +1,8 @@
 /* Brutalist baseline reset.
  *
- * Foundation layer: ADDS to MUI CssBaseline, does not subtract. Keep
- * normalization minimal so CssBaseline still owns list-style, button
- * resets, and so on. Imported globally from src/index.js.
+ * Foundation layer for the brutalist design system. Imported globally
+ * from src/index.js. Replaces what MUI CssBaseline used to provide
+ * (button typography, list-style, etc.) with the minimal subset we want.
  */
 
 *,
@@ -17,7 +17,10 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p,
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -26,6 +29,14 @@ body {
   font-family: "Space Grotesk", system-ui, sans-serif;
   color: #000;
   background: #fff;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
 kbd,
