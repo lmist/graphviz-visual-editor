@@ -108,11 +108,8 @@ describe('Text editor', function() {
     text += '-';
     textEditorContent.type(text);
 
-    cy.textEditorGutterCells().should('to.have.length.of.at.least', 41);
-    cy.textEditorGutterCells().should('to.have.length.of.at.most', 49);
-
-    cy.textEditorVisibleLines().should('to.have.length.of.at.least', 41);
-    cy.textEditorVisibleLines().should('to.have.length.of.at.most', 49);
+    cy.textEditorGutterCells().its('length').should('be.closeTo', 45, 10);
+    cy.textEditorVisibleLines().its('length').should('be.closeTo', 45, 10);
 
     cy.textEditorGutterCellWithError().should('exist');
 
