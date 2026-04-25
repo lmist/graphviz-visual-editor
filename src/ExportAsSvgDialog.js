@@ -1,26 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { Close as CloseIcon } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import { Button } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { DialogActions } from '@mui/material';
-import { Input } from '@mui/material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import Button from './components/ui/Button.jsx';
+import Dialog from './components/ui/Dialog.jsx';
+import DialogActions from './components/ui/DialogActions.jsx';
+import DialogContent from './components/ui/DialogContent.jsx';
+import DialogContentText from './components/ui/DialogContentText.jsx';
+import DialogTitle from './components/ui/DialogTitle.jsx';
+import IconButton from './components/ui/IconButton.jsx';
+import Input from './components/ui/Input.jsx';
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  content: {
-    overflowY: 'visible',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const contentStyle = {
+  overflowY: 'visible',
+};
 
 class ExportAsSvgDialog extends React.Component {
 
@@ -61,33 +60,29 @@ class ExportAsSvgDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Dialog
           id="export-graph-as-svg-dialog"
-          className={classes.root}
           open
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <div className={classes.title}>
+          <div style={titleRowStyle}>
             <DialogTitle id="form-dialog-title">
               Export Graph as SVG
             </DialogTitle>
-            <IconButton aria-label="Close" onClick={this.handleClose} size="large">
+            <IconButton aria-label="Close" onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>
           </div>
-          <DialogContent classes={{root: classes.content}}>
+          <DialogContent style={contentStyle}>
             <DialogContentText>
               Choose a name for the exported SVG file
             </DialogContentText>
             <br/>
             <Input
-              inputProps={{
-                size: 60,
-              }}
+              size={60}
               autoFocus
               id="export"
               type="text"
@@ -110,10 +105,9 @@ class ExportAsSvgDialog extends React.Component {
 }
 
 ExportAsSvgDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
   defaultFilename: PropTypes.string.isRequired,
   getSvgString: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(ExportAsSvgDialog, styles));
+export default withRoot(ExportAsSvgDialog);
