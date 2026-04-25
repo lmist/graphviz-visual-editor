@@ -5,6 +5,7 @@
 // (`src/components/ui`) so primitive implementations can move without
 // touching call sites.
 
+export { default as Checkbox } from './Checkbox.jsx';
 export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as FormControl } from './FormControl.jsx';
 export { default as FormControlLabel } from './FormControlLabel.jsx';
