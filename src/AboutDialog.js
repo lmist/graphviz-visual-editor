@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+} from './components/ui';
 import graphvizVersions from './graphviz-versions.json';
 import packageJSON from '../package.json';
 import versions from './versions.json';
-import { IconButton } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
 
 class AboutDialog extends React.Component {
 
@@ -26,7 +26,6 @@ class AboutDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     const version = packageJSON.version;
     const changelogHeaderId = (() => {
       if (versions[version] == null) {
@@ -48,13 +47,13 @@ class AboutDialog extends React.Component {
           scroll={'paper'}
           aria-labelledby="form-dialog-title"
         >
-          <div className={classes.title}>
+          <div style={titleRowStyle}>
             <DialogTitle id="form-dialog-title">About the Graphviz Visual Editor</DialogTitle>
             <IconButton
               id="close-button"
               aria-label="Close"
               onClick={this.handleClose}
-              size="large">
+            >
               <CloseIcon />
             </IconButton>
           </div>
@@ -150,7 +149,8 @@ class AboutDialog extends React.Component {
 }
 
 AboutDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  onAboutDialogClose: PropTypes.func.isRequired,
+  graphvizVersion: PropTypes.string.isRequired,
 };
 
-export default withRoot(withStyles(AboutDialog, styles));
+export default withRoot(AboutDialog);
