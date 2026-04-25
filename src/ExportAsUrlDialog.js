@@ -64,6 +64,7 @@ class ExportAsUrlDialog extends React.Component {
             autoFocus
             id="export"
             type="text"
+            aria-label="Shareable URL"
             value={this.props.URL}
             readOnly
           />

@@ -165,10 +165,11 @@ class SettingsDialog extends React.Component {
               These settings affects how the graph is rendered.
             </DialogContentText>
             <FormControl style={formControlStyle}>
-              <InputLabel htmlFor="engine-simple">Engine</InputLabel>
+              <InputLabel htmlFor="engine-selector" id="engine-selector-label">Engine</InputLabel>
               <Select
                 id="engine-selector"
                 name="engine"
+                aria-labelledby="engine-selector-label"
                 value={this.props.engine}
                 onChange={this.handleEngineSelectChange}
               >

@@ -86,6 +86,7 @@ class ExportAsSvgDialog extends React.Component {
               autoFocus
               id="export"
               type="text"
+              aria-label="SVG filename"
               value={this.state.filename}
               onChange={this.handleChange}
             />
