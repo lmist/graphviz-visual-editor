@@ -65,6 +65,58 @@
     "eject": "react-scripts eject"
   },
   "homepage": ".",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": [
+                "@mui/*",
+                "tss-react",
+                "tss-react/*",
+                "typeface-roboto",
+                "@emotion/react",
+                "@emotion/styled"
+              ],
+              "message": "MUI/tss-react/typeface-roboto/Emotion are forbidden. Use @base-ui-components/react and the project's brutalist UI primitives instead. See gv-704eaebf."
+            }
+          ]
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/pages/index.js"
+        ],
+        "rules": {
+          "no-restricted-imports": [
+            "error",
+            {
+              "patterns": [
+                {
+                  "group": [
+                    "@mui/*",
+                    "tss-react",
+                    "tss-react/*",
+                    "@emotion/react",
+                    "@emotion/styled"
+                  ],
+                  "message": "MUI/tss-react/Emotion are forbidden. Use @base-ui-components/react and the project's brutalist UI primitives instead."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@cypress/code-coverage": "^3.12.45",
