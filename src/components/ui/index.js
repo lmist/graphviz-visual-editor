@@ -42,4 +42,5 @@ export { default as TableCell } from './TableCell.jsx';
 export { default as TableHead } from './TableHead.jsx';
 export { default as TableRow } from './TableRow.jsx';
 export { default as TableSortLabel } from './TableSortLabel.jsx';
+export { default as Toolbar } from './Toolbar.jsx';
 export { default as Typography } from './Typography.jsx';
