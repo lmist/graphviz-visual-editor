@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Menu } from '@mui/material';
-import { MenuItem } from '@mui/material';
+import { Menu, MenuItem } from './components/ui';
 
 class MainMenu extends React.Component {
 
