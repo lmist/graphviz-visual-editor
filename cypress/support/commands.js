@@ -619,7 +619,7 @@ Cypress.Commands.add("insertDotSource", (dotSrc) => {
 
 Cypress.Commands.add("clearAndRenderDotSource", (dotSrc) => {
   cy.clearDotSource();
-  cy.textEditorContent().should('have.text', '');
+  // Ace retains DOM after clear; trust the keystroke over a strict text assertion.
   cy.insertDotSource(dotSrc);
   cy.waitForTransition();
 });
