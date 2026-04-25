@@ -8,7 +8,7 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-} from './components/ui';
+} from './components/ui/index.js';
 import graphvizVersions from './graphviz-versions.json';
 import packageJSON from '../package.json';
 import versions from './versions.json';

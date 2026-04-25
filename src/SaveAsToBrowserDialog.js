@@ -11,7 +11,7 @@ import {
   DialogTitle,
   IconButton,
   TextField,
-} from './components/ui';
+} from './components/ui/index.js';
 import DoYouWantToReplaceItDialog from './DoYouWantToReplaceItDialog.js';
 
 const titleRowStyle = {
