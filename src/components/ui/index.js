@@ -6,6 +6,7 @@
 // touching call sites.
 
 export { default as AccordionDetails } from './AccordionDetails.jsx';
+export { default as Card } from './Card.jsx';
 export { default as Checkbox } from './Checkbox.jsx';
 export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as Divider } from './Divider.jsx';
