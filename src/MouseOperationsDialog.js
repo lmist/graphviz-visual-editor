@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { IconButton } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { Table } from '@mui/material';
-import { TableBody } from '@mui/material';
-import { TableCell } from '@mui/material';
-import { TableRow } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import Dialog from './components/ui/Dialog.jsx';
+import DialogContent from './components/ui/DialogContent.jsx';
+import DialogTitle from './components/ui/DialogTitle.jsx';
+import IconButton from './components/ui/IconButton.jsx';
+import Table from './components/ui/Table.jsx';
+import TableBody from './components/ui/TableBody.jsx';
+import TableCell from './components/ui/TableCell.jsx';
+import TableRow from './components/ui/TableRow.jsx';
 
 const mouseOperations = [
   {key: 'Mouse wheel', description: 'Zoom in or out.'},
@@ -28,12 +27,11 @@ const mouseOperations = [
   {key: 'Drag-and-drop an insert shape', description: 'Insert a node from the insert panel with default attributes.'},
 ];
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
 
 class MouseOperationsDialog extends React.Component {
 
@@ -42,51 +40,48 @@ class MouseOperationsDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>
-        <Dialog id="mouse-operations-dialog"
-          open
-          onClose={this.handleClose}
-          scroll={'paper'}
-          aria-labelledby="form-dialog-title"
-        >
-          <div className={classes.title}>
-            <DialogTitle id="form-dialog-title">Mouse operations in the graph</DialogTitle>
-            <IconButton
-              id="close-button"
-              aria-label="Close"
-              onClick={this.handleClose}
-              size="large">
-              <CloseIcon />
-            </IconButton>
-          </div>
-          <DialogContent>
-            <Table className={classes.table}>
-              <TableBody>
-                {mouseOperations.map(mouseOperation => {
-                  return (
-                    <TableRow key={mouseOperation.key}>
-                      <TableCell component="th" scope="row" padding="none">
-                        {mouseOperation.key}
-                      </TableCell>
-                      <TableCell size="small">
-                        {mouseOperation.description}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </DialogContent>
-        </Dialog>
-      </div>
+      <Dialog id="mouse-operations-dialog"
+        open
+        onClose={this.handleClose}
+        scroll={'paper'}
+        aria-labelledby="form-dialog-title"
+      >
+        <div style={titleRowStyle}>
+          <DialogTitle id="form-dialog-title">Mouse operations in the graph</DialogTitle>
+          <IconButton
+            id="close-button"
+            aria-label="Close"
+            onClick={this.handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <DialogContent>
+          <Table size="small">
+            <TableBody>
+              {mouseOperations.map(mouseOperation => {
+                return (
+                  <TableRow key={mouseOperation.key}>
+                    <TableCell component="th" scope="row" padding="none">
+                      {mouseOperation.key}
+                    </TableCell>
+                    <TableCell>
+                      {mouseOperation.description}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </DialogContent>
+      </Dialog>
     );
   }
 }
 
 MouseOperationsDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  onMouseOperationsDialogClose: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(MouseOperationsDialog, styles));
+export default withRoot(MouseOperationsDialog);
