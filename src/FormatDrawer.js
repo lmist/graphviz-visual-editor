@@ -1,99 +1,105 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
-import { Drawer } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { Divider } from './components/ui';
-import { IconButton } from '@mui/material';
-import { ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
-import { ChevronRight as ChevronRightIcon } from '@mui/icons-material';
-import { FormControl } from '@mui/material';
-import { FormGroup } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
-import { Checkbox } from '@mui/material';
-import { Switch } from '@mui/material';
-import ColorPicker from './ColorPicker.js'
+import {
+  Checkbox,
+  DialogTitle,
+  Divider,
+  Drawer,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+  Switch,
+} from './components/ui';
+import ChevronLeftIcon from './components/icons/ChevronLeftIcon.jsx';
+import ChevronRightIcon from './components/icons/ChevronRightIcon.jsx';
+import { SPACING } from './design/tokens.js';
+import ColorPicker from './ColorPicker.js';
 
 const drawerWidth = '100%';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-    height: 'calc(100vh - 64px - 2 * 12px)',
-    textAlign: 'left',
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    textTransform: 'capitalize',
-    ...theme.mixins.toolbar,
-  },
-  styleFormControl: {
-  },
-  styleSwitch: {
-    marginLeft: theme.spacing(2),
-  },
-  styleCheckbox: {
-    marginLeft: theme.spacing(0),
-    marginTop: theme.spacing(-2),
-  },
-  colorFormControl: {
-    marginLeft: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-  },
-  colorSwitch: {
-    marginLeft: theme.spacing(0),
-  },
-});
+const drawerPaperStyle = {
+  width: drawerWidth,
+  height: `calc(100vh - 64px - 2 * 12px)`,
+  textAlign: 'left',
+};
+
+const drawerHeaderStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: '0 8px',
+  textTransform: 'capitalize',
+  minHeight: 64,
+};
+
+const styleSwitchStyle = {
+  marginLeft: SPACING.md,
+};
+
+const styleCheckboxStyle = {
+  marginLeft: 0,
+  marginTop: -SPACING.md,
+};
+
+const colorFormControlStyle = {
+  marginLeft: SPACING.md,
+  marginBottom: SPACING.sm,
+};
+
+const colorSwitchStyle = {
+  marginLeft: 0,
+};
 
 const emptyStyle = '';
 
 const nodeStyles = [
-  "dashed",
-  "dotted",
-  "solid",
-  "invis",
-  "bold",
-  "filled",
-  "striped",
-  "wedged",
-  "diagonals",
-  "rounded",
-  "radial",
+  'dashed',
+  'dotted',
+  'solid',
+  'invis',
+  'bold',
+  'filled',
+  'striped',
+  'wedged',
+  'diagonals',
+  'rounded',
+  'radial',
 ];
 
 const edgeStyles = [
-  "dashed",
-  "dotted",
-  "solid",
-  "invis",
-  "bold",
-  "tapered",
+  'dashed',
+  'dotted',
+  'solid',
+  'invis',
+  'bold',
+  'tapered',
 ];
 
 const emptyColor = '';
 
-const FormatDrawer = ({classes, type, defaultAttributes, onClick, onFormatDrawerClose, onStyleChange, onColorChange, onFillColorChange} ) => {
+function isRtl() {
+  if (typeof document === 'undefined') return false;
+  return document.documentElement.dir === 'rtl';
+}
 
+const FormatDrawer = ({
+  type,
+  defaultAttributes,
+  onClick,
+  onFormatDrawerClose,
+  onStyleChange,
+  onColorChange,
+  onFillColorChange,
+}) => {
   const [colorColorPickerIsOpen, setColorColorPickerIsOpen] = useState(false);
-  const [fillColorColorPickerIsOpen, setFillColorColorPickerIsOpen] = useState(false)
+  const [fillColorColorPickerIsOpen, setFillColorColorPickerIsOpen] = useState(false);
 
   function getStyleSet() {
     if (defaultAttributes.style == null) {
       return new Set([]);
     } else {
-      let styleSet = new Set(defaultAttributes.style.split(', '))
+      let styleSet = new Set(defaultAttributes.style.split(', '));
       styleSet.add(emptyStyle);
       return styleSet;
     }
@@ -118,79 +124,76 @@ const FormatDrawer = ({classes, type, defaultAttributes, onClick, onFormatDrawer
     onFormatDrawerClose();
   };
 
-  const handleStyleSwitchChange = (event) => {
+  const handleStyleSwitchChange = (_event, checked) => {
     let styleSet = getStyleSet();
     styleSet.clear();
-    if (event.target.checked) {
+    if (checked) {
       styleSet.add(emptyStyle);
     }
     setStyle(styleSet);
-  }
+  };
 
-  const handleStyleChange = (styleName) => (event) => {
-    const checked = event.target.checked;
+  const handleStyleChange = (styleName) => (_event, checked) => {
     let styleSet = getStyleSet();
     if (checked) {
       styleSet.delete(emptyStyle);
       styleSet.add(styleName);
-    }
-    else {
+    } else {
       styleSet.delete(styleName);
     }
     setStyle(styleSet);
   };
 
-  const handleColorSwitchChange = (event) => {
-    if (event.target.checked) {
+  const handleColorSwitchChange = (_event, checked) => {
+    if (checked) {
       onColorChange(emptyColor);
     } else {
       onColorChange(null);
     }
-  }
+  };
 
   const handleColorChange = (color) => {
     onColorChange(color);
   };
 
-  const handleFillColorSwitchChange = (event) => {
-    if (event.target.checked) {
+  const handleFillColorSwitchChange = (_event, checked) => {
+    if (checked) {
       onFillColorChange(emptyColor);
     } else {
       onFillColorChange(null);
     }
-  }
+  };
   const handleFillColorChange = (color) => {
     onFillColorChange(color);
   };
 
-  let styles = type === 'node' ? nodeStyles : edgeStyles;
-  let currentStyle = getStyleSet();
-  const theme = useTheme();
+  const styles = type === 'node' ? nodeStyles : edgeStyles;
+  const currentStyle = getStyleSet();
+  const rtl = isRtl();
+
   return (
-    <div className={classes.root}>
+    <div style={{ flexGrow: 1 }}>
       <Drawer
         id="format-drawer"
         variant="persistent"
-        anchor='left'
+        anchor="left"
         open
-        classes={{
-          paper: classes.drawerPaper,
-        }}
+        style={drawerPaperStyle}
         onClick={handleClick}
       >
-        <div className={classes.drawerHeader}>
+        <div style={drawerHeaderStyle}>
           <DialogTitle id="form-dialog-title">
             Default {type} attributes
           </DialogTitle>
-          <IconButton id="close-button" onClick={handleDrawerClose} size="large">
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          <IconButton id="close-button" onClick={handleDrawerClose}>
+            {rtl ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
-        <FormControl variant="standard" className={classes.styleFormControl}>
+        <FormControl>
           <FormGroup row>
             <FormControlLabel
-              className={classes.styleSwitch}
+              style={styleSwitchStyle}
               control={
                 <Switch
                   id="style-switch"
@@ -203,30 +206,27 @@ const FormatDrawer = ({classes, type, defaultAttributes, onClick, onFormatDrawer
             />
           </FormGroup>
           <FormGroup row id="styles">
-            {styles.map((style) =>
+            {styles.map((style) => (
               <FormControlLabel
-              className={classes.styleCheckbox}
+                key={style}
+                style={styleCheckboxStyle}
                 control={
                   <Checkbox
                     id={style}
                     checked={currentStyle.has(style)}
-                  onChange={handleStyleChange(style)}
-                  value={style}
+                    onChange={handleStyleChange(style)}
+                    value={style}
                   />
                 }
-                key={style}
                 label={style}
               />
-            )}
+            ))}
           </FormGroup>
         </FormControl>
-        <FormControl
-          variant="standard"
-          className={classes.colorFormControl}
-          id="color-picker-form">
+        <FormControl style={colorFormControlStyle} id="color-picker-form">
           <FormGroup row>
             <FormControlLabel
-              className={classes.colorSwitch}
+              style={colorSwitchStyle}
               control={
                 <Switch
                   id="color-switch"
@@ -245,17 +245,14 @@ const FormatDrawer = ({classes, type, defaultAttributes, onClick, onFormatDrawer
               setOpen={setColorColorPickerIsOpen}
               invert={true}
               color={defaultAttributes.color || ''}
-              onChange={color => handleColorChange(color)}
+              onChange={(color) => handleColorChange(color)}
             />
           </FormGroup>
         </FormControl>
-        <FormControl
-          variant="standard"
-          className={classes.colorFormControl}
-          id="fillcolor-picker-form">
+        <FormControl style={colorFormControlStyle} id="fillcolor-picker-form">
           <FormGroup row>
             <FormControlLabel
-              className={classes.colorSwitch}
+              style={colorSwitchStyle}
               control={
                 <Switch
                   id="fillcolor-switch"
@@ -273,17 +270,23 @@ const FormatDrawer = ({classes, type, defaultAttributes, onClick, onFormatDrawer
               open={fillColorColorPickerIsOpen}
               setOpen={setFillColorColorPickerIsOpen}
               color={defaultAttributes.fillcolor || ''}
-              onChange={color => handleFillColorChange(color)}
+              onChange={(color) => handleFillColorChange(color)}
             />
           </FormGroup>
         </FormControl>
       </Drawer>
     </div>
   );
-}
-
-FormatDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(FormatDrawer, styles);
+FormatDrawer.propTypes = {
+  type: PropTypes.string.isRequired,
+  defaultAttributes: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onFormatDrawerClose: PropTypes.func.isRequired,
+  onStyleChange: PropTypes.func.isRequired,
+  onColorChange: PropTypes.func.isRequired,
+  onFillColorChange: PropTypes.func.isRequired,
+};
+
+export default FormatDrawer;
