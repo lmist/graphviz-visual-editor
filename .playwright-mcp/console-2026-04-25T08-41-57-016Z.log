@@ -1,0 +1,89 @@
+[     322ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89224
+[  169239ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89224
+[  176833ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89224
+[  224552ms] [ERROR] Warning: Unknown event handler property `%s`. It will be ignored.%s onCheckedChange 
+    at span
+    at CompositeItem (http://localhost:3007/static/js/bundle.js:116486:5)
+    at RadioRoot (http://localhost:3007/static/js/bundle.js:126176:5)
+    at Radio (http://localhost:3007/static/js/bundle.js:7208:3)
+    at label
+    at FormControlLabel (http://localhost:3007/static/js/bundle.js:5660:3)
+    at div
+    at CompositeList (http://localhost:3007/static/js/bundle.js:116603:5)
+    at CompositeRoot (http://localhost:3007/static/js/bundle.js:116911:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:125829:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:7333:3)
+    at fieldset
+    at FormControl (http://localhost:3007/static/js/bundle.js:5539:3)
+    at div
+    at DialogContent (http://localhost:3007/static/js/bundle.js:4818:3)
+    at div
+    at FloatingFocusManager (http://localhost:3007/static/js/bundle.js:118703:5)
+    at DialogPopup (http://localhost:3007/static/js/bundle.js:117402:5)
+    at div
+    at FloatingPortal (http://localhost:3007/static/js/bundle.js:119306:5)
+    at DialogPortal (http://localhost:3007/static/js/bundle.js:117590:5)
+    at DialogRoot (http://localhost:3007/static/js/bundle.js:117678:5)
+    at Dialog (http://localhost:3007/static/js/bundle.js:4570:3)
+    at div
+    at SettingsDialog (http://localhost:3007/static/js/bundle.js:107334:5)
+    at WithRoot
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112497:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63538
+[  241536ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `TooltipTrigger`. 
+    at TableSortLabel (http://localhost:3007/static/js/bundle.js:8920:3)
+    at TooltipTrigger (http://localhost:3007/static/js/bundle.js:129777:5)
+    at TooltipRoot (http://localhost:3007/static/js/bundle.js:129458:5)
+    at FloatingDelayGroup (http://localhost:3007/static/js/bundle.js:118440:5)
+    at TooltipProvider (http://localhost:3007/static/js/bundle.js:129368:5)
+    at Tooltip (http://localhost:3007/static/js/bundle.js:9396:3)
+    at td
+    at TableCell (http://localhost:3007/static/js/bundle.js:8561:3)
+    at tr
+    at TableRow (http://localhost:3007/static/js/bundle.js:8782:3)
+    at thead
+    at TableHead (http://localhost:3007/static/js/bundle.js:8688:3)
+    at EnhancedTableHead (http://localhost:3007/static/js/bundle.js:106628:5)
+    at table
+    at Table (http://localhost:3007/static/js/bundle.js:8340:3)
+    at div
+    at DialogContent (http://localhost:3007/static/js/bundle.js:4818:3)
+    at div
+    at FloatingFocusManager (http://localhost:3007/static/js/bundle.js:118703:5)
+    at DialogPopup (http://localhost:3007/static/js/bundle.js:117402:5)
+    at div
+    at FloatingPortal (http://localhost:3007/static/js/bundle.js:119306:5)
+    at DialogPortal (http://localhost:3007/static/js/bundle.js:117590:5)
+    at DialogRoot (http://localhost:3007/static/js/bundle.js:117678:5)
+    at Dialog (http://localhost:3007/static/js/bundle.js:4570:3)
+    at div
+    at OpenFromBrowserDialog (http://localhost:3007/static/js/bundle.js:106690:5)
+    at WithRoot
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112497:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63538
+[  264972ms] TypeError: Cannot read properties of null (reading 'getAttribute')
+    at Selection.__WEBPACK_DEFAULT_EXPORT__ [as attr] (http://localhost:3007/static/js/bundle.js:144820:88)
+    at Graph.handleZoomOutMapButtonClick [as onZoomOutMapButtonClick] (http://localhost:3007/static/js/bundle.js:104833:30)
+    at handleZoomOutMapButtonClick (http://localhost:3007/static/js/bundle.js:102866:44)
+    at HTMLUnknownElement.callCallback (http://localhost:3007/static/js/bundle.js:67189:18)
+    at Object.invokeGuardedCallbackDev (http://localhost:3007/static/js/bundle.js:67233:20)
+    at invokeGuardedCallback (http://localhost:3007/static/js/bundle.js:67290:35)
+    at invokeGuardedCallbackAndCatchFirstError (http://localhost:3007/static/js/bundle.js:67304:29)
+    at executeDispatch (http://localhost:3007/static/js/bundle.js:71447:7)
+    at processDispatchQueueItemsInOrder (http://localhost:3007/static/js/bundle.js:71473:11)
+    at processDispatchQueue (http://localhost:3007/static/js/bundle.js:71484:9)
+[  264973ms] TypeError: Cannot read properties of null (reading 'getAttribute')
+    at Selection.__WEBPACK_DEFAULT_EXPORT__ [as attr] (http://localhost:3007/static/js/bundle.js:144820:88)
+    at Graph.handleZoomOutMapButtonClick [as onZoomOutMapButtonClick] (http://localhost:3007/static/js/bundle.js:104833:30)
+    at handleZoomOutMapButtonClick (http://localhost:3007/static/js/bundle.js:102866:44)
+    at HTMLUnknownElement.callCallback (http://localhost:3007/static/js/bundle.js:67189:18)
+    at Object.invokeGuardedCallbackDev (http://localhost:3007/static/js/bundle.js:67233:20)
+    at invokeGuardedCallback (http://localhost:3007/static/js/bundle.js:67290:35)
+    at invokeGuardedCallbackAndCatchFirstError (http://localhost:3007/static/js/bundle.js:67304:29)
+    at executeDispatch (http://localhost:3007/static/js/bundle.js:71447:7)
+    at processDispatchQueueItemsInOrder (http://localhost:3007/static/js/bundle.js:71473:11)
+    at processDispatchQueue (http://localhost:3007/static/js/bundle.js:71484:9)

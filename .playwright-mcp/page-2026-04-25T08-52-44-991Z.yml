@@ -1,0 +1,59 @@
+- generic [ref=e3]:
+  - banner [ref=e5]:
+    - generic [ref=e6]:
+      - button "Menu" [ref=e7] [cursor=pointer]:
+        - img [ref=e8]
+      - button "New" [ref=e9] [cursor=pointer]:
+        - img [ref=e10]
+      - button "OpenInBrowser" [ref=e11] [cursor=pointer]:
+        - img [ref=e12]
+      - button "SaveAlt" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+      - button "Undo" [disabled] [ref=e19]:
+        - img [ref=e20]
+      - button "Redo" [disabled] [ref=e23]:
+        - img [ref=e24]
+      - heading "Graphviz Visual Editor" [level=6] [ref=e27]: Graphviz Visual Editor
+      - button "ZoomIn" [ref=e29] [cursor=pointer]:
+        - img [ref=e30]
+      - button "ZoomOut" [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+      - button "ZoomOutMap" [ref=e37] [cursor=pointer]:
+        - img [ref=e38]
+      - button "1:1" [ref=e47] [cursor=pointer]
+      - button "Insert" [ref=e48] [cursor=pointer]
+      - button "Node format" [ref=e49] [cursor=pointer]
+      - button "Edge format" [ref=e50] [cursor=pointer]
+      - button "Settings" [ref=e51] [cursor=pointer]:
+        - img [ref=e52]
+      - link "GitHub" [ref=e59] [cursor=pointer]:
+        - /url: https://github.com/magjac/graphviz-visual-editor
+        - button "GitHub" [ref=e60]:
+          - img [ref=e61]
+      - button "Help" [ref=e63] [cursor=pointer]:
+        - img [ref=e64]
+  - generic [ref=e67]:
+    - generic [ref=e72]:
+      - textbox [ref=e73]
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - text: "1"
+          - button [expanded] [ref=e77] [cursor=pointer]
+        - generic [ref=e78]: "2"
+        - generic [ref=e79]: "3"
+        - generic [ref=e80]: "4"
+        - generic [ref=e81]: "5"
+      - generic [ref=e83]:
+        - generic:
+          - generic:
+            - generic: "strict digraph {"
+          - generic:
+            - generic: a [shape="ellipse" style="filled" fillcolor="#1f77b4"]
+          - generic:
+            - generic: b [shape="polygon" style="filled" fillcolor="#ff7f0e"]
+          - generic:
+            - generic: a -> b [fillcolor="#a6cee3" color="#1f78b4"]
+          - generic:
+            - generic: "}"
+    - button "Fullscreen" [ref=e87] [cursor=pointer]:
+      - img [ref=e88]
