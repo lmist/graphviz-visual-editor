@@ -36,6 +36,7 @@ export { default as Select } from './Select.jsx';
 export { default as Snackbar } from './Snackbar.jsx';
 export { default as SnackbarContent } from './SnackbarContent.jsx';
 export { default as SvgIcon } from './SvgIcon.jsx';
+export { default as Switch } from './Switch.jsx';
 export { default as Table, TableSizeContext } from './Table.jsx';
 export { default as TableBody } from './TableBody.jsx';
 export { default as TableCell } from './TableCell.jsx';
