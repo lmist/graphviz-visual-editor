@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
-import { Fade } from '@mui/material';
-import { CircularProgress } from '@mui/material';
-import { IconButton } from '@mui/material';
-import { OpenInFull as OpenInFullIcon } from '@mui/icons-material';
-import { CloseFullscreen as CloseFullscreenIcon } from '@mui/icons-material';
+import Fade from './components/ui/Fade.jsx';
+import CircularProgress from './components/ui/CircularProgress.jsx';
+import IconButton from './components/ui/IconButton.jsx';
+import OpenInFullIcon from './components/icons/OpenInFullIcon.jsx';
+import CloseFullscreenIcon from './components/icons/CloseFullscreenIcon.jsx';
 import { select as d3_select} from 'd3-selection';
 import { selectAll as d3_selectAll} from 'd3-selection';
 import { transition as d3_transition} from 'd3-transition';
@@ -15,33 +13,34 @@ import { pointer as d3_pointer} from 'd3-selection';
 import 'd3-graphviz';
 import DotGraph from './dot.js'
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flexGrow: 1,
-  },
-  progressWhenNotFullscreen: {
-    position: 'absolute',
-    top: 'calc(64px + 2 * 12px + 2px)',
-    left: 'calc(50vw + 2 * 12px + 2px)',
-  },
-  progressWhenFullscreen: {
-    position: 'absolute',
-    top: 'calc(1 * 12px + 2px)',
-    left: 'calc(1 * 12px + 2px)',
-  },
-  fullscreenWhenNotFullscreen: {
-    position: 'absolute',
-    top: 'calc(64px + 1 * 12px + 2px)',
-    left: 'calc(100vw - 2 * 12px - 2 * 12px)',
-  },
-  fullscreenWhenFullscreen: {
-    position: 'absolute',
-    top: 'calc(2px)',
-    left: 'calc(100vw - 2 * 12px - 1 * 12px)',
-  },
+const canvasStyle = {
+  border: '1px solid #000',
+  background: '#fff',
+  boxSizing: 'border-box',
+};
+
+const progressWhenNotFullscreenStyle = {
+  position: 'absolute',
+  top: 'calc(64px + 2 * 12px + 2px)',
+  left: 'calc(50vw + 2 * 12px + 2px)',
+};
+
+const progressWhenFullscreenStyle = {
+  position: 'absolute',
+  top: 'calc(1 * 12px + 2px)',
+  left: 'calc(1 * 12px + 2px)',
+};
+
+const fullscreenWhenNotFullscreenStyle = {
+  position: 'absolute',
+  top: 'calc(64px + 1 * 12px + 2px)',
+  left: 'calc(100vw - 2 * 12px - 2 * 12px)',
+};
+
+const fullscreenWhenFullscreenStyle = {
+  position: 'absolute',
+  top: 'calc(2px)',
+  left: 'calc(100vw - 2 * 12px - 1 * 12px)',
 };
 
 function isNumeric(n) {
@@ -780,7 +779,6 @@ class Graph extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <React.Fragment>
         <div
@@ -788,6 +786,7 @@ class Graph extends React.Component {
           ref={div => this.div = d3_select(div)}
           onDragOver={this.handleNodeShapeDragOver}
           onDrop={this.handleNodeShapeDrop.bind(this)}
+          style={canvasStyle}
         >
         </div>
         {this.state.busy && (
@@ -795,13 +794,12 @@ class Graph extends React.Component {
             in={true}
             style={{
               transitionDelay: '800ms',
+              ...(this.props.fullscreen ? progressWhenFullscreenStyle : progressWhenNotFullscreenStyle),
             }}
             unmountOnExit
           >
              <CircularProgress
                id="busy-indicator"
-               className={this.props.fullscreen ? classes.progressWhenFullscreen : classes.progressWhenNotFullscreen}
-               color="secondary"
                size={20}
                thickness={4.5}
              />
@@ -809,8 +807,7 @@ class Graph extends React.Component {
         )}
         <IconButton
           id="fullscreen"
-          className={this.props.fullscreen ? classes.fullscreenWhenFullscreen : classes.fullscreenWhenNotFullscreen}
-          color="inherit"
+          style={this.props.fullscreen ? fullscreenWhenFullscreenStyle : fullscreenWhenNotFullscreenStyle}
           aria-label="Fullscreen"
           onClick={this.props.onToggleFullscreen}
           size="small">
@@ -824,8 +821,4 @@ class Graph extends React.Component {
   }
 }
 
-Graph.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(Graph, styles);
+export default Graph;
