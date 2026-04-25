@@ -39,7 +39,6 @@ const styleSwitchStyle = {
 
 const styleCheckboxStyle = {
   marginLeft: 0,
-  marginTop: -SPACING.md,
 };
 
 const colorFormControlStyle = {
