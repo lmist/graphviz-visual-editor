@@ -12,4 +12,5 @@ export { default as Input } from './Input.jsx';
 export { default as SvgIcon } from './SvgIcon.jsx';
 export { default as Table, TableSizeContext } from './Table.jsx';
 export { default as TableHead } from './TableHead.jsx';
+export { default as TableSortLabel } from './TableSortLabel.jsx';
 export { default as Typography } from './Typography.jsx';
