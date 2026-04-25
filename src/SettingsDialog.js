@@ -1,26 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { IconButton } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { FormGroup } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
-import { FormLabel } from '@mui/material';
-import { RadioGroup } from '@mui/material';
-import { Radio } from '@mui/material';
-import { Switch } from '@mui/material';
-import { Input } from '@mui/material';
-import { InputAdornment } from './components/ui/index.js';
-import { InputLabel } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { FormHelperText } from '@mui/material';
-import { FormControl } from '@mui/material';
-import { Select } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import Dialog from './components/ui/Dialog.jsx';
+import DialogContent from './components/ui/DialogContent.jsx';
+import DialogContentText from './components/ui/DialogContentText.jsx';
+import DialogTitle from './components/ui/DialogTitle.jsx';
+import FormControl from './components/ui/FormControl.jsx';
+import FormControlLabel from './components/ui/FormControlLabel.jsx';
+import FormGroup from './components/ui/FormGroup.jsx';
+import FormHelperText from './components/ui/FormHelperText.jsx';
+import FormLabel from './components/ui/FormLabel.jsx';
+import IconButton from './components/ui/IconButton.jsx';
+import Input from './components/ui/Input.jsx';
+import InputAdornment from './components/ui/InputAdornment.jsx';
+import InputLabel from './components/ui/InputLabel.jsx';
+import MenuItem from './components/ui/MenuItem.jsx';
+import Radio from './components/ui/Radio.jsx';
+import RadioGroup from './components/ui/RadioGroup.jsx';
+import Select from './components/ui/Select.jsx';
+import Switch from './components/ui/Switch.jsx';
 
 const engines = [
   'circo',
@@ -32,48 +31,57 @@ const engines = [
   'twopi',
 ];
 
-const styles = theme => ({
-  root: {
-    overflowY: 'visible',
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  formControlLabel: {
-    margin: theme.spacing(-0.5),
-  },
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  transitionDuration: {
-    width: '7.6em',
-  },
-  group: {
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(0),
-  },
-  tweenPrecisionAbsoluteInput: {
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(1.5),
-    width: '6.9em',
-  },
-  tweenPrecisionRelativeInput: {
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(1.5),
-    width: '4.8em',
-  },
-  holdOffInput: {
-    width: '7.6em',
-  },
-  fontSizeInput: {
-    width: '5em',
-  },
-  tabSizeInput: {
-    width: '7.1em',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const contentStyle = {
+  overflowY: 'visible',
+};
+
+const formControlStyle = {
+  margin: 8,
+  minWidth: 120,
+};
+
+const formControlLabelStyle = {
+  margin: -4,
+};
+
+const radioGroupStyle = {
+  marginTop: 8,
+  marginLeft: 0,
+};
+
+const transitionDurationStyle = {
+  width: '7.6em',
+};
+
+const tweenPrecisionAbsoluteInputStyle = {
+  marginTop: 8,
+  marginLeft: 12,
+  width: '6.9em',
+};
+
+const tweenPrecisionRelativeInputStyle = {
+  marginTop: 8,
+  marginLeft: 12,
+  width: '4.8em',
+};
+
+const holdOffInputStyle = {
+  width: '7.6em',
+};
+
+const fontSizeInputStyle = {
+  width: '5em',
+};
+
+const tabSizeInputStyle = {
+  width: '7.1em',
+};
 
 class SettingsDialog extends React.Component {
 
@@ -85,20 +93,20 @@ class SettingsDialog extends React.Component {
     this.props.onEngineSelectChange(event.target.value);
   };
 
-  handleFitSwitchChange = (event) => {
-    this.props.onFitGraphSwitchChange(event.target.checked);
+  handleFitSwitchChange = (_event, checked) => {
+    this.props.onFitGraphSwitchChange(checked);
   };
 
   handleTransitionDurationChange = (event) => {
     this.props.onTransitionDurationChange(event.target.value);
   };
 
-  handleTweenPathsSwitchChange = (event) => {
-    this.props.onTweenPathsSwitchChange(event.target.checked);
+  handleTweenPathsSwitchChange = (_event, checked) => {
+    this.props.onTweenPathsSwitchChange(checked);
   };
 
-  handleTweenShapesSwitchChange = (event) => {
-    this.props.onTweenShapesSwitchChange(event.target.checked);
+  handleTweenShapesSwitchChange = (_event, checked) => {
+    this.props.onTweenShapesSwitchChange(checked);
   };
 
   handleTweenPrecisionChange = (event) => {
@@ -109,12 +117,12 @@ class SettingsDialog extends React.Component {
     this.props.onTweenPrecisionChange(tweenPrecision.toString() + (this.props.tweenPrecision.includes('%') ? '%': ''));
   };
 
-  handleTweenPrecisionIsRelativeRadioChange = (event) => {
+  handleTweenPrecisionIsRelativeRadioChange = (_event, value) => {
     let tweenPrecision = +this.props.tweenPrecision.split('%')[0];
-    if (event.target.value === 'absolute' || tweenPrecision > 1) {
+    if (value === 'absolute' || tweenPrecision > 1) {
       tweenPrecision = Math.max(Math.ceil(tweenPrecision), 1);
     }
-    this.props.onTweenPrecisionChange(tweenPrecision.toString() + (event.target.value === 'relative' ? '%': ''));
+    this.props.onTweenPrecisionChange(tweenPrecision.toString() + (value === 'relative' ? '%': ''));
   };
 
   handleHoldOffChange = (event) => {
@@ -130,14 +138,13 @@ class SettingsDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     const tweenPrecisionIsRelative = this.props.tweenPrecision.includes('%');
     const tweenPrecision = +this.props.tweenPrecision.split('%')[0];
     const tweenPrecisionType = tweenPrecisionIsRelative ? 'relative' :  'absolute';
     const tweenPrecisionUnit = tweenPrecisionIsRelative ? '%' :  'points';
     const enableTweenPrecisionSetting = this.props.tweenPaths || this.props.tweenShapes;
     const tweenPrecisionStep = (tweenPrecisionIsRelative && tweenPrecision <= 1) ? 0.1 : 1;
-    const tweenPrecisionInputClass = tweenPrecisionIsRelative ? classes.tweenPrecisionRelativeInput : classes.tweenPrecisionAbsoluteInput;
+    const tweenPrecisionInputStyle = tweenPrecisionIsRelative ? tweenPrecisionRelativeInputStyle : tweenPrecisionAbsoluteInputStyle;
     return (
       <div>
         <Dialog
@@ -147,24 +154,24 @@ class SettingsDialog extends React.Component {
           scroll={'paper'}
           aria-labelledby="form-dialog-title"
         >
-          <div className={classes.title}>
+          <div style={titleRowStyle}>
             <DialogTitle id="form-dialog-title">Graph rendering</DialogTitle>
-              <IconButton aria-label="Close" onClick={this.handleClose} size="large">
-                <CloseIcon />
-              </IconButton>
+            <IconButton aria-label="Close" onClick={this.handleClose}>
+              <CloseIcon />
+            </IconButton>
           </div>
-          <DialogContent classes={{root: classes.root}}>
+          <DialogContent style={contentStyle}>
             <DialogContentText>
               These settings affects how the graph is rendered.
             </DialogContentText>
-            <FormControl variant="standard" className={classes.formControl}>
+            <FormControl style={formControlStyle}>
               <InputLabel htmlFor="engine-simple">Engine</InputLabel>
               <Select
-                variant="standard"
                 id="engine-selector"
+                name="engine"
                 value={this.props.engine}
                 onChange={this.handleEngineSelectChange}
-                input={<Input name="engine" id="engine-helper" />}>
+              >
                 {engines.map((engine) =>
                   <MenuItem
                     id={engine}
@@ -179,13 +186,13 @@ class SettingsDialog extends React.Component {
             </FormControl>
           </DialogContent>
           <DialogTitle id="form-dialog-title">Graph viewing</DialogTitle>
-          <DialogContent classes={{root: classes.root}}>
+          <DialogContent style={contentStyle}>
             <DialogContentText>
               These settings affects how the graph is viewed. They do not affect the graph itself.
             </DialogContentText>
             <FormGroup row>
               <FormControlLabel
-                className={classes.formControlLabel}
+                style={formControlLabelStyle}
                 control={
                   <Switch
                     id="fit-switch"
@@ -197,28 +204,25 @@ class SettingsDialog extends React.Component {
               />
             </FormGroup>
             <FormControl
-              variant="standard"
-              className={classes.formControl}
+              style={formControlStyle}
               aria-describedby="transition-duration-helper-text">
               <InputLabel shrink={true}>Transition duration</InputLabel>
               <Input
-                className={classes.transitionDuration}
+                style={transitionDurationStyle}
                 id="transition-duration"
                 type="number"
                 value={this.props.transitionDuration}
                 onChange={this.handleTransitionDurationChange}
                 endAdornment={<InputAdornment position="end"> seconds</InputAdornment>}
-                inputProps={{
-                  'aria-label': 'transitionDuration',
-                  min: 0.1,
-                  max: 99,
-                  step: 0.1,
-                }}
+                aria-label="transitionDuration"
+                min={0.1}
+                max={99}
+                step={0.1}
               />
             </FormControl>
             <FormGroup row>
               <FormControlLabel
-                className={classes.formControlLabel}
+                style={formControlLabelStyle}
                 control={
                   <Switch
                     id="path-tween-switch"
@@ -231,7 +235,7 @@ class SettingsDialog extends React.Component {
             </FormGroup>
             <FormGroup row>
               <FormControlLabel
-                className={classes.formControlLabel}
+                style={formControlLabelStyle}
                 control={
                   <Switch
                     id="shape-tween-switch"
@@ -243,27 +247,26 @@ class SettingsDialog extends React.Component {
               />
             </FormGroup>
             <FormControl
-              variant="standard"
               id="tween-precision-form"
               component="fieldset"
-              className={classes.formControl}>
+              style={formControlStyle}>
               <FormLabel component="legend">Tweening precision</FormLabel>
               <RadioGroup
                 id="tween-precision-radio-group"
                 name="tweenPrecision"
-                className={classes.group}
+                style={radioGroupStyle}
                 value={tweenPrecisionType}
                 onChange={this.handleTweenPrecisionIsRelativeRadioChange}
               >
                 <FormControlLabel
-                  className={classes.formControlLabel}
+                  style={formControlLabelStyle}
                   value="absolute"
                   disabled={!enableTweenPrecisionSetting}
                   control={<Radio id="absolute"/>}
                   label="Absolute"
                 />
                 <FormControlLabel
-                  className={classes.formControlLabel}
+                  style={formControlLabelStyle}
                   value="relative"
                   disabled={!enableTweenPrecisionSetting}
                   control={<Radio id="relative"/>}
@@ -271,86 +274,75 @@ class SettingsDialog extends React.Component {
                 />
               </RadioGroup>
               <Input
-                className={tweenPrecisionInputClass}
+                style={tweenPrecisionInputStyle}
                 id="tween-precision-input"
                 type="number"
                 value={tweenPrecision}
                 disabled={!enableTweenPrecisionSetting}
                 onChange={this.handleTweenPrecisionChange}
                 endAdornment={<InputAdornment id="tween-precision-input-adornment" position="end"> {tweenPrecisionUnit} </InputAdornment>}
-                inputProps={{
-                  'aria-label': 'tweenPrecision',
-                  min: tweenPrecisionStep,
-                  max: tweenPrecisionIsRelative ? 100 : 999,
-                  step: tweenPrecisionStep,
-                }}
+                aria-label="tweenPrecision"
+                min={tweenPrecisionStep}
+                max={tweenPrecisionIsRelative ? 100 : 999}
+                step={tweenPrecisionStep}
               />
             </FormControl>
           </DialogContent>
           <DialogTitle id="form-dialog-title">Text Editor</DialogTitle>
-          <DialogContent classes={{root: classes.root}}>
+          <DialogContent style={contentStyle}>
             <FormControl
-              variant="standard"
-              className={classes.formControl}
+              style={formControlStyle}
               aria-describedby="font-size-helper-text">
               <InputLabel shrink={true}>Font size</InputLabel>
               <Input
-                className={classes.fontSizeInput}
+                style={fontSizeInputStyle}
                 id="font-size"
                 type="number"
                 value={this.props.fontSize}
                 onChange={this.handleFontSizeChange}
                 endAdornment={<InputAdornment position="end"> px</InputAdornment>}
-                inputProps={{
-                  'aria-label': 'FontSize',
-                  min: 1,
-                  max: 99,
-                  step: 1,
-                }}
+                aria-label="FontSize"
+                min={1}
+                max={99}
+                step={1}
               />
             </FormControl>
           </DialogContent>
-          <DialogContent classes={{root: classes.root}}>
+          <DialogContent style={contentStyle}>
             <FormControl
-              variant="standard"
-              className={classes.formControl}
+              style={formControlStyle}
               aria-describedby="tab-size-helper-text">
               <InputLabel shrink={true}>Tab size</InputLabel>
               <Input
-                className={classes.tabSizeInput}
+                style={tabSizeInputStyle}
                 id="tab-size"
                 type="number"
                 value={this.props.tabSize}
                 onChange={this.handleTabSizeChange}
                 endAdornment={<InputAdornment position="end"> spaces</InputAdornment>}
-                inputProps={{
-                  'aria-label': 'TabSize',
-                  min: 1,
-                  max: 99,
-                  step: 1,
-                }}
+                aria-label="TabSize"
+                min={1}
+                max={99}
+                step={1}
               />
             </FormControl>
           </DialogContent>
-          <DialogContent classes={{root: classes.root}}>
+          <DialogContent style={contentStyle}>
             <FormControl
-              variant="standard"
-              className={classes.formControl}
+              style={formControlStyle}
               aria-describedby="holdoff-helper-text">
               <InputLabel shrink={true}>Hold-off time</InputLabel>
               <Input
-                className={classes.holdOffInput}
+                style={holdOffInputStyle}
                 id="holdoff"
                 type="number"
                 value={this.props.holdOff}
                 onChange={this.handleHoldOffChange}
                 endAdornment={<InputAdornment position="end"> seconds</InputAdornment>}
-                inputProps={{
-                  'aria-label': 'Holdoff',
-                  min: 0.0,
-                  max: 9.9,
-                  step: 0.1,
-                }}
+                aria-label="Holdoff"
+                min={0.0}
+                max={9.9}
+                step={0.1}
               />
               <FormHelperText id="holdoff-helper-text">Time of editor inactivity after which graph rendering starts</FormHelperText>
             </FormControl>
@@ -362,7 +354,25 @@ class SettingsDialog extends React.Component {
 }
 
 SettingsDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  engine: PropTypes.string,
+  fitGraph: PropTypes.bool,
+  transitionDuration: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  tweenPaths: PropTypes.bool,
+  tweenShapes: PropTypes.bool,
+  tweenPrecision: PropTypes.string,
+  holdOff: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  tabSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onSettingsClose: PropTypes.func,
+  onEngineSelectChange: PropTypes.func,
+  onFitGraphSwitchChange: PropTypes.func,
+  onTransitionDurationChange: PropTypes.func,
+  onTweenPathsSwitchChange: PropTypes.func,
+  onTweenShapesSwitchChange: PropTypes.func,
+  onTweenPrecisionChange: PropTypes.func,
+  onHoldOffChange: PropTypes.func,
+  onFontSizeChange: PropTypes.func,
+  onTabSizeChange: PropTypes.func,
 };
 
-export default withRoot(withStyles(SettingsDialog, styles));
+export default withRoot(SettingsDialog);
