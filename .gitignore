@@ -45,3 +45,6 @@ cypress/screenshots
 .dolt/
 *.db
 .beads-credential-key
+
+# Per-session runtime state (written by gt/gas town safety-net)
+.runtime/
