@@ -2,7 +2,6 @@ import React from 'react';
 import 'typeface-roboto';
 import PropTypes from 'prop-types';
 import { Paper } from '@mui/material';
-import { Grid } from '@mui/material';
 import { withStyles } from 'tss-react/mui';
 import withRoot from '../withRoot.js';
 import ButtonAppBar from '../ButtonAppBar.js';
@@ -961,14 +960,21 @@ class Index extends React.Component {
             onUpdatedSnackbarClose={this.handleUpdatedSnackbarClose}
           />
         }
-        <Grid container
-          spacing={this.state.fullscreen ? 0 : 1.5}
+        <div
           style={{
+            display: 'grid',
+            gridTemplateColumns: [
+              !this.state.fullscreen ? `${columns.textEditor}fr` : null,
+              this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen ? `${columns.insertPanels}fr` : null,
+              `${columns.graph}fr`,
+            ].filter(Boolean).join(' '),
+            gap: this.state.fullscreen ? 0 : '12px',
             margin: 0,
             width: '100%',
           }}
         >
-          <Grid item xs={columns.textEditor} padding={1.5} style={{ display: this.state.fullscreen ? 'none' : 'block' }}>
+          {!this.state.fullscreen && (
+          <div style={{ padding: '12px' }}>
             <Paper elevation={leftPaneElevation} className={paperClass}>
               {this.state.nodeFormatDrawerIsOpen &&
                 <FormatDrawer
@@ -1012,9 +1018,10 @@ class Index extends React.Component {
                 />
               </div>
             </Paper>
-          </Grid>
+          </div>
+          )}
           {this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen && (
-            <Grid item xs={columns.insertPanels} padding={1.5}>
+            <div style={{ padding: '12px' }}>
               <Paper elevation={midPaneElevation} className={paperClass}>
                 <InsertPanels
                     onClick={this.handleInsertPanelsClick}
@@ -1023,9 +1030,9 @@ class Index extends React.Component {
                     onNodeShapeDragEnd={this.handleNodeShapeDragEnd}
                 />
               </Paper>
-            </Grid>
+            </div>
           )}
-          <Grid item xs={columns.graph} padding={this.state.fullscreen ? 0 : 1.5}>
+          <div style={{ padding: this.state.fullscreen ? 0 : '12px' }}>
             <Paper elevation={rightPaneElevation} className={paperClass}>
               <Graph
                 hasFocus={graphHasFocus}
@@ -1059,8 +1066,8 @@ class Index extends React.Component {
                 test={this.state.test}
               />
             </Paper>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
         {this.state.helpMenuIsOpen &&
           <HelpMenu
             anchorEl={this.state.helpMenuAnchorEl}
