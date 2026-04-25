@@ -40,7 +40,6 @@ function TableSortLabel({
       onClick={onClick}
       className={className}
       style={mergedStyle}
-      aria-sort={active ? (direction === 'desc' ? 'descending' : 'ascending') : undefined}
       {...rest}
     >
       <span>{children}</span>

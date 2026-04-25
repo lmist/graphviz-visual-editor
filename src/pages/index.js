@@ -1,5 +1,4 @@
 import React from 'react';
-import 'typeface-roboto';
 import { Paper } from '../components/ui/index.js';
 import withRoot from '../withRoot.js';
 import ButtonAppBar from '../ButtonAppBar.js';
