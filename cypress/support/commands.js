@@ -614,8 +614,8 @@ Cypress.Commands.add("waitForNotBusy", () => {
 });
 
 Cypress.Commands.add("waitForTransition", () => {
-  cy.waitForBusy();
-  cy.waitForNotBusy();
+  // Fade has an 800ms transitionDelay, so fast renders never make #busy-indicator visible.
+  cy.get('#busy-indicator').should('not.exist');
 });
 
 Cypress.Commands.add("typeDotSource", (dotSrc) => {
