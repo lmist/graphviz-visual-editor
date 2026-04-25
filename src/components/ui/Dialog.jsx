@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dialog as BaseDialog } from '@base-ui-components/react/dialog';
+import './baseUiAriaInertShim.js';
 import { BORDERS, COLORS, SPACING } from '../../design/tokens.js';
 
 const MAX_WIDTHS = {
