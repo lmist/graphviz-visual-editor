@@ -1,0 +1,36 @@
+/* Brutalist baseline reset.
+ *
+ * Foundation layer: ADDS to MUI CssBaseline, does not subtract. Keep
+ * normalization minimal so CssBaseline still owns list-style, button
+ * resets, and so on. Imported globally from src/index.js.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: #000;
+  background: #fff;
+}
+
+kbd,
+code,
+pre,
+samp {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}

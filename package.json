@@ -25,8 +25,11 @@
     "url": "https://github.com/lmist/graphviz-visual-editor.git"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-rc.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.10",
     "@mui/codemod": "^5.15.14",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
