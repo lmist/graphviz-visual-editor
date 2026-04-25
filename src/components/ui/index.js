@@ -49,4 +49,5 @@ export { default as TableHead } from './TableHead.jsx';
 export { default as TableRow } from './TableRow.jsx';
 export { default as TableSortLabel } from './TableSortLabel.jsx';
 export { default as Toolbar } from './Toolbar.jsx';
+export { default as Tooltip } from './Tooltip.jsx';
 export { default as Typography } from './Typography.jsx';
