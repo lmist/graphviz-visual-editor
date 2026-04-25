@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'tss-react/mui';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import './design/scrollbar.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const styles = {
