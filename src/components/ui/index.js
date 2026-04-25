@@ -6,3 +6,4 @@
 // touching call sites. Empty until E2 primitive tasks land.
 
 export { default as TableHead } from './TableHead.jsx';
+export { default as Table, TableSizeContext } from './Table.jsx';
