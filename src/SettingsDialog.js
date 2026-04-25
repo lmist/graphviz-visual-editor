@@ -14,7 +14,7 @@ import { RadioGroup } from '@mui/material';
 import { Radio } from '@mui/material';
 import { Switch } from '@mui/material';
 import { Input } from '@mui/material';
-import { InputAdornment } from './components/ui';
+import { InputAdornment } from './components/ui/index.js';
 import { InputLabel } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { FormHelperText } from '@mui/material';

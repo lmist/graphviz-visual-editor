@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography, Button, IconButton, Icon } from './components/ui';
+import { AppBar, Toolbar, Typography, Button, IconButton, Icon } from './components/ui/index.js';
 import MenuIcon from './components/icons/MenuIcon.jsx';
 import AddIcon from './components/icons/AddIcon.jsx';
 import OpenInBrowserIcon from './components/icons/OpenInBrowserIcon.jsx';

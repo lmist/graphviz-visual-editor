@@ -10,7 +10,7 @@ import {
   FormGroup,
   IconButton,
   Switch,
-} from './components/ui';
+} from './components/ui/index.js';
 import ChevronLeftIcon from './components/icons/ChevronLeftIcon.jsx';
 import ChevronRightIcon from './components/icons/ChevronRightIcon.jsx';
 import { SPACING } from './design/tokens.js';

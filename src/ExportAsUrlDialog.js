@@ -12,7 +12,7 @@ import {
   DialogTitle,
   IconButton,
   Input,
-} from './components/ui';
+} from './components/ui/index.js';
 
 const titleRowStyle = {
   display: 'flex',

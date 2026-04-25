@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem } from './components/ui';
+import { Menu, MenuItem } from './components/ui/index.js';
 
 class HelpMenu extends React.Component {
 

@@ -5,7 +5,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
-} from './components/ui';
+} from './components/ui/index.js';
 import ExpandMoreIcon from './components/icons/ExpandMoreIcon.jsx';
 import {shapes} from './shapes.js';
 
