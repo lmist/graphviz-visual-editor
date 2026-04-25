@@ -451,11 +451,15 @@ Cypress.Commands.add("tweenPrecisionRadioGroup", () => {
 });
 
 Cypress.Commands.add("tweenPrecisionRadioButtonAbsolute", () => {
-  return cy.tweenPrecisionRadioGroup().find('#absolute');
+  return cy.tweenPrecisionRadioGroup()
+    .contains('.MuiFormControlLabel-root', 'Absolute')
+    .find('input[type=radio]');
 });
 
 Cypress.Commands.add("tweenPrecisionRadioButtonRelative", () => {
-  return cy.tweenPrecisionRadioGroup().find('#relative');
+  return cy.tweenPrecisionRadioGroup()
+    .contains('.MuiFormControlLabel-root', 'Relative')
+    .find('input[type=radio]');
 });
 
 Cypress.Commands.add("tweenPrecisionInput", () => {
