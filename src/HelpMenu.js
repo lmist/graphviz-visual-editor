@@ -1,6 +1,5 @@
 import React from 'react';
-import { Menu } from '@mui/material';
-import { MenuItem } from '@mui/material';
+import { Menu, MenuItem } from './components/ui';
 
 class HelpMenu extends React.Component {
 
@@ -26,18 +25,16 @@ class HelpMenu extends React.Component {
   render() {
 
     return (
-      <div>
-        <Menu
-          id="help-menu"
-          anchorEl={this.props.anchorEl}
-          open
-          onClose={this.handleClose}
-        >
-          <MenuItem id="keyboard-shortcuts" onClick={this.handleKeyboardShortcutsClick}>Keyboard shortcuts</MenuItem>
-          <MenuItem id ="mouse-operations" onClick={this.handleMouseOperationsClick}>Mouse operations</MenuItem>
-          <MenuItem id="about" onClick={this.handleAboutClick}>About</MenuItem>
-        </Menu>
-      </div>
+      <Menu
+        id="help-menu"
+        anchorEl={this.props.anchorEl}
+        open
+        onClose={this.handleClose}
+      >
+        <MenuItem id="keyboard-shortcuts" onClick={this.handleKeyboardShortcutsClick}>Keyboard shortcuts</MenuItem>
+        <MenuItem id="mouse-operations" onClick={this.handleMouseOperationsClick}>Mouse operations</MenuItem>
+        <MenuItem id="about" onClick={this.handleAboutClick}>About</MenuItem>
+      </Menu>
     );
   }
 }
