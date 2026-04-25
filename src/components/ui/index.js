@@ -20,6 +20,7 @@ export { default as InputLabel } from './InputLabel.jsx';
 export { default as MenuItem } from './MenuItem.jsx';
 export { default as RadioGroup } from './RadioGroup.jsx';
 export { default as Select } from './Select.jsx';
+export { default as SnackbarContent } from './SnackbarContent.jsx';
 export { default as SvgIcon } from './SvgIcon.jsx';
 export { default as Table, TableSizeContext } from './Table.jsx';
 export { default as TableBody } from './TableBody.jsx';
