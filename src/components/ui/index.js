@@ -31,6 +31,7 @@ export { default as InputAdornment } from './InputAdornment.jsx';
 export { default as InputLabel } from './InputLabel.jsx';
 export { default as Menu } from './Menu.jsx';
 export { default as MenuItem } from './MenuItem.jsx';
+export { default as Paper } from './Paper.jsx';
 export { default as Radio } from './Radio.jsx';
 export { default as RadioGroup } from './RadioGroup.jsx';
 export { default as Select } from './Select.jsx';
