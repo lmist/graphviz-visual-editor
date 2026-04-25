@@ -38,6 +38,7 @@ coverage-jest
 dotfiles.txt
 
 cypress/screenshots
+cypress/videos
 .vercel
 .railway
 

@@ -197,6 +197,25 @@ describe('Basic rendering from DOT source', function() {
 
   })
 
+  it('Preserves the last valid render when the editor contains invalid DOT (gutter shows the error)', function() {
+    cy.startApplicationWithDotSource('digraph {Alice -> Bob}');
+
+    cy.nodes().should('have.length', 2);
+    cy.edges().should('have.length', 1);
+    cy.textEditorGutterCellWithError().should('not.exist');
+
+    cy.textEditorContent().type('{ctrl}{end}xxxxxx');
+
+    cy.textEditorGutterCellWithError().should('exist');
+
+    cy.canvasSvg().should('exist');
+    cy.canvasGraph().should('exist');
+    cy.nodes().should('have.length', 2);
+    cy.edges().should('have.length', 1);
+    cy.node(1).shouldHaveLabel('Alice');
+    cy.node(2).shouldHaveLabel('Bob');
+  })
+
   it('Renders nodes with names equal to properties of the JavaScript Object type, and edges between them', function() {
     const nodeNames = getAllPropertyNames({});
     const dotSrc = `digraph {\n${nodeNames.join('-> \n')}\n}`;
