@@ -1,0 +1,84 @@
+[      42ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89224
+[  119575ms] [ERROR] Warning: Unknown event handler property `%s`. It will be ignored.%s onCheckedChange 
+    at span
+    at CompositeItem (http://localhost:3007/static/js/bundle.js:116486:5)
+    at RadioRoot (http://localhost:3007/static/js/bundle.js:126176:5)
+    at Radio (http://localhost:3007/static/js/bundle.js:7208:3)
+    at label
+    at FormControlLabel (http://localhost:3007/static/js/bundle.js:5660:3)
+    at div
+    at CompositeList (http://localhost:3007/static/js/bundle.js:116603:5)
+    at CompositeRoot (http://localhost:3007/static/js/bundle.js:116911:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:125829:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:7333:3)
+    at fieldset
+    at FormControl (http://localhost:3007/static/js/bundle.js:5539:3)
+    at div
+    at DialogContent (http://localhost:3007/static/js/bundle.js:4818:3)
+    at div
+    at FloatingFocusManager (http://localhost:3007/static/js/bundle.js:118703:5)
+    at DialogPopup (http://localhost:3007/static/js/bundle.js:117402:5)
+    at div
+    at FloatingPortal (http://localhost:3007/static/js/bundle.js:119306:5)
+    at DialogPortal (http://localhost:3007/static/js/bundle.js:117590:5)
+    at DialogRoot (http://localhost:3007/static/js/bundle.js:117678:5)
+    at Dialog (http://localhost:3007/static/js/bundle.js:4570:3)
+    at div
+    at SettingsDialog (http://localhost:3007/static/js/bundle.js:107334:5)
+    at WithRoot
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112497:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63538
+[  190984ms] [WARNING] Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.
+Element with focus: <button#help>
+Ancestor with aria-hidden: <div#root> @ http://localhost:3007/:0
+[  192593ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `TooltipTrigger`. 
+    at TableSortLabel (http://localhost:3007/static/js/bundle.js:8920:3)
+    at TooltipTrigger (http://localhost:3007/static/js/bundle.js:129777:5)
+    at TooltipRoot (http://localhost:3007/static/js/bundle.js:129458:5)
+    at FloatingDelayGroup (http://localhost:3007/static/js/bundle.js:118440:5)
+    at TooltipProvider (http://localhost:3007/static/js/bundle.js:129368:5)
+    at Tooltip (http://localhost:3007/static/js/bundle.js:9396:3)
+    at td
+    at TableCell (http://localhost:3007/static/js/bundle.js:8561:3)
+    at tr
+    at TableRow (http://localhost:3007/static/js/bundle.js:8782:3)
+    at thead
+    at TableHead (http://localhost:3007/static/js/bundle.js:8688:3)
+    at EnhancedTableHead (http://localhost:3007/static/js/bundle.js:106628:5)
+    at table
+    at Table (http://localhost:3007/static/js/bundle.js:8340:3)
+    at div
+    at DialogContent (http://localhost:3007/static/js/bundle.js:4818:3)
+    at div
+    at FloatingFocusManager (http://localhost:3007/static/js/bundle.js:118703:5)
+    at DialogPopup (http://localhost:3007/static/js/bundle.js:117402:5)
+    at div
+    at FloatingPortal (http://localhost:3007/static/js/bundle.js:119306:5)
+    at DialogPortal (http://localhost:3007/static/js/bundle.js:117590:5)
+    at DialogRoot (http://localhost:3007/static/js/bundle.js:117678:5)
+    at Dialog (http://localhost:3007/static/js/bundle.js:4570:3)
+    at div
+    at OpenFromBrowserDialog (http://localhost:3007/static/js/bundle.js:106690:5)
+    at WithRoot
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112497:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63538
+[  553853ms] [ERROR] Error: <polygon> attribute points: Expected number, "nan,-nan nan,-na…". @ http://localhost:3007/static/js/bundle.js:65638
+[  553854ms] [ERROR] Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s openMultiple openmultiple 
+    at div
+    at CompositeList (http://localhost:3007/static/js/bundle.js:116603:5)
+    at AccordionRoot (http://localhost:3007/static/js/bundle.js:115200:5)
+    at Accordion (http://localhost:3007/static/js/bundle.js:3362:3)
+    at div
+    at InsertPanels (http://localhost:3007/static/js/bundle.js:105758:5)
+    at section
+    at Paper (http://localhost:3007/static/js/bundle.js:7072:3)
+    at div
+    at div
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112497:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63538
+[  735438ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89224
