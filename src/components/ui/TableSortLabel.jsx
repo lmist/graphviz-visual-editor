@@ -22,7 +22,7 @@ const glyphStyle = {
   lineHeight: 1,
 };
 
-function TableSortLabel({
+const TableSortLabel = React.forwardRef(function TableSortLabel({
   active = false,
   direction = 'asc',
   onClick,
@@ -30,12 +30,13 @@ function TableSortLabel({
   className,
   style,
   ...rest
-}) {
+}, ref) {
   const glyph = direction === 'desc' ? '▼' : '▲';
   const mergedStyle = { ...baseStyle, ...style };
 
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onClick}
       className={className}
@@ -46,7 +47,7 @@ function TableSortLabel({
       {active ? <span aria-hidden="true" style={glyphStyle}>{glyph}</span> : null}
     </button>
   );
-}
+});
 
 TableSortLabel.propTypes = {
   active: PropTypes.bool,

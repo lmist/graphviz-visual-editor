@@ -241,7 +241,7 @@ class OpenFromBrowserDialog extends React.Component {
                       onClick={this.handleClick(name)}
                       onDoubleClick={this.handleDoubleClick(name)}
                     >
-                    <TableCell component="th" scope="project">
+                    <TableCell component="th" scope="row">
                       {name}
                     </TableCell>
                     <TableCell>

@@ -185,7 +185,7 @@ const FormatDrawer = ({
           <DialogTitle id="form-dialog-title">
             Default {type} attributes
           </DialogTitle>
-          <IconButton id="close-button" onClick={handleDrawerClose}>
+          <IconButton id="close-button" aria-label="Close" onClick={handleDrawerClose}>
             {rtl ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>

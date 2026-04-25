@@ -46,7 +46,8 @@ function TableCell({
     ...style,
   };
 
-  const ariaSort = sortDirection ? SORT_ARIA[sortDirection] : undefined;
+  // aria-sort is only valid on header cells (axe: aria-allowed-attr).
+  const ariaSort = isHeader && sortDirection ? SORT_ARIA[sortDirection] : undefined;
 
   return (
     <Tag

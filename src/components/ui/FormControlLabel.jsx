@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import { COLORS, SPACING, TYPOGRAPHY } from '../../design/tokens.js';
 
@@ -39,15 +39,24 @@ function FormControlLabel({
     ...style,
   };
 
+  // base-ui Switch/Radio/Checkbox render as span[role=...], which means
+  // a wrapping <label> alone does not establish the accessible name (only
+  // native form controls get implicit-label semantics). Link the label
+  // span to the control via aria-labelledby so axe and screen readers
+  // pick it up.
+  const labelId = useId();
   const controlProps = {};
   if (value !== undefined) controlProps.value = value;
   if (disabled) controlProps.disabled = true;
+  if (label != null && control.props['aria-labelledby'] == null && control.props['aria-label'] == null) {
+    controlProps['aria-labelledby'] = labelId;
+  }
   const resolvedControl = React.cloneElement(control, controlProps);
 
   return (
     <label className={className} style={resolvedStyle} {...rest}>
       {resolvedControl}
-      <span>{label}</span>
+      <span id={labelId}>{label}</span>
     </label>
   );
 }
