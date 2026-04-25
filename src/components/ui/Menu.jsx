@@ -14,16 +14,28 @@ const popupStyle = {
   listStyle: 'none',
 };
 
+// The wrapper accepts an imperative `anchorEl` (a DOM node held by the
+// parent) instead of a child Trigger, matching MUI's classic Menu API.
+// finalFocus restores focus to that anchor on close — without it,
+// closing the menu via ESC or item-activation drops focus on document
+// body and breaks keyboard-only flows.
 function Menu({ id, anchorEl, open, onClose, children }) {
   const handleOpenChange = (next) => {
     if (!next && onClose) onClose();
   };
 
+  const finalFocus = React.useCallback(() => {
+    if (anchorEl && typeof anchorEl.focus === 'function') {
+      return anchorEl;
+    }
+    return true;
+  }, [anchorEl]);
+
   return (
     <BaseMenu.Root open={open} onOpenChange={handleOpenChange}>
       <BaseMenu.Portal>
         <BaseMenu.Positioner anchor={anchorEl} sideOffset={4}>
-          <BaseMenu.Popup id={id} style={popupStyle}>
+          <BaseMenu.Popup id={id} style={popupStyle} finalFocus={finalFocus}>
             {children}
           </BaseMenu.Popup>
         </BaseMenu.Positioner>
