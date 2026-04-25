@@ -13,17 +13,18 @@ const baseStyle = {
   flex: '0 0 auto',
 };
 
-function DialogActions({ className, style, children, ...rest }) {
+function DialogActions({ id, className, style, children, ...rest }) {
   const resolvedStyle = { ...baseStyle, ...style };
 
   return (
-    <div className={className} style={resolvedStyle} {...rest}>
+    <div id={id} className={className} style={resolvedStyle} {...rest}>
       {children}
     </div>
   );
 }
 
 DialogActions.propTypes = {
+  id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,
