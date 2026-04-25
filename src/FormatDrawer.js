@@ -5,7 +5,7 @@ import { withStyles } from 'tss-react/mui';
 import { useTheme } from '@mui/material';
 import { Drawer } from '@mui/material';
 import { DialogTitle } from '@mui/material';
-import { Divider } from '@mui/material';
+import { Divider } from './components/ui';
 import { IconButton } from '@mui/material';
 import { ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
 import { ChevronRight as ChevronRightIcon } from '@mui/icons-material';

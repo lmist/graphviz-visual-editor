@@ -7,6 +7,7 @@
 
 export { default as Checkbox } from './Checkbox.jsx';
 export { default as CircularProgress } from './CircularProgress.jsx';
+export { default as Divider } from './Divider.jsx';
 export { default as FormControl } from './FormControl.jsx';
 export { default as FormControlLabel } from './FormControlLabel.jsx';
 export { default as FormGroup } from './FormGroup.jsx';
