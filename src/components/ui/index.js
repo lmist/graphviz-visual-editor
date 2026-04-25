@@ -23,6 +23,7 @@ export { default as Input } from './Input.jsx';
 export { default as InputAdornment } from './InputAdornment.jsx';
 export { default as InputLabel } from './InputLabel.jsx';
 export { default as MenuItem } from './MenuItem.jsx';
+export { default as Radio } from './Radio.jsx';
 export { default as RadioGroup } from './RadioGroup.jsx';
 export { default as Select } from './Select.jsx';
 export { default as Snackbar } from './Snackbar.jsx';
