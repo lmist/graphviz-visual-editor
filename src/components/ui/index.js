@@ -7,6 +7,7 @@
 
 export { default as CircularProgress } from './CircularProgress.jsx';
 export { default as FormControl } from './FormControl.jsx';
+export { default as FormHelperText } from './FormHelperText.jsx';
 export { default as Icon } from './Icon.jsx';
 export { default as Input } from './Input.jsx';
 export { default as SvgIcon } from './SvgIcon.jsx';
