@@ -1,25 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
 import withRoot from './withRoot.js';
-import { Close as CloseIcon } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import { Button } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { DialogActions } from '@mui/material';
+import CloseIcon from './components/icons/CloseIcon.jsx';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+} from './components/ui';
 
-const styles = theme => ({
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  content: {
-    overflowY: 'visible',
-  },
-});
+const titleRowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const contentStyle = {
+  overflowY: 'visible',
+};
 
 class DoYouWantToReplaceItDialog extends React.Component {
 
@@ -32,32 +33,30 @@ class DoYouWantToReplaceItDialog extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Dialog
           id="replace-graph-dialog"
-          className={classes.root}
           open
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <div className={classes.title}>
+          <div style={titleRowStyle}>
             <DialogTitle id="form-dialog-title">Replace "{this.props.name}"?</DialogTitle>
-            <IconButton aria-label="Close" onClick={this.handleClose} size="large">
+            <IconButton aria-label="Close" onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>
           </div>
-          <DialogContent classes={{root: classes.content}}>
+          <DialogContent style={contentStyle}>
             <DialogContentText>
               "{this.props.name}" already exists. Do you want to replace it?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="secondary" id="cancel">
+            <Button onClick={this.handleClose} autoFocus id="cancel">
               Cancel
             </Button>
-            <Button onClick={this.handleReplace} color="secondary" id="replace">
+            <Button onClick={this.handleReplace} id="replace">
               Replace
             </Button>
           </DialogActions>
@@ -68,10 +67,9 @@ class DoYouWantToReplaceItDialog extends React.Component {
 }
 
 DoYouWantToReplaceItDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   onReplace: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(DoYouWantToReplaceItDialog, styles));
+export default withRoot(DoYouWantToReplaceItDialog);
