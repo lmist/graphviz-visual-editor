@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'tss-react/mui';
-import { Accordion } from '@mui/material';
-import { AccordionSummary } from '@mui/material';
-import { AccordionDetails } from './components/ui';
-import { Typography } from '@mui/material';
-import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from './components/ui';
+import ExpandMoreIcon from './components/icons/ExpandMoreIcon.jsx';
 import {shapes} from './shapes.js';
 
 const nodeShapeCategories = [
@@ -103,28 +104,28 @@ const nodeShapeCategories = [
   },
 ];
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    overflowY: 'auto',
-    height: 'calc(100vh - 64px - 2 * 12px)',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexShrink: 0,
-  },
-  columns: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-  },
-  column: {
-    flexBasis: '25%',
-    flexGrow: '1',
-    flexShrink: '0',
-    textAlign: 'start',
-  },
-});
+const rootStyle = {
+  width: '100%',
+  overflowY: 'auto',
+  height: 'calc(100vh - 64px - 2 * 12px)',
+};
+
+const headingStyle = {
+  flexShrink: 0,
+};
+
+const columnsStyle = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'flex-start',
+};
+
+const columnStyle = {
+  flexBasis: '25%',
+  flexGrow: 1,
+  flexShrink: 0,
+  textAlign: 'start',
+};
 
 class InsertPanels extends React.Component {
   state = {
@@ -155,11 +156,10 @@ class InsertPanels extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     const { expanded } = this.state;
 
     return (
-      <div id="insert-panels" className={classes.root} onClick={this.handleClick}>
+      <div id="insert-panels" style={rootStyle} onClick={this.handleClick}>
         {nodeShapeCategories.map((nodeShapeCategory) =>
           <Accordion
             key={nodeShapeCategory.name}
@@ -167,15 +167,15 @@ class InsertPanels extends React.Component {
             onChange={this.handleChange(nodeShapeCategory)}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>{nodeShapeCategory.name}</Typography>
+              <Typography style={headingStyle}>{nodeShapeCategory.name}</Typography>
             </AccordionSummary>
-            <AccordionDetails className={classes.columns}>
+            <AccordionDetails style={columnsStyle}>
               {nodeShapeCategory.shapes.map((shape) =>
                 <div
                   id={shape}
                   dangerouslySetInnerHTML={{__html: shapes[shape]}}
                   key={shape}
-                  className={classes.column}
+                  style={columnStyle}
                   onClick={this.handleNodeShapeClick(shape)}
                   draggable="true"
                   onDragStart={this.handleNodeShapeDragStart(shape)}
@@ -192,7 +192,10 @@ class InsertPanels extends React.Component {
 }
 
 InsertPanels.propTypes = {
-  classes: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
+  onNodeShapeClick: PropTypes.func,
+  onNodeShapeDragStart: PropTypes.func,
+  onNodeShapeDragEnd: PropTypes.func,
 };
 
-export default withStyles(InsertPanels, styles);
+export default InsertPanels;
