@@ -1,0 +1,143 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - button [ref=e115] [cursor=pointer]:
+          - img [ref=e8]
+        - button [ref=e116] [cursor=pointer]:
+          - img [ref=e10]
+        - button [ref=e117] [cursor=pointer]:
+          - img [ref=e12]
+        - button [ref=e118] [cursor=pointer]:
+          - img [ref=e16]
+        - button [disabled] [ref=e119]:
+          - img [ref=e20]
+        - button [disabled] [ref=e120]:
+          - img [ref=e24]
+        - heading [level=6] [ref=e121]: Graphviz Visual Editor
+        - button [ref=e122] [cursor=pointer]:
+          - img [ref=e30]
+        - button [ref=e123] [cursor=pointer]:
+          - img [ref=e34]
+        - button [ref=e124] [cursor=pointer]:
+          - img [ref=e38]
+        - button [ref=e125] [cursor=pointer]: 1:1
+        - button [ref=e126] [cursor=pointer]: Insert
+        - button [ref=e127] [cursor=pointer]: Node format
+        - button [ref=e128] [cursor=pointer]: Edge format
+        - button [ref=e129] [cursor=pointer]:
+          - img [ref=e52]
+        - link [ref=e130] [cursor=pointer]:
+          - /url: https://github.com/magjac/graphviz-visual-editor
+          - button [ref=e131]:
+            - img [ref=e61]
+        - button [ref=e132] [cursor=pointer]:
+          - img [ref=e64]
+    - alert [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e70]:
+          - text: The Graphviz Visual Editor has been updated to version
+          - link "1.3.0" [ref=e71] [cursor=pointer]:
+            - /url: https://github.com/magjac/graphviz-visual-editor/blob/master/CHANGELOG.md#130---2024-08-20
+          - text: . The underlying Graphviz software has been updated to version
+          - link "12.1.0" [ref=e72] [cursor=pointer]:
+            - /url: https://gitlab.com/graphviz/graphviz/-/blob/main/CHANGELOG.md#1210--2024-08-12
+          - text: .
+        - button "Close" [ref=e74] [cursor=pointer]:
+          - img [ref=e75]
+    - generic [ref=e78]:
+      - generic [ref=e83]:
+        - textbox [ref=e84]
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - text: "1"
+            - button [expanded] [ref=e88] [cursor=pointer]
+          - generic [ref=e89]: "2"
+          - generic [ref=e90]: "3"
+          - generic [ref=e91]: "4"
+          - generic [ref=e92]: "5"
+        - generic [ref=e94]:
+          - generic:
+            - generic:
+              - generic: "strict digraph {"
+            - generic:
+              - generic: a [shape="ellipse" style="filled" fillcolor="#1f77b4"]
+            - generic:
+              - generic: b [shape="polygon" style="filled" fillcolor="#ff7f0e"]
+            - generic:
+              - generic: a -> b [fillcolor="#a6cee3" color="#1f78b4"]
+            - generic:
+              - generic: "}"
+      - generic [ref=e96]:
+        - img [ref=e104]:
+          - generic [ref=e105]:
+            - generic [ref=e109]: a
+            - generic [ref=e112]: b
+        - button [ref=e136] [cursor=pointer]:
+          - img [ref=e99]
+  - dialog "Graph rendering" [ref=e139]:
+    - generic [ref=e140]:
+      - heading "Graph rendering" [level=2] [ref=e141]
+      - button "Close" [active] [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+    - generic [ref=e146]:
+      - paragraph [ref=e147]: These settings affects how the graph is rendered.
+      - group [ref=e148]:
+        - generic [ref=e149]: Engine
+        - combobox "Engine" [ref=e150] [cursor=pointer]:
+          - generic [ref=e151]: dot
+          - generic [ref=e152]: ▼
+        - textbox [ref=e153]: dot
+        - paragraph [ref=e154]: Graphviz layout engine
+    - heading "Graph viewing" [level=2] [ref=e155]
+    - generic [ref=e156]:
+      - paragraph [ref=e157]: These settings affects how the graph is viewed. They do not affect the graph itself.
+      - generic [ref=e159] [cursor=pointer]:
+        - switch "Fit graph to available area" [ref=e160]
+        - checkbox [ref=e162]
+        - generic [ref=e163]: Fit graph to available area
+      - group [ref=e164]:
+        - generic [ref=e165]: Transition duration
+        - generic [ref=e166]:
+          - spinbutton "transitionDuration" [ref=e167]: "1"
+          - generic [ref=e169]: seconds
+      - generic [ref=e171] [cursor=pointer]:
+        - switch "Enable path tweening during transitions" [checked] [ref=e172]
+        - checkbox [checked] [ref=e174]
+        - generic [ref=e175]: Enable path tweening during transitions
+      - generic [ref=e177] [cursor=pointer]:
+        - switch "Enable shape tweening during transitions" [checked] [ref=e178]
+        - checkbox [checked] [ref=e180]
+        - generic [ref=e181]: Enable shape tweening during transitions
+      - group "Tweening precision" [ref=e182]:
+        - generic [ref=e183]: Tweening precision
+        - radiogroup [ref=e184]:
+          - generic [ref=e185] [cursor=pointer]:
+            - radio "Absolute" [ref=e186]
+            - radio [ref=e187]
+            - generic [ref=e188]: Absolute
+          - generic [ref=e189] [cursor=pointer]:
+            - radio "Relative" [checked] [ref=e190]
+            - radio [checked] [ref=e192]
+            - generic [ref=e193]: Relative
+        - textbox [ref=e194]: relative
+        - generic [ref=e195]:
+          - spinbutton "tweenPrecision" [ref=e196]: "1"
+          - generic [ref=e198]: "%"
+    - heading "Text Editor" [level=2] [ref=e199]
+    - group [ref=e201]:
+      - generic [ref=e202]: Font size
+      - generic [ref=e203]:
+        - spinbutton "FontSize" [ref=e204]: "12"
+        - generic [ref=e206]: px
+    - group [ref=e208]:
+      - generic [ref=e209]: Tab size
+      - generic [ref=e210]:
+        - spinbutton "TabSize" [ref=e211]: "4"
+        - generic [ref=e213]: spaces
+    - group [ref=e215]:
+      - generic [ref=e216]: Hold-off time
+      - generic [ref=e217]:
+        - spinbutton "Holdoff" [ref=e218]: "0.2"
+        - generic [ref=e220]: seconds
+      - paragraph [ref=e221]: Time of editor inactivity after which graph rendering starts

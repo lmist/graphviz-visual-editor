@@ -1,0 +1,31 @@
+[     273ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:3007/static/js/bundle.js:89278
+[    3192ms] [ERROR] Warning: Unknown event handler property `%s`. It will be ignored.%s onCheckedChange 
+    at span
+    at CompositeItem (http://localhost:3007/static/js/bundle.js:116553:5)
+    at RadioRoot (http://localhost:3007/static/js/bundle.js:126442:5)
+    at Radio (http://localhost:3007/static/js/bundle.js:7254:3)
+    at label
+    at FormControlLabel (http://localhost:3007/static/js/bundle.js:5661:3)
+    at div
+    at CompositeList (http://localhost:3007/static/js/bundle.js:116670:5)
+    at CompositeRoot (http://localhost:3007/static/js/bundle.js:116978:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:126095:5)
+    at RadioGroup (http://localhost:3007/static/js/bundle.js:7383:3)
+    at fieldset
+    at FormControl (http://localhost:3007/static/js/bundle.js:5539:3)
+    at div
+    at DialogContent (http://localhost:3007/static/js/bundle.js:4818:3)
+    at div
+    at FloatingFocusManager (http://localhost:3007/static/js/bundle.js:118770:5)
+    at DialogPopup (http://localhost:3007/static/js/bundle.js:117469:5)
+    at div
+    at FloatingPortal (http://localhost:3007/static/js/bundle.js:119373:5)
+    at DialogPortal (http://localhost:3007/static/js/bundle.js:117657:5)
+    at DialogRoot (http://localhost:3007/static/js/bundle.js:117745:5)
+    at Dialog (http://localhost:3007/static/js/bundle.js:4570:3)
+    at div
+    at SettingsDialog (http://localhost:3007/static/js/bundle.js:107396:5)
+    at WithRoot
+    at div
+    at Index (http://localhost:3007/static/js/bundle.js:112564:5)
+    at WithRoot @ http://localhost:3007/static/js/bundle.js:63592
