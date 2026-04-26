@@ -39,6 +39,7 @@ dotfiles.txt
 
 cypress/screenshots
 cypress/videos
+cypress/downloads
 .vercel
 .railway
 
