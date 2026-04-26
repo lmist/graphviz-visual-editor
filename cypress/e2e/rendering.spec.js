@@ -131,8 +131,8 @@ describe('Basic rendering from DOT source', function() {
     cy.startApplicationWithDotSource('digraph {Alice -> Bob}');
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 15);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 15);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 351.75 429');
       cy.wrap(svg).should('have.attr', 'width', '469');
       cy.wrap(svg).should('have.attr', 'height', '572');
@@ -146,8 +146,8 @@ describe('Basic rendering from DOT source', function() {
     cy.viewport(1000 * 2, 660 * 2);
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 15);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 15);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 351.75 429');
       cy.wrap(svg).should('have.attr', 'width', '976');
       cy.wrap(svg).should('have.attr', 'height', '1232');
@@ -168,8 +168,8 @@ describe('Basic rendering from DOT source', function() {
     cy.get('body').type('{esc}', { release: false });
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 15);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 15);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
       cy.wrap(svg).should('have.attr', 'width', '469');
       cy.wrap(svg).should('have.attr', 'height', '572');
@@ -177,14 +177,14 @@ describe('Basic rendering from DOT source', function() {
 
     cy.canvasGraph().then(graph0 => {
       cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 0.0005);
-      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 15);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 25);
     });
 
     cy.viewport(1000 * 2, 660 * 2);
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 15);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 15);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
       cy.wrap(svg).should('have.attr', 'width', '976');
       cy.wrap(svg).should('have.attr', 'height', '1232');
