@@ -190,6 +190,15 @@ class Graph extends React.Component {
   }
 
   handleRenderStaged() {
+    // d3-graphviz fires 'renderEnd' synchronously once the new SVG/nodes are
+    // in the DOM, before transitions complete. Bind event handlers here so
+    // contextmenu/click work as soon as the elements exist — otherwise tests
+    // (and users) that interact between renderEnd and transitionEnd hit nodes
+    // with no listeners attached.
+    this.svg = this.div.selectWithoutDataPropagation("svg");
+    this.graph0 = this.svg.selectWithoutDataPropagation("g");
+    this.dotGraph = this.prelDotGraph;
+    this.addEventHandlers();
     if (this.renderGraphReady) {
       this.markSelectedComponents(this.selectedComponents);
     }
