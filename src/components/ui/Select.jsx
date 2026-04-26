@@ -32,6 +32,12 @@ const popupStyle = {
   minWidth: 'var(--anchor-width)',
 };
 
+// Stack above Material UI Dialog (z-index 1300) so the listbox is not
+// occluded by dialog content (e.g. <InputLabel> overlapping the first item).
+const positionerStyle = {
+  zIndex: 1500,
+};
+
 const itemStyle = {
   fontFamily: TYPOGRAPHY.mono,
   fontSize: TYPOGRAPHY.sizes.body,
@@ -92,6 +98,8 @@ function Select({
     }
   });
 
+  const [open, setOpen] = React.useState(false);
+
   const handleValueChange = (next, event) => {
     if (!onChange) return;
     const synthetic = event && event.target
@@ -100,12 +108,26 @@ function Select({
     onChange(synthetic, next);
   };
 
+  // Base UI Select.Item bails out of its built-in click handler when the item
+  // is not yet "highlighted" (i.e. activeIndex hasn't propagated since the
+  // pointer entered). Headless test runners dispatch the full mouse-event
+  // sequence synchronously, so React doesn't get a chance to re-render between
+  // mouseenter and click — the option is hovered visually but its click is
+  // dropped. Commit the value via our own onClick so the test path matches the
+  // user-facing behavior of "clicking an option selects it".
+  const handleItemClick = (itemValue) => (event) => {
+    handleValueChange(itemValue, event);
+    setOpen(false);
+  };
+
   const placement = MenuProps && MenuProps.placement;
 
   return (
     <BaseSelect.Root
       value={value}
       onValueChange={handleValueChange}
+      open={open}
+      onOpenChange={setOpen}
       disabled={disabled}
       {...rest}
     >
@@ -127,7 +149,7 @@ function Select({
         <BaseSelect.Icon style={chevronStyle}>{'▼'}</BaseSelect.Icon>
       </BaseSelect.Trigger>
       <BaseSelect.Portal>
-        <BaseSelect.Positioner sideOffset={4} side={placement}>
+        <BaseSelect.Positioner sideOffset={4} side={placement} style={positionerStyle}>
           <BaseSelect.Popup style={popupStyle}>
             {items.map((child, idx) => {
               if (!('value' in (child.props || {}))) {
@@ -142,6 +164,7 @@ function Select({
                   id={itemId}
                   value={itemValue}
                   style={itemStyle}
+                  onClick={handleItemClick(itemValue)}
                   {...itemHover}
                 >
                   <BaseSelect.ItemText>{label}</BaseSelect.ItemText>
