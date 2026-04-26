@@ -1,5 +1,17 @@
 describe('Undo and redo of last DOT source change', function() {
 
+  // d3-graphviz updates existing #node1 <title> text via a 1s tween, but the
+  // Graph component's `busy` state (and thus waitForTransition) only covers
+  // layout/render, not the tween. Setting transitionDuration to 0 makes the
+  // text update synchronous so cy.node(N).shouldHaveName() sees the new label
+  // immediately after render. Scoped to this spec; transition.spec.js relies
+  // on the default 1s duration.
+  beforeEach(function() {
+    cy.on('window:before:load', (win) => {
+      win.localStorage.setItem('transitionDuration', '0');
+    });
+  });
+
   it('Undo insertion of a node by pressing ctrl-Z in the graph', function() {
     cy.startApplication();
     cy.clearAndRenderDotSource('digraph {Alice -> Bob}');
