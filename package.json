@@ -110,6 +110,9 @@
       }
     ]
   },
+  "overrides": {
+    "serialize-javascript": "^6.0.2"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@cypress/code-coverage": "^3.12.45",
