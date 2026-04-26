@@ -151,8 +151,8 @@ describe('Transitioning when DOT source changes', function() {
 
     cy.settingsButton().click();
     cy.tweenPrecisionRadioButtonAbsolute().click();
-    cy.tweenPrecisionRadioButtonAbsolute().should('be.checked');
-    cy.tweenPrecisionRadioButtonRelative().should('not.be.checked');
+    cy.tweenPrecisionRadioButtonAbsolute().should('have.attr', 'aria-checked', 'true');
+    cy.tweenPrecisionRadioButtonRelative().should('have.attr', 'aria-checked', 'false');
     cy.tweenPrecisionInput().should('have.value', '1');
     cy.tweenPrecisionInput().type('{backspace}50{del}');
     cy.tweenPrecisionInput().should('have.value', '50');
@@ -209,8 +209,8 @@ describe('Transitioning when DOT source changes', function() {
     cy.startApplicationWithDotSource('digraph {\n    edge [minlen=5]\n    Alice -> Bob\n    Alice -> Charlie\n}');
 
     cy.settingsButton().click();
-    cy.tweenPrecisionRadioButtonAbsolute().should('not.be.checked');
-    cy.tweenPrecisionRadioButtonRelative().should('be.checked');
+    cy.tweenPrecisionRadioButtonAbsolute().should('have.attr', 'aria-checked', 'false');
+    cy.tweenPrecisionRadioButtonRelative().should('have.attr', 'aria-checked', 'true');
     cy.tweenPrecisionInput().should('have.value', '1');
     cy.tweenPrecisionInput().type('{backspace}50{del}');
     cy.tweenPrecisionInput().should('have.value', '50');

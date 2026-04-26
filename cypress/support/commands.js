@@ -406,10 +406,9 @@ Cypress.Commands.add("settingsDialog", () => {
 });
 
 Cypress.Commands.add("fitSwitch", () => {
-  return cy.settingsDialog()
-    .find('input#fit-switch')
-    .parents('.MuiFormControlLabel-root')
-    .find('.MuiSwitch-root');
+  // Base UI Switch.Root renders a button (role=switch) and the `id` prop
+  // lands on that button — no hidden <input> exists. Target it directly.
+  return cy.settingsDialog().find('button#fit-switch');
 });
 
 Cypress.Commands.add("engineSelector", () => {
@@ -421,7 +420,10 @@ Cypress.Commands.add("engineMenu", () => {
 });
 
 Cypress.Commands.add("engineMenuAlternative", (engine) => {
-  return cy.engineMenu().find('li#' + engine);
+  // Base UI Select.Item renders as a div[role=option], not a <li>.
+  // Select.jsx forwards the `id` prop from the MenuItem child onto
+  // BaseSelect.Item so we can still anchor by id.
+  return cy.engineMenu().find('#' + engine);
 });
 
 Cypress.Commands.add("transitionDurationInput", () => {
@@ -429,17 +431,11 @@ Cypress.Commands.add("transitionDurationInput", () => {
 });
 
 Cypress.Commands.add("pathTweenSwitch", () => {
-  return cy.settingsDialog()
-    .find('input#path-tween-switch')
-    .parents('.MuiFormControlLabel-root')
-    .find('.MuiSwitch-root');
+  return cy.settingsDialog().find('button#path-tween-switch');
 });
 
 Cypress.Commands.add("shapeTweenSwitch", () => {
-  return cy.settingsDialog()
-    .find('input#shape-tween-switch')
-    .parents('.MuiFormControlLabel-root')
-    .find('.MuiSwitch-root');
+  return cy.settingsDialog().find('button#shape-tween-switch');
 });
 
 Cypress.Commands.add("tweenPrecisionForm", () => {
@@ -451,15 +447,14 @@ Cypress.Commands.add("tweenPrecisionRadioGroup", () => {
 });
 
 Cypress.Commands.add("tweenPrecisionRadioButtonAbsolute", () => {
-  return cy.tweenPrecisionRadioGroup()
-    .contains('.MuiFormControlLabel-root', 'Absolute')
-    .find('input[type=radio]');
+  // Base UI Radio.Root renders a button (role=radio); the `id` lands on
+  // that button, and there is no hidden <input>. Use checked-ness via
+  // aria-checked or data-checked rather than `:checked`.
+  return cy.tweenPrecisionRadioGroup().find('button#absolute');
 });
 
 Cypress.Commands.add("tweenPrecisionRadioButtonRelative", () => {
-  return cy.tweenPrecisionRadioGroup()
-    .contains('.MuiFormControlLabel-root', 'Relative')
-    .find('input[type=radio]');
+  return cy.tweenPrecisionRadioGroup().find('button#relative');
 });
 
 Cypress.Commands.add("tweenPrecisionInput", () => {
