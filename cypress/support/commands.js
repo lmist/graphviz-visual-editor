@@ -587,11 +587,15 @@ Cypress.Commands.add("aboutDialogParagraphs", () => {
 // These chained assertions historically did `cy.wrap(subject).find(...)`,
 // which captured a stale subject across re-renders. Now they re-resolve via
 // the subject's id so cy.get() can retry the lookup from root, matching
-// `nodeShouldHaveName` / `edgeShouldHaveName` semantics.
+// `nodeShouldHaveName` / `edgeShouldHaveName` semantics. The re-query is
+// scoped to `#canvas` because the InsertPanels shape templates contain
+// SVGs whose `<g>` elements share ids like `node1`/`node2` with the
+// canvas graph; an unscoped `cy.get('#node1')` would match those panel
+// elements (whose `<title>` is the shape name like 'ellipse') instead.
 Cypress.Commands.add("shouldHaveName", {prevSubject: true}, (subject, label) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('title').should('have.text', label);
+    cy.get('#canvas #' + id).find('title').should('have.text', label);
   } else {
     cy.wrap(subject).find('title').should('have.text', label);
   }
@@ -609,7 +613,7 @@ Cypress.Commands.add("edgeShouldHaveName", (index, label) => {
 Cypress.Commands.add("shouldHaveLabel", {prevSubject: true}, (subject, label) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('text').should('have.text', label);
+    cy.get('#canvas #' + id).find('text').should('have.text', label);
   } else {
     cy.wrap(subject).find('text').should('have.text', label);
   }
@@ -619,7 +623,7 @@ Cypress.Commands.add("shouldHaveLabel", {prevSubject: true}, (subject, label) =>
 Cypress.Commands.add("shouldHaveShape", {prevSubject: true}, (subject, shape) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find(':nth-child(2)').should('have.prop', 'tagName', shape);
+    cy.get('#canvas #' + id).find(':nth-child(2)').should('have.prop', 'tagName', shape);
   } else {
     cy.wrap(subject).find(':nth-child(2)').should('have.prop', 'tagName', shape);
   }
@@ -629,7 +633,7 @@ Cypress.Commands.add("shouldHaveShape", {prevSubject: true}, (subject, shape) =>
 Cypress.Commands.add("shouldBeSelected", {prevSubject: true}, (subject) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('rect').should('exist');
+    cy.get('#canvas #' + id).find('rect').should('exist');
   } else {
     cy.wrap(subject).within(() => {
       cy.get('rect').should('exist');
