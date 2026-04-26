@@ -441,9 +441,11 @@ Cypress.Commands.add("settingsDialog", () => {
 });
 
 Cypress.Commands.add("fitSwitch", () => {
-  // Base UI Switch.Root renders a button (role=switch) and the `id` prop
-  // lands on that button — no hidden <input> exists. Target it directly.
-  return cy.settingsDialog().find('button#fit-switch');
+  // Base UI Switch.Root spreads `id` onto its hidden form <input>, not the
+  // visible span[role=switch] sibling. Walk to the sibling for clicks.
+  return cy.settingsDialog()
+    .find('input#fit-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("engineSelector", () => {
@@ -466,11 +468,15 @@ Cypress.Commands.add("transitionDurationInput", () => {
 });
 
 Cypress.Commands.add("pathTweenSwitch", () => {
-  return cy.settingsDialog().find('button#path-tween-switch');
+  return cy.settingsDialog()
+    .find('input#path-tween-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("shapeTweenSwitch", () => {
-  return cy.settingsDialog().find('button#shape-tween-switch');
+  return cy.settingsDialog()
+    .find('input#shape-tween-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("tweenPrecisionForm", () => {
@@ -585,13 +591,17 @@ Cypress.Commands.add("aboutDialogParagraphs", () => {
 });
 
 // These chained assertions historically did `cy.wrap(subject).find(...)`,
-// which captured a stale subject across re-renders. Now they re-resolve via
-// the subject's id so cy.get() can retry the lookup from root, matching
-// `nodeShouldHaveName` / `edgeShouldHaveName` semantics.
+// which captured a stale subject across re-renders. Re-resolve via the
+// subject's id scoped to the canvas-graph so cy.get() can retry the lookup
+// from root. Scoping matters: insert panels render their own preview SVG
+// per shape, each with its own #graph0 > #node1, so a bare `cy.get('#node1')`
+// matches dozens of elements and the assertion sees the wrong title.
+const canvasGraphChild = (id) => '#canvas svg #graph0 > #' + id;
+
 Cypress.Commands.add("shouldHaveName", {prevSubject: true}, (subject, label) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('title').should('have.text', label);
+    cy.get(canvasGraphChild(id)).find('title').should('have.text', label);
   } else {
     cy.wrap(subject).find('title').should('have.text', label);
   }
@@ -609,7 +619,7 @@ Cypress.Commands.add("edgeShouldHaveName", (index, label) => {
 Cypress.Commands.add("shouldHaveLabel", {prevSubject: true}, (subject, label) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('text').should('have.text', label);
+    cy.get(canvasGraphChild(id)).find('text').should('have.text', label);
   } else {
     cy.wrap(subject).find('text').should('have.text', label);
   }
@@ -619,7 +629,7 @@ Cypress.Commands.add("shouldHaveLabel", {prevSubject: true}, (subject, label) =>
 Cypress.Commands.add("shouldHaveShape", {prevSubject: true}, (subject, shape) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find(':nth-child(2)').should('have.prop', 'tagName', shape);
+    cy.get(canvasGraphChild(id)).find(':nth-child(2)').should('have.prop', 'tagName', shape);
   } else {
     cy.wrap(subject).find(':nth-child(2)').should('have.prop', 'tagName', shape);
   }
@@ -629,7 +639,7 @@ Cypress.Commands.add("shouldHaveShape", {prevSubject: true}, (subject, shape) =>
 Cypress.Commands.add("shouldBeSelected", {prevSubject: true}, (subject) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('rect').should('exist');
+    cy.get(canvasGraphChild(id)).find('rect').should('exist');
   } else {
     cy.wrap(subject).within(() => {
       cy.get('rect').should('exist');
@@ -640,7 +650,7 @@ Cypress.Commands.add("shouldBeSelected", {prevSubject: true}, (subject) => {
 Cypress.Commands.add("shouldNotBeSelected", {prevSubject: true}, (subject) => {
   const id = subject.attr('id');
   if (id) {
-    cy.get('#' + id).find('rect').should('not.exist');
+    cy.get(canvasGraphChild(id)).find('rect').should('not.exist');
   } else {
     cy.wrap(subject).within(() => {
       cy.get('rect').should('not.exist');
