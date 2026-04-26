@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 3,
+  "passes": 3,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:49:35.842Z",
+  "duration": 7695,
+  "file": "cypress/e2e/export_and_import_as_url.spec.js"
+}

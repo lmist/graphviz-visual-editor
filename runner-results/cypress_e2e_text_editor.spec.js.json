@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 10,
+  "passes": 10,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:50:00.130Z",
+  "duration": 51669,
+  "file": "cypress/e2e/text_editor.spec.js"
+}

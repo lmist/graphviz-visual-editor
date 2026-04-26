@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 17,
+  "passes": 17,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:49:30.500Z",
+  "duration": 151906,
+  "file": "cypress/e2e/browser_save_and_open.spec.js"
+}

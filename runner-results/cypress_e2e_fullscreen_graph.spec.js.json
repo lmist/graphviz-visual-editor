@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 4,
+  "passes": 4,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:49:38.363Z",
+  "duration": 5272,
+  "file": "cypress/e2e/fullscreen_graph.spec.js"
+}

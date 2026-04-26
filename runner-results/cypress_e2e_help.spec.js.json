@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 5,
+  "passes": 5,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:49:44.603Z",
+  "duration": 3105,
+  "file": "cypress/e2e/help.spec.js"
+}

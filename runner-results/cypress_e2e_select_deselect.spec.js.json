@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 18,
+  "passes": 18,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-04-26T20:49:46.651Z",
+  "duration": 40287,
+  "file": "cypress/e2e/select_deselect.spec.js"
+}
