@@ -134,10 +134,12 @@ function Select({
                 return React.cloneElement(child, { key: child.key ?? idx });
               }
               const itemValue = child.props.value;
+              const itemId = child.props.id;
               const label = child.props.children;
               return (
                 <BaseSelect.Item
                   key={child.key ?? itemValue ?? idx}
+                  id={itemId}
                   value={itemValue}
                   style={itemStyle}
                   {...itemHover}
