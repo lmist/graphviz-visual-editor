@@ -713,3 +713,23 @@ Cypress.Commands.add("clearAndRenderDotSource", (dotSrc) => {
   cy.insertDotSource(dotSrc);
   cy.waitForTransition();
 });
+
+// d3-zoom/d3-graphviz produce sub-pixel transform values that drift slightly
+// across dependency upgrades. Compare components numerically within tolerance
+// rather than asserting on the exact serialized string.
+Cypress.Commands.add(
+  "shouldHaveTransform",
+  {prevSubject: true},
+  (subject, tx, ty, scale, tolerance = 2, scaleTolerance = 0.05) => {
+    const attr = subject.attr('transform') || '';
+    const match = attr.match(
+      /translate\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)\s*scale\(\s*(-?\d+(?:\.\d+)?)\s*\)/
+    );
+    expect(match, `transform "${attr}" matches translate(...) scale(...)`).to.not.be.null;
+    const [, axStr, ayStr, asStr] = match;
+    expect(parseFloat(axStr), `tx of "${attr}"`).to.be.closeTo(tx, tolerance);
+    expect(parseFloat(ayStr), `ty of "${attr}"`).to.be.closeTo(ty, tolerance);
+    expect(parseFloat(asStr), `scale of "${attr}"`).to.be.closeTo(scale, scaleTolerance);
+    return cy.wrap(subject);
+  }
+);
