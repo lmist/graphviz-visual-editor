@@ -55,7 +55,8 @@
     "test:coverage": "react-scripts test --env=jsdom --coverage --coverageDirectory=./coverage-jest",
     "integration-test": "cypress run --config video=${CI:-false} --browser=chrome --headless --record --key a12725d3-851c-4e67-b432-079b4fb1a875",
     "merge-coverage": "mkdir -p coverage && cp -p coverage-jest/coverage-final.json coverage/coverage-final-jest.json && cp -p coverage-cypress/coverage-final.json coverage/coverage-final-cypress.json && nyc report --temp-dir coverage --report-dir coverage --reporter lcov --reporter clover --reporter json --reporter text",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "patch-package"
   },
   "homepage": ".",
   "eslintConfig": {
@@ -117,6 +118,7 @@
     "svgo": "^2.8.1",
     "underscore": "^1.13.8",
     "uuid": "^11.1.0",
+    "webpack-dev-server": "^5.2.1",
     "@istanbuljs/load-nyc-config": {
       "js-yaml": "^3.14.2"
     },
@@ -137,6 +139,7 @@
     "istanbul-lib-coverage": "^3.2.2",
     "jest-axe": "^10.0.0",
     "nyc": "^17.0.0",
+    "patch-package": "^8.0.1",
     "peggy": "^4.0.3",
     "wait-on": "^8.0.0"
   },
