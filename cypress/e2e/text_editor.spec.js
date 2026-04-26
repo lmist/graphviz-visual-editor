@@ -30,7 +30,7 @@ describe('Text editor', function() {
 
     cy.node(1).shouldHaveName('Alice');
 
-    cy.textEditorContent().type('{ctrl}z');
+    cy.textEditorContent().pressUndo();
     cy.waitForTransition();
 
     cy.nodes().should('have.length', 0);
@@ -48,13 +48,13 @@ describe('Text editor', function() {
 
     cy.node(1).shouldHaveName('Alice');
 
-    cy.textEditorContent().type('{ctrl}z');
+    cy.textEditorContent().pressUndo();
     cy.waitForTransition();
 
     cy.nodes().should('have.length', 0);
     cy.edges().should('have.length', 0);
 
-    cy.textEditorContent().type('{ctrl}y');
+    cy.textEditorContent().pressRedo();
     cy.waitForTransition();
 
     cy.nodes().should('have.length', 1);
