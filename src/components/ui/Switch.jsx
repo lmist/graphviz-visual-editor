@@ -44,6 +44,7 @@ const checkedThumbStyle = {
 };
 
 function Switch({
+  id,
   checked,
   defaultChecked,
   onChange,
@@ -62,6 +63,10 @@ function Switch({
 
   const isChecked = checked ?? defaultChecked ?? false;
 
+  // Base UI's Switch.Root renders a <span> by default and routes the `id`
+  // prop onto its hidden <input>. Cypress helpers and any consumer that
+  // anchors via `button#<id>` need the id on the rendered control itself,
+  // so we render as a real <button role="switch"> and place our id there.
   return (
     <BaseSwitch.Root
       checked={checked}
@@ -70,11 +75,15 @@ function Switch({
       disabled={disabled}
       name={name}
       className={className}
+      nativeButton
       style={{
         ...rootStyle(disabled),
         ...(isChecked ? checkedRootStyle : null),
         ...style,
       }}
+      render={(rootProps) => (
+        <button type="button" {...rootProps} id={id ?? rootProps.id} />
+      )}
       {...rest}
     >
       <BaseSwitch.Thumb
@@ -88,6 +97,7 @@ function Switch({
 }
 
 Switch.propTypes = {
+  id: PropTypes.string,
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
   onChange: PropTypes.func,

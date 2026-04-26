@@ -13,6 +13,7 @@ const groupStyle = {
 };
 
 function RadioGroup({
+  id,
   value,
   onChange,
   name,
@@ -25,6 +26,10 @@ function RadioGroup({
     ? (nextValue, event) => onChange(event, nextValue)
     : undefined;
 
+  // Base UI's RadioGroup routes the `id` prop onto its hidden <input>
+  // rather than the rendered <div>. Cypress helpers anchor by
+  // `#tween-precision-radio-group` and then walk into child radios, so we
+  // place the id on the rendered group element via the `render` prop.
   return (
     <BaseRadioGroup
       value={value}
@@ -32,6 +37,9 @@ function RadioGroup({
       name={name}
       className={className}
       style={{ ...groupStyle, ...style }}
+      render={(rootProps) => (
+        <div {...rootProps} id={id ?? rootProps.id} />
+      )}
       {...rest}
     >
       {children}
@@ -40,6 +48,7 @@ function RadioGroup({
 }
 
 RadioGroup.propTypes = {
+  id: PropTypes.string,
   value: PropTypes.any,
   onChange: PropTypes.func,
   name: PropTypes.string,
