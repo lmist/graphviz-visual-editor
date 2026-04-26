@@ -111,6 +111,7 @@
     ]
   },
   "overrides": {
+    "postcss": "^8.5.10",
     "serialize-javascript": "^6.0.2",
     "svgo": "^2.8.1",
     "underscore": "^1.13.8"
