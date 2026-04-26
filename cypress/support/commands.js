@@ -217,7 +217,10 @@ function rowIndexOf(subject, index) {
 }
 
 Cypress.Commands.add("graphTableHeader", {prevSubject: 'optional'}, (subject, name) => {
-  return cy.get('#open-from-browser-dialog').find('thead > tr > th > #' + name);
+  // Base UI's TableCell renders as <td> inside <thead> (no TableContext to mark
+  // header cells as <th>), and the sort button is wrapped in Tooltip.Trigger.
+  // Anchor on the sort button id instead of the cell tag.
+  return cy.get('#open-from-browser-dialog').find('thead #' + name);
 });
 
 Cypress.Commands.add("savedGraphs", {prevSubject: 'optional'}, (subject) => {
@@ -249,12 +252,21 @@ Cypress.Commands.add("savedGraphPreview", {prevSubject: 'optional'}, (subject, i
 });
 
 Cypress.Commands.add("savedGraphPreviewGraph", {prevSubject: 'optional'}, (subject, index) => {
+  // Callers chain this off a savedGraphPreview <td>, not a <tr>. Using
+  // subject.index() on a td returns the cell position (3), not the row, so
+  // search inside the subject directly when one is given.
+  if (subject != null && index === undefined) {
+    return cy.wrap(subject).find('#svg-wrapper > svg > #graph0');
+  }
   const idx = rowIndexOf(subject, index);
   return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(2)
     .find('#svg-wrapper > svg > #graph0');
 });
 
 Cypress.Commands.add("savedGraphPreviewPopUp", {prevSubject: 'optional'}, (subject, index) => {
+  if (subject != null && index === undefined) {
+    return cy.wrap(subject).find('#preview-pop-up');
+  }
   const idx = rowIndexOf(subject, index);
   return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(2)
     .find('#preview-pop-up');
