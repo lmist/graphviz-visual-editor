@@ -958,17 +958,16 @@ class Index extends React.Component {
           style={{
             display: 'grid',
             gridTemplateColumns: [
-              !this.state.fullscreen ? `${columns.textEditor}fr` : null,
-              this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen ? `${columns.insertPanels}fr` : null,
-              `${columns.graph}fr`,
+              !this.state.fullscreen ? `minmax(0, ${columns.textEditor}fr)` : null,
+              this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen ? `minmax(0, ${columns.insertPanels}fr)` : null,
+              `minmax(0, ${columns.graph}fr)`,
             ].filter(Boolean).join(' '),
             gap: this.state.fullscreen ? 0 : '12px',
             margin: 0,
             width: '100%',
           }}
         >
-          {!this.state.fullscreen && (
-          <div style={{ padding: '12px' }}>
+          <div style={{ padding: '12px', display: this.state.fullscreen ? 'none' : 'block' }}>
             <Paper elevation={leftPaneElevation} style={paperPaneStyle}>
               {this.state.nodeFormatDrawerIsOpen &&
                 <FormatDrawer
@@ -1013,7 +1012,6 @@ class Index extends React.Component {
               </div>
             </Paper>
           </div>
-          )}
           {this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen && (
             <div style={{ padding: '12px' }}>
               <Paper elevation={midPaneElevation} style={paperPaneStyle}>
