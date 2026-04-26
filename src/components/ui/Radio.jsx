@@ -43,6 +43,7 @@ const indicatorStyle = {
 };
 
 function Radio({
+  id,
   value,
   checked,
   onChange,
@@ -65,6 +66,10 @@ function Radio({
     ...style,
   };
 
+  // Base UI's Radio.Root renders a <span> by default and routes the `id`
+  // prop onto its hidden <input>. Cypress helpers and any consumer that
+  // anchors via `button#<id>` need the id on the rendered control itself,
+  // so we render as a real <button role="radio"> and place our id there.
   return (
     <BaseRadio.Root
       value={value}
@@ -73,6 +78,10 @@ function Radio({
       disabled={disabled}
       className={className}
       style={mergedStyle}
+      nativeButton
+      render={(rootProps) => (
+        <button type="button" {...rootProps} id={id ?? rootProps.id} />
+      )}
       {...rest}
     >
       <BaseRadio.Indicator style={indicatorStyle} />
@@ -81,6 +90,7 @@ function Radio({
 }
 
 Radio.propTypes = {
+  id: PropTypes.string,
   value: PropTypes.any,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
