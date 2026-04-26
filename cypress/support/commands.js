@@ -329,7 +329,9 @@ Cypress.Commands.add("formatDrawer", () => {
 });
 
 Cypress.Commands.add("styleSwitch", () => {
-  return cy.formatDrawer().find('#style-switch');
+  return cy.formatDrawer()
+    .find('input#style-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("formatDrawerCloseButton", () => {
@@ -341,7 +343,9 @@ Cypress.Commands.add("styles", () => {
 });
 
 Cypress.Commands.add("style", (styleName) => {
-  return cy.styles().find('#' + styleName);
+  return cy.styles()
+    .find('input#' + styleName)
+    .siblings('[role="checkbox"]');
 });
 
 Cypress.Commands.add("colorPickerForm", () => {
@@ -349,7 +353,9 @@ Cypress.Commands.add("colorPickerForm", () => {
 });
 
 Cypress.Commands.add("colorSwitch", () => {
-  return cy.colorPickerForm().find('#color-switch');
+  return cy.colorPickerForm()
+    .find('input#color-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("colorPickerSwatch", () => {
@@ -381,7 +387,9 @@ Cypress.Commands.add("fillColorPickerForm", () => {
 });
 
 Cypress.Commands.add("fillColorSwitch", () => {
-  return cy.fillColorPickerForm().find('#fillcolor-switch');
+  return cy.fillColorPickerForm()
+    .find('input#fillcolor-switch')
+    .siblings('[role="switch"]');
 });
 
 Cypress.Commands.add("fillColorPickerSwatch", () => {
