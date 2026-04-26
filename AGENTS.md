@@ -82,3 +82,11 @@ bd close <id>         # Complete work
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
 <!-- END BEADS INTEGRATION -->
+
+## Cypress E2E Fix Guidelines (Post-Base-UI Refactor)
+
+- Always prefer updating the visible control / label instead of hidden inputs.
+- Update selectors to match the new Base UI DOM structure.
+- Fix shared helpers in cypress/support/commands.js first — they block many specs.
+- Preserve original product behavior unless the findings explicitly call it a regression.
+- After fixing a test, verify both the test and the manual behavior.
