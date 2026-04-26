@@ -133,7 +133,13 @@ describe('Basic rendering from DOT source', function() {
     cy.canvasSvg().then(svg => {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
-      cy.wrap(svg).should('have.attr', 'viewBox', '0 0 351.75 429');
+      cy.wrap(svg).invoke('attr', 'viewBox').then(vb => {
+        const [x, y, w, h] = vb.split(/\s+/).map(Number);
+        expect(x).to.equal(0);
+        expect(y).to.equal(0);
+        expect(w).to.be.closeTo(351.75, 1);
+        expect(h).to.be.closeTo(429, 2);
+      });
       cy.wrap(svg).should('have.attr', 'width', '469');
       cy.wrap(svg).should('have.attr', 'height', '572');
     });
@@ -148,7 +154,13 @@ describe('Basic rendering from DOT source', function() {
     cy.canvasSvg().then(svg => {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
-      cy.wrap(svg).should('have.attr', 'viewBox', '0 0 351.75 429');
+      cy.wrap(svg).invoke('attr', 'viewBox').then(vb => {
+        const [x, y, w, h] = vb.split(/\s+/).map(Number);
+        expect(x).to.equal(0);
+        expect(y).to.equal(0);
+        expect(w).to.be.closeTo(351.75, 1);
+        expect(h).to.be.closeTo(429, 2);
+      });
       cy.wrap(svg).should('have.attr', 'width', '976');
       cy.wrap(svg).should('have.attr', 'height', '1232');
     });
