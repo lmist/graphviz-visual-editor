@@ -651,7 +651,7 @@ describe('Insertion of nodes into the graph', function() {
     });
 
     cy.wrap(styles.filter(style => style != 'invis')).each((style, i) => {
-      cy.style(style).should('be.checked');
+      cy.style(style).should('have.attr', 'aria-checked', 'true');
     });
 
     let numberOfVisibleNodes = 0;

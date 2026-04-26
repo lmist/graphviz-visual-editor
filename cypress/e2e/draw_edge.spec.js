@@ -398,7 +398,7 @@ describe('Draw edges in the graph', function() {
     });
 
     styles.filter(style => style != 'invis').forEach((style, i) => {
-      cy.style(style).should('be.checked');
+      cy.style(style).should('have.attr', 'aria-checked', 'true');
     });
 
     // FIXME: remove when https://github.com/magjac/d3-graphviz/issues/119 is fixed
