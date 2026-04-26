@@ -34,13 +34,13 @@ const progressWhenFullscreenStyle = {
 const fullscreenWhenNotFullscreenStyle = {
   position: 'absolute',
   top: 'calc(64px + 1 * 12px + 2px)',
-  left: 'calc(100vw - 2 * 12px - 2 * 12px)',
+  right: 'calc(2 * 12px)',
 };
 
 const fullscreenWhenFullscreenStyle = {
   position: 'absolute',
   top: 'calc(2px)',
-  left: 'calc(100vw - 2 * 12px - 1 * 12px)',
+  right: 'calc(1 * 12px)',
 };
 
 function isNumeric(n) {
