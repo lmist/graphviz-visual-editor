@@ -623,7 +623,7 @@ Cypress.Commands.add("typeDotSource", (dotSrc) => {
 });
 
 Cypress.Commands.add("clearDotSource", () => {
-  cy.typeDotSource('{ctrl}a{del}');
+  cy.textEditorContent().type('{selectall}{del}');
 });
 
 Cypress.Commands.add("insertDotSource", (dotSrc) => {
