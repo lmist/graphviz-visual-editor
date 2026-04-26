@@ -114,7 +114,8 @@
     "postcss": "^8.5.10",
     "serialize-javascript": "^6.0.2",
     "svgo": "^2.8.1",
-    "underscore": "^1.13.8"
+    "underscore": "^1.13.8",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
