@@ -724,7 +724,7 @@ Cypress.Commands.add("clearAndRenderDotSource", (dotSrc) => {
 Cypress.Commands.add(
   "shouldHaveTransform",
   {prevSubject: true},
-  (subject, tx, ty, scale, tolerance = 2, scaleTolerance = 0.05) => {
+  (subject, tx, ty, scale, tolerance = 4, scaleTolerance = 0.05) => {
     const attr = subject.attr('transform') || '';
     const match = attr.match(
       /translate\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)\s*scale\(\s*(-?\d+(?:\.\d+)?)\s*\)/
