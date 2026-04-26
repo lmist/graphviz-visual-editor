@@ -38,3 +38,19 @@ No spec currently asserts SVG-clears-on-**invalid**-DOT, so Option A does not re
 #### Follow-up
 
 - A4 (`gviz-j4u`): no spec changes required under Option A. The bead can either be closed as a no-op once B1 has landed and the suite is re-verified, or repurposed to add an explicit positive assertion (e.g., a new test asserting that typing invalid DOT after a valid render leaves the canvas SVG intact while `cy.textEditorGutterCellWithError()` becomes visible). Recommend the latter so the contract is encoded in the suite, not just in this document.
+
+---
+
+## Addendum (2026-04-26)
+
+This document is **superseded for the run summary, executive summary, per-spec table, and recommended next actions** by [`CYPRESS_FINDINGS_2026-04-26.md`](./CYPRESS_FINDINGS_2026-04-26.md), which captures the full-suite re-run after Epics A–D landed.
+
+The **A3 invalid-DOT contract decision** above (Option A — preserve last valid render on parse error) remains canonical and is unchanged. The 2026-04-26 run did not retest the A3/A4 positive contract because that test is already encoded in `cypress/e2e/rendering.spec.js` (added in gviz-j4u, merged as `4f74fc5`) and was part of the green slice this run.
+
+What changed in the 2026-04-26 run vs. this document's snapshot:
+
+- **Pass rate**: 19.6% → 31.5% (+13 newly green tests; no new regressions).
+- **Test count**: 107 → 108 (the +1 is the gviz-j4u positive contract).
+- **Specs all-green**: `github`, `help`, `main_menu`, `settings`, `text_editor` (5; was 4 — `text_editor` flipped fully green).
+- **Open clusters**: the three buckets identified here are still the dominant root causes; see the new findings doc for the explicit cluster-by-cluster cause analysis (DOM detachment from Base UI re-renders is now the largest, ahead of stale MUI selectors).
+- **New infrastructure dependency**: `cypress.config.js` now sets `e2e.baseUrl` and the spec / support files use relative `cy.visit()`. This was required by gviz-g68 to even start the run on a non-3000 port.

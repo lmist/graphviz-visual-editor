@@ -6,6 +6,7 @@ export default defineConfig({
   defaultCommandTimeout: 10000,
   video: true,
   e2e: {
+    baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
       configCodeCoverage(on, config);
 
