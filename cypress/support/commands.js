@@ -65,48 +65,53 @@ Cypress.Commands.add("textEditorErrorButton", () => {
   return cy.textEditorWrapper().find('#error-button');
 });
 
+// Canvas helpers collapse to a single cy.get() so Cypress's auto-retry can
+// re-resolve the entire selector path from root after a re-render. Chained
+// custom commands (cy.canvas().find('svg').find('#graph0')) used to break
+// retry-ability across the custom-command boundary, leaving Cypress holding a
+// detached subject when Base UI re-rendered between commands.
 Cypress.Commands.add("canvas", () => {
   return cy.get('#canvas');
 });
 
 Cypress.Commands.add("canvasSvg", () => {
-  return cy.canvas().find('svg');
+  return cy.get('#canvas svg');
 });
 
 Cypress.Commands.add("canvasGraph", () => {
-  return cy.canvasSvg().find('#graph0');
+  return cy.get('#canvas svg #graph0');
 });
 
 Cypress.Commands.add("findNode", {prevSubject: true}, (subject, index) => {
-  return cy.wrap(subject).find('> #node' + index);
+  return cy.get('#canvas svg #graph0 > #node' + index);
 });
 
 Cypress.Commands.add("findNodes", {prevSubject: true}, (subject, index) => {
-  return cy.wrap(subject).find('> .node');
+  return cy.get('#canvas svg #graph0 > .node');
 });
 
 Cypress.Commands.add("findEdge", {prevSubject: true}, (subject, index) => {
-  return cy.wrap(subject).find('> #edge' + index);
+  return cy.get('#canvas svg #graph0 > #edge' + index);
 });
 
 Cypress.Commands.add("findEdges", {prevSubject: true}, (subject, index) => {
-  return cy.wrap(subject).find('> .edge');
+  return cy.get('#canvas svg #graph0 > .edge');
 });
 
 Cypress.Commands.add("node", (index) => {
-  return cy.canvasGraph().find('> #node' + index);
+  return cy.get('#canvas svg #graph0 > #node' + index);
 });
 
 Cypress.Commands.add("edge", (index) => {
-  return cy.canvasGraph().find('> #edge' + index);
+  return cy.get('#canvas svg #graph0 > #edge' + index);
 });
 
 Cypress.Commands.add("nodes", () => {
-  return cy.canvasGraph().find(' > .node');
+  return cy.get('#canvas svg #graph0 > .node');
 });
 
 Cypress.Commands.add("edges", () => {
-  return cy.canvasGraph().find('> .edge');
+  return cy.get('#canvas svg #graph0 > .edge');
 });
 
 Cypress.Commands.add("fullscreenButton", (buttonName) => {
@@ -197,44 +202,66 @@ Cypress.Commands.add("openFromBrowserDialog", () => {
   return cy.get('#open-from-browser-dialog');
 });
 
+// Saved-graph helpers re-query from the dialog root each call. Base UI
+// re-renders the dialog body more aggressively than legacy MUI did, so a
+// captured tr subject becomes detached between chained calls. Resolving the
+// row by index from `cy.get('#open-from-browser-dialog tbody > tr')` lets
+// Cypress's auto-retry recover from the re-render.
+function rowIndexOf(subject, index) {
+  if (index !== undefined) return index;
+  if (subject != null && typeof subject.index === 'function') {
+    const idx = subject.index();
+    if (idx >= 0) return idx;
+  }
+  return 0;
+}
+
 Cypress.Commands.add("graphTableHeader", {prevSubject: 'optional'}, (subject, name) => {
-  return (subject ? cy.wrap(subject) : cy.openFromBrowserDialog()).find('thead > tr > th > #' + name);
+  return cy.get('#open-from-browser-dialog').find('thead > tr > th > #' + name);
 });
 
 Cypress.Commands.add("savedGraphs", {prevSubject: 'optional'}, (subject) => {
-  return (subject ? cy.wrap(subject) : cy.openFromBrowserDialog()).find('tbody').find('tr');
+  return cy.get('#open-from-browser-dialog tbody > tr');
 });
 
 Cypress.Commands.add("savedGraph", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraphs()).eq(index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(rowIndexOf(subject, index));
 });
 
 Cypress.Commands.add("savedGraphName",  {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraph(index)).find('th');
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('th');
 });
 
 Cypress.Commands.add("savedGraphDotSource", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraph(index)).find('td').eq(0);
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(0);
 });
 
 Cypress.Commands.add("savedGraphTime", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraph(index)).find('td').eq(1);
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(1);
 });
 
 Cypress.Commands.add("savedGraphPreview", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraph(index)).find('td').eq(2);
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(2);
 });
 
 Cypress.Commands.add("savedGraphPreviewGraph", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraphPreview(index)).find('#svg-wrapper > svg > #graph0');
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(2)
+    .find('#svg-wrapper > svg > #graph0');
 });
 
 Cypress.Commands.add("savedGraphPreviewPopUp", {prevSubject: 'optional'}, (subject, index) => {
-  return (subject ? cy.wrap(subject) : cy.savedGraphPreview(index)).find('#preview-pop-up');
+  const idx = rowIndexOf(subject, index);
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(idx).find('td').eq(2)
+    .find('#preview-pop-up');
 });
 
 Cypress.Commands.add("savedGraphDeleteButton", (index) => {
-  return cy.savedGraphs().eq(index).find('td').eq(3).find('#delete');
+  return cy.get('#open-from-browser-dialog tbody > tr').eq(index).find('td').eq(3).find('#delete');
 });
 
 Cypress.Commands.add("openGraphCancelButton", (index) => {
@@ -549,8 +576,17 @@ Cypress.Commands.add("aboutDialogParagraphs", () => {
   return cy.aboutDialog().find('p');
 });
 
+// These chained assertions historically did `cy.wrap(subject).find(...)`,
+// which captured a stale subject across re-renders. Now they re-resolve via
+// the subject's id so cy.get() can retry the lookup from root, matching
+// `nodeShouldHaveName` / `edgeShouldHaveName` semantics.
 Cypress.Commands.add("shouldHaveName", {prevSubject: true}, (subject, label) => {
-  cy.wrap(subject).find('title').should('have.text', label);
+  const id = subject.attr('id');
+  if (id) {
+    cy.get('#' + id).find('title').should('have.text', label);
+  } else {
+    cy.wrap(subject).find('title').should('have.text', label);
+  }
   return cy.wrap(subject);
 });
 
@@ -563,25 +599,45 @@ Cypress.Commands.add("edgeShouldHaveName", (index, label) => {
 });
 
 Cypress.Commands.add("shouldHaveLabel", {prevSubject: true}, (subject, label) => {
-  cy.wrap(subject).find('text').should('have.text', label);
+  const id = subject.attr('id');
+  if (id) {
+    cy.get('#' + id).find('text').should('have.text', label);
+  } else {
+    cy.wrap(subject).find('text').should('have.text', label);
+  }
   return cy.wrap(subject);
 });
 
 Cypress.Commands.add("shouldHaveShape", {prevSubject: true}, (subject, shape) => {
-  cy.wrap(subject).find(':nth-child(2)').should('have.prop', 'tagName', shape);
+  const id = subject.attr('id');
+  if (id) {
+    cy.get('#' + id).find(':nth-child(2)').should('have.prop', 'tagName', shape);
+  } else {
+    cy.wrap(subject).find(':nth-child(2)').should('have.prop', 'tagName', shape);
+  }
   return cy.wrap(subject);
 });
 
 Cypress.Commands.add("shouldBeSelected", {prevSubject: true}, (subject) => {
-  cy.wrap(subject).within(() => {
-    cy.get('rect').should('exist');
-  });
+  const id = subject.attr('id');
+  if (id) {
+    cy.get('#' + id).find('rect').should('exist');
+  } else {
+    cy.wrap(subject).within(() => {
+      cy.get('rect').should('exist');
+    });
+  }
 });
 
 Cypress.Commands.add("shouldNotBeSelected", {prevSubject: true}, (subject) => {
-  cy.wrap(subject).within(() => {
-    cy.get('rect').should('not.exist');
-  });
+  const id = subject.attr('id');
+  if (id) {
+    cy.get('#' + id).find('rect').should('not.exist');
+  } else {
+    cy.wrap(subject).within(() => {
+      cy.get('rect').should('not.exist');
+    });
+  }
 });
 
 Cypress.Commands.add("checkDefaultGraph", () => {
