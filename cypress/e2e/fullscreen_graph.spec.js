@@ -19,19 +19,20 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    // Extended timeout: cypress-parallel -t 4 stalls layout past 10s (gviz-q6t).
+    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.lt', viewportWidth / 2)
 
     cy.fullscreenButton().click();
 
     cy.textEditorWrapper().should('not.be.visible');
     cy.toolbar().should('not.exist');
-    cy.canvas().invoke('width').should('be.gte', viewportWidth - 4)
+    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.gte', viewportWidth - 4)
 
     cy.fullscreenButton().click();
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.lt', viewportWidth / 2)
   });
 
   it('Shows the graph only when the \'f\' key is pressed and shows the full application when it\'s pressed again', function () {
