@@ -21,7 +21,7 @@ describe('Export as URL', function() {
 
     cy.exportGraphAsUrlDialog().should('exist');
 
-    cy.exportGraphAsUrlExportedUrl().should('have.value', 'http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.exportGraphAsUrlExportedUrl().should('have.value', `${Cypress.config('baseUrl')}/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D`);
 
     cy.exportGraphAsUrlCopyButton().click();
     /* Copy URL does not work inside Cypress because of
@@ -41,8 +41,8 @@ describe('Export as URL', function() {
     cy.nodes().should('have.length', 0);
     cy.edges().should('have.length', 0);
 
-    cy.visit('http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
-    cy.window().url().should('eq', 'http://localhost:3000/');
+    cy.visit('/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.window().url().should('eq', `${Cypress.config('baseUrl')}/`);
 
     cy.node(1).should('exist');
     cy.node(2).should('exist');
@@ -56,7 +56,7 @@ describe('Export as URL', function() {
     cy.edges().should('have.length', 1);
 
     cy.go('back');
-    cy.window().url().should('eq', 'http://localhost:3000/');
+    cy.window().url().should('eq', `${Cypress.config('baseUrl')}/`);
   })
 
   it('The graph is opened in a new tab when visiting the genereated URL by clicking the open link button in the export graph as URL dialog', function() {
@@ -84,13 +84,13 @@ describe('Export as URL', function() {
 
     cy.exportGraphAsUrlDialog().should('exist');
 
-    cy.exportGraphAsUrlExportedUrl().should('have.value', 'http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.exportGraphAsUrlExportedUrl().should('have.value', `${Cypress.config('baseUrl')}/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D`);
 
     cy.exportGraphAsUrlOpenLinkButton().click();
 
     /* We can't test that it actually opens, so we just check that
      * window.open() is called with the URL */
-    cy.window().its('open').should('be.calledWith', 'http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D')
+    cy.window().its('open').should('be.calledWith', `${Cypress.config('baseUrl')}/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D`)
   })
 
 })

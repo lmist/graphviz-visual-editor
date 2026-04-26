@@ -994,7 +994,7 @@ describe('Browser save and open', function() {
         cy.openGraphCancelButton().click();
       });
 
-    cy.visit('http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.visit('/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
 
     cy.openButton().click();
     cy.openFromBrowserDialog()
@@ -1062,7 +1062,7 @@ describe('Browser save and open', function() {
         cy.openGraphCancelButton().click();
       });
 
-    cy.visit('http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.visit('/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
 
     cy.node(1).should('exist');
     cy.node(2).should('exist');
@@ -1142,7 +1142,7 @@ describe('Browser save and open', function() {
         cy.openGraphCancelButton().click();
       });
 
-    cy.visit('http://localhost:3000/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
+    cy.visit('/?dot=digraph%20%7BAlice%20-%3E%20Bob%7D');
     cy.waitForTransition();
 
     cy.openButton().click();
