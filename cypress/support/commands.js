@@ -622,8 +622,22 @@ Cypress.Commands.add("typeDotSource", (dotSrc) => {
   cy.textEditorContent().type(dotSrc);
 });
 
+// Ace binds undo/redo to Cmd- on darwin, Ctrl- elsewhere; mirror that here so
+// Cypress drives the same shortcut Ace listens for on the host platform.
+const editorModKey = Cypress.platform === 'darwin' ? '{cmd}' : '{ctrl}';
+
 Cypress.Commands.add("clearDotSource", () => {
   cy.textEditorContent().type('{selectall}{del}');
+});
+
+Cypress.Commands.add("pressUndo", { prevSubject: 'optional' }, (subject) => {
+  const target = subject ? cy.wrap(subject) : cy.get('body');
+  target.type(`${editorModKey}z`);
+});
+
+Cypress.Commands.add("pressRedo", { prevSubject: 'optional' }, (subject) => {
+  const target = subject ? cy.wrap(subject) : cy.get('body');
+  target.type(`${editorModKey}y`);
 });
 
 Cypress.Commands.add("insertDotSource", (dotSrc) => {
