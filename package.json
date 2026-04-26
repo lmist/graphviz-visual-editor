@@ -54,6 +54,9 @@
     "test": "react-scripts test --env=jsdom --verbose=false",
     "test:coverage": "react-scripts test --env=jsdom --coverage --coverageDirectory=./coverage-jest",
     "integration-test": "cypress run --config video=${CI:-false} --browser=chrome --headless --record --key a12725d3-851c-4e67-b432-079b4fb1a875",
+    "integration-test:fast": "cypress-parallel -s integration-test:noinstrument -t 4 -d cypress/e2e -a '\"--browser=chrome --headless\"'",
+    "integration-test:noinstrument": "cypress run --config video=false --browser=chrome --headless",
+    "start:fast": "react-scripts --max_old_space_size=4096 start",
     "merge-coverage": "mkdir -p coverage && cp -p coverage-jest/coverage-final.json coverage/coverage-final-jest.json && cp -p coverage-cypress/coverage-final.json coverage/coverage-final-cypress.json && nyc report --temp-dir coverage --report-dir coverage --reporter lcov --reporter clover --reporter json --reporter text",
     "eject": "react-scripts eject",
     "postinstall": "patch-package"
@@ -135,6 +138,7 @@
     "@testing-library/react": "^16.0.0",
     "codecov": "^3.8.3",
     "cypress": "^13.13.3",
+    "cypress-parallel": "^0.14.0",
     "enzyme": "^3.11.0",
     "istanbul-lib-coverage": "^3.2.2",
     "jest-axe": "^10.0.0",
