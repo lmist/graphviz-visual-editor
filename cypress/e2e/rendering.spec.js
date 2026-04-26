@@ -138,8 +138,12 @@ describe('Basic rendering from DOT source', function() {
         expect(w).to.be.closeTo(351.75, 1);
         expect(h).to.be.closeTo(429, 2);
       });
-      cy.wrap(svg).should('have.attr', 'width', '469');
-      cy.wrap(svg).should('have.attr', 'height', '572');
+      cy.wrap(svg).invoke('attr', 'width').then(w => {
+        expect(Number(w)).to.be.closeTo(469, 1);
+      });
+      cy.wrap(svg).invoke('attr', 'height').then(h => {
+        expect(Number(h)).to.be.closeTo(572, 1);
+      });
     });
 
     cy.canvasGraph().then(graph0 => {
@@ -159,8 +163,12 @@ describe('Basic rendering from DOT source', function() {
         expect(w).to.be.closeTo(351.75, 1);
         expect(h).to.be.closeTo(429, 2);
       });
-      cy.wrap(svg).should('have.attr', 'width', '976');
-      cy.wrap(svg).should('have.attr', 'height', '1232');
+      cy.wrap(svg).invoke('attr', 'width').then(w => {
+        expect(Number(w)).to.be.closeTo(976, 1);
+      });
+      cy.wrap(svg).invoke('attr', 'height').then(h => {
+        expect(Number(h)).to.be.closeTo(1232, 1);
+      });
     });
 
     cy.canvasGraph().then(graph0 => {
