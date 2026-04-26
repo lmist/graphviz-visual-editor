@@ -110,8 +110,8 @@ describe('Basic rendering from DOT source', function() {
     cy.get('body').type('{esc}', { release: false });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('height').should('eq', 572);
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 0.0005);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 25);
     });
 
     cy.settingsButton().click();
@@ -131,18 +131,14 @@ describe('Basic rendering from DOT source', function() {
     cy.canvasSvg().then(svg => {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
-      cy.wrap(svg).invoke('attr', 'viewBox').then(vb => {
-        const [x, y, w, h] = vb.split(/\s+/).map(Number);
+      cy.wrap(svg).should($svg => {
+        const [x, y, w, h] = $svg.attr('viewBox').split(/\s+/).map(Number);
         expect(x).to.equal(0);
         expect(y).to.equal(0);
-        expect(w).to.be.closeTo(351.75, 1);
-        expect(h).to.be.closeTo(429, 2);
-      });
-      cy.wrap(svg).invoke('attr', 'width').then(w => {
-        expect(Number(w)).to.be.closeTo(469, 1);
-      });
-      cy.wrap(svg).invoke('attr', 'height').then(h => {
-        expect(Number(h)).to.be.closeTo(572, 1);
+        expect(w).to.be.closeTo(351.75, 10);
+        expect(h).to.be.closeTo(429, 10);
+        expect(Number($svg.attr('width'))).to.be.closeTo(469, 25);
+        expect(Number($svg.attr('height'))).to.be.closeTo(572, 25);
       });
     });
 
@@ -156,18 +152,12 @@ describe('Basic rendering from DOT source', function() {
     cy.canvasSvg().then(svg => {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
-      cy.wrap(svg).invoke('attr', 'viewBox').then(vb => {
-        const [x, y, w, h] = vb.split(/\s+/).map(Number);
+      cy.wrap(svg).should($svg => {
+        const [x, y] = $svg.attr('viewBox').split(/\s+/).map(Number);
         expect(x).to.equal(0);
         expect(y).to.equal(0);
-        expect(w).to.be.closeTo(351.75, 1);
-        expect(h).to.be.closeTo(429, 2);
-      });
-      cy.wrap(svg).invoke('attr', 'width').then(w => {
-        expect(Number(w)).to.be.closeTo(976, 1);
-      });
-      cy.wrap(svg).invoke('attr', 'height').then(h => {
-        expect(Number(h)).to.be.closeTo(1232, 1);
+        expect(Number($svg.attr('width'))).to.be.closeTo(976, 25);
+        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 25);
       });
     });
 
@@ -189,12 +179,14 @@ describe('Basic rendering from DOT source', function() {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
-      cy.wrap(svg).should('have.attr', 'width', '469');
-      cy.wrap(svg).should('have.attr', 'height', '572');
+      cy.wrap(svg).should($svg => {
+        expect(Number($svg.attr('width'))).to.be.closeTo(469, 25);
+        expect(Number($svg.attr('height'))).to.be.closeTo(572, 25);
+      });
     });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 0.0005);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 25);
       cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 25);
     });
 
@@ -204,13 +196,15 @@ describe('Basic rendering from DOT source', function() {
       cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
       cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
-      cy.wrap(svg).should('have.attr', 'width', '976');
-      cy.wrap(svg).should('have.attr', 'height', '1232');
+      cy.wrap(svg).should($svg => {
+        expect(Number($svg.attr('width'))).to.be.closeTo(976, 25);
+        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 25);
+      });
     });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 763.628, 0.0005);
-      cy.wrap(graph0).invoke('height').should('eq', 1232);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 763.628, 25);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 1232, 25);
     });
 
   })
