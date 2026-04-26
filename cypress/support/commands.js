@@ -341,9 +341,7 @@ Cypress.Commands.add("formatDrawer", () => {
 });
 
 Cypress.Commands.add("styleSwitch", () => {
-  return cy.formatDrawer()
-    .find('input#style-switch')
-    .siblings('[role="switch"]');
+  return cy.formatDrawer().find('button#style-switch');
 });
 
 Cypress.Commands.add("formatDrawerCloseButton", () => {
@@ -365,9 +363,7 @@ Cypress.Commands.add("colorPickerForm", () => {
 });
 
 Cypress.Commands.add("colorSwitch", () => {
-  return cy.colorPickerForm()
-    .find('input#color-switch')
-    .siblings('[role="switch"]');
+  return cy.formatDrawer().find('button#color-switch');
 });
 
 Cypress.Commands.add("colorPickerSwatch", () => {
@@ -399,9 +395,7 @@ Cypress.Commands.add("fillColorPickerForm", () => {
 });
 
 Cypress.Commands.add("fillColorSwitch", () => {
-  return cy.fillColorPickerForm()
-    .find('input#fillcolor-switch')
-    .siblings('[role="switch"]');
+  return cy.formatDrawer().find('button#fillcolor-switch');
 });
 
 Cypress.Commands.add("fillColorPickerSwatch", () => {
@@ -453,11 +447,7 @@ Cypress.Commands.add("settingsDialog", () => {
 });
 
 Cypress.Commands.add("fitSwitch", () => {
-  // Base UI Switch.Root spreads `id` onto its hidden form <input>, not the
-  // visible span[role=switch] sibling. Walk to the sibling for clicks.
-  return cy.settingsDialog()
-    .find('input#fit-switch')
-    .siblings('[role="switch"]');
+  return cy.settingsDialog().find('button#fit-switch');
 });
 
 Cypress.Commands.add("engineSelector", () => {
@@ -480,15 +470,11 @@ Cypress.Commands.add("transitionDurationInput", () => {
 });
 
 Cypress.Commands.add("pathTweenSwitch", () => {
-  return cy.settingsDialog()
-    .find('input#path-tween-switch')
-    .siblings('[role="switch"]');
+  return cy.settingsDialog().find('button#path-tween-switch');
 });
 
 Cypress.Commands.add("shapeTweenSwitch", () => {
-  return cy.settingsDialog()
-    .find('input#shape-tween-switch')
-    .siblings('[role="switch"]');
+  return cy.settingsDialog().find('button#shape-tween-switch');
 });
 
 Cypress.Commands.add("tweenPrecisionForm", () => {
