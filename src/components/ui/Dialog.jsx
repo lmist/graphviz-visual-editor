@@ -25,7 +25,7 @@ const positionerStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: `${SPACING.xl}px ${SPACING.lg}px`,
+  padding: `clamp(${SPACING.sm}px, 3vw, ${SPACING.xl}px)`,
   zIndex: 1300,
   pointerEvents: 'none',
 };
@@ -54,7 +54,7 @@ function resolvePopupStyle({ fullWidth, maxWidth, scroll, style }) {
     resolved.width = '100%';
   }
 
-  resolved.maxHeight = `calc(100vh - ${SPACING.xl * 2}px)`;
+  resolved.maxHeight = `calc(100dvh - clamp(${SPACING.md}px, 6vw, ${SPACING.xl * 2}px))`;
   if (scroll === 'body') {
     resolved.overflowY = 'auto';
   } else {

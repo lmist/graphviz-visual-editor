@@ -63,6 +63,7 @@ const rows = [
 
 const rootStyle = {
   userSelect: 'none',
+  width: 'min(960px, 100%)',
 };
 
 const titleRowStyle = {
@@ -73,6 +74,12 @@ const titleRowStyle = {
 
 const tableStyle = {
   minWidth: 700,
+};
+
+const tableScrollStyle = {
+  maxWidth: '100%',
+  minWidth: 0,
+  overflowX: 'auto',
 };
 
 class EnhancedTableHead extends React.Component {
@@ -223,57 +230,59 @@ class OpenFromBrowserDialog extends React.Component {
             <DialogContentText>
               Open a graph from the browser&apos;s local storage.
             </DialogContentText>
-            <Table style={tableStyle}>
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={this.handleRequestSort}
-              />
-              <TableBody>
-                {stableSort(projectList, getSorting(order, orderBy))
-                .map((project) => {
-                  const name = project.name;
-                  return (
-                    <TableRow
-                      key={name}
-                      selected={name === selectedName}
-                      hover
-                      onClick={this.handleClick(name)}
-                      onDoubleClick={this.handleDoubleClick(name)}
-                    >
-                    <TableCell component="th" scope="row">
-                      {name}
-                    </TableCell>
-                    <TableCell>
-                      <DotSrcPreview
-                        dotSrc={project.dotSrc}
-                        numLines={numLinesPreview}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      {project.dotSrcLastChangeTime ? moment(project.dotSrcLastChangeTime).fromNow() : ''}
-                    </TableCell>
-                    <TableCell>
-                      <SvgPreview
-                        svg={project.svg}
-                        width="200px"
-                        height={Math.ceil(numLinesPreview * 1.2, 1) + "em"}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <IconButton
-                        id="delete"
-                        aria-label="Delete"
-                        onClick={this.handleDelete(name)}
+            <div style={tableScrollStyle}>
+              <Table style={tableStyle}>
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={this.handleRequestSort}
+                />
+                <TableBody>
+                  {stableSort(projectList, getSorting(order, orderBy))
+                  .map((project) => {
+                    const name = project.name;
+                    return (
+                      <TableRow
+                        key={name}
+                        selected={name === selectedName}
+                        hover
+                        onClick={this.handleClick(name)}
+                        onDoubleClick={this.handleDoubleClick(name)}
                       >
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
+                      <TableCell component="th" scope="row">
+                        {name}
+                      </TableCell>
+                      <TableCell>
+                        <DotSrcPreview
+                          dotSrc={project.dotSrc}
+                          numLines={numLinesPreview}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        {project.dotSrcLastChangeTime ? moment(project.dotSrcLastChangeTime).fromNow() : ''}
+                      </TableCell>
+                      <TableCell>
+                        <SvgPreview
+                          svg={project.svg}
+                          width="200px"
+                          height={Math.ceil(numLinesPreview * 1.2, 1) + "em"}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          id="delete"
+                          aria-label="Delete"
+                          onClick={this.handleDelete(name)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.onClose} id="cancel">

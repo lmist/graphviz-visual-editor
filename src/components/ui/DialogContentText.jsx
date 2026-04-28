@@ -22,6 +22,9 @@ function DialogContentText({
     lineHeight: 1.5,
     color: COLORS.fg,
     margin: 0,
+    maxWidth: '70ch',
+    minWidth: 0,
+    overflowWrap: 'anywhere',
     ...style,
   };
 

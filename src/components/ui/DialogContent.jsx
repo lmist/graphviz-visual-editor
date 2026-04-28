@@ -7,6 +7,7 @@ const baseStyle = {
   gap: SPACING.md,
   padding: `${SPACING.md}px ${SPACING.lg}px ${SPACING.lg}px`,
   overflowY: 'auto',
+  minWidth: 0,
   flex: '1 1 auto',
 };
 

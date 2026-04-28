@@ -18,7 +18,14 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Icon } from './compone
 import { BORDERS, COLORS, SPACING, TYPOGRAPHY } from './design/tokens.js';
 
 const rootStyle = { flexGrow: 1 };
-const titleStyle = { flex: '1 0 148px', display: 'inline-flex', alignItems: 'center', gap: SPACING.sm, minWidth: 148 };
+const titleStyle = {
+  flex: '1 1 148px',
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: SPACING.sm,
+  minWidth: 112,
+  maxWidth: 228,
+};
 const logoIconStyle = { width: 32, height: 32 };
 const logoImgStyle = { display: 'block', height: '100%', width: '100%' };
 const gitHubLinkStyle = { color: 'inherit', textDecoration: 'none' };
@@ -57,10 +64,12 @@ const titleNameStyle = {
 const statusClusterStyle = {
   display: 'inline-flex',
   alignItems: 'center',
-  flexShrink: 0,
+  flex: '1 1 178px',
+  flexWrap: 'wrap',
   gap: SPACING.sm,
   marginLeft: SPACING.sm,
   marginRight: SPACING.sm,
+  minWidth: 0,
 };
 const statusPillStyle = (tone) => ({
   display: 'inline-flex',
