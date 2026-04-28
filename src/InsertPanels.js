@@ -107,7 +107,7 @@ const nodeShapeCategories = [
 const rootStyle = {
   width: '100%',
   overflowY: 'auto',
-  height: 'calc(100vh - 64px - 2 * 12px)',
+  height: `calc(100vh - 64px - 2 * 12px)`,
 };
 
 const headingStyle = {

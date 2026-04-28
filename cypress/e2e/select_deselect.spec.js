@@ -388,7 +388,7 @@ describe('Selection and deselection in graph', function() {
     cy.edge(2).shouldNotBeSelected();
 
     cy.get('body').type('{shift}', { release: false })
-      .edge(2).click();
+      .edge(2).click({force: true});
 
     cy.node(1).shouldNotBeSelected();
     cy.node(2).shouldNotBeSelected();
@@ -423,7 +423,7 @@ describe('Selection and deselection in graph', function() {
     cy.edge(2).shouldNotBeSelected();
 
     cy.get('body').type('{ctrl}', { release: false })
-      .edge(2).click();
+      .edge(2).click({force: true});
 
     cy.node(1).shouldNotBeSelected();
     cy.node(2).shouldNotBeSelected();

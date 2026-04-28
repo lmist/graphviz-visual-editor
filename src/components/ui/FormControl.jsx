@@ -11,6 +11,7 @@ const MARGIN_MAP = {
 const baseStyle = {
   display: 'flex',
   flexDirection: 'column',
+  gap: SPACING.sm,
   border: 0,
   padding: 0,
   margin: 0,

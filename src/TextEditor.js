@@ -5,14 +5,14 @@ import 'ace-builds/src-noconflict/theme-github.js';
 import 'ace-builds/src-noconflict/ext-searchbox.js';
 import IconButton from './components/ui/IconButton.jsx';
 import ErrorOutlineIcon from './components/icons/ErrorOutlineIcon.jsx';
-import { COLORS } from './design/tokens.js';
+import { COLORS, LAYOUT, SPACING } from './design/tokens.js';
 const AceEditor = typeof ace == 'function' ? ace : ace.default;
 
 const SELECTED_WORD_CLASS = 'gv-ace-selected-word';
 
 const errorButtonStyle = {
   position: 'absolute',
-  top: 'calc(64px + 12px)',
+  top: `calc(${LAYOUT.appBarHeight}px + ${SPACING.md}px)`,
 };
 
 const markerStyle = `.${SELECTED_WORD_CLASS} {
@@ -141,7 +141,7 @@ class TextEditor extends React.Component {
           id="error-button"
           style={{
             ...errorButtonStyle,
-            left: `calc(${this.props.width} - 2 * 12px - 12px - ${scrollbarWidth}px`,
+            left: `calc(${this.props.width} - 2 * ${SPACING.md}px - ${SPACING.md}px - ${scrollbarWidth}px`,
             display: this.props.error ? 'block' : 'none',
             zIndex: 1,
           }}

@@ -42,11 +42,16 @@ export const BORDERS = {
 
 export const SHADOWS = {
   hover: '2px 2px 0 0 #000',
+  deep: '8px 8px 0 #000',
 };
 
 export const MOTION = {
   duration: '80ms',
   easing: 'linear',
+};
+
+export const LAYOUT = {
+  appBarHeight: 64,
 };
 
 export const cssVariables = `:root {
@@ -76,9 +81,12 @@ export const cssVariables = `:root {
   --border-radius: ${BORDERS.radius};
 
   --shadow-hover: ${SHADOWS.hover};
+  --shadow-deep: ${SHADOWS.deep};
 
   --motion-duration: ${MOTION.duration};
   --motion-easing: ${MOTION.easing};
+
+  --layout-app-bar-height: ${LAYOUT.appBarHeight}px;
 }`;
 
 const tokens = {
@@ -88,6 +96,7 @@ const tokens = {
   BORDERS,
   SHADOWS,
   MOTION,
+  LAYOUT,
   cssVariables,
 };
 

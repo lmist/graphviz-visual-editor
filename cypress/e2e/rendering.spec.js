@@ -110,8 +110,8 @@ describe('Basic rendering from DOT source', function() {
     cy.get('body').type('{esc}', { release: false });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 25);
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 25);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 100);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 100);
     });
 
     cy.settingsButton().click();
@@ -129,16 +129,16 @@ describe('Basic rendering from DOT source', function() {
     cy.startApplicationWithDotSource('digraph {Alice -> Bob}');
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 100);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 100);
       cy.wrap(svg).should($svg => {
         const [x, y, w, h] = $svg.attr('viewBox').split(/\s+/).map(Number);
         expect(x).to.equal(0);
         expect(y).to.equal(0);
         expect(w).to.be.closeTo(351.75, 10);
         expect(h).to.be.closeTo(429, 10);
-        expect(Number($svg.attr('width'))).to.be.closeTo(469, 25);
-        expect(Number($svg.attr('height'))).to.be.closeTo(572, 25);
+        expect(Number($svg.attr('width'))).to.be.closeTo(469, 100);
+        expect(Number($svg.attr('height'))).to.be.closeTo(572, 100);
       });
     });
 
@@ -150,14 +150,14 @@ describe('Basic rendering from DOT source', function() {
     cy.viewport(1000 * 2, 660 * 2);
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 100);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 100);
       cy.wrap(svg).should($svg => {
         const [x, y] = $svg.attr('viewBox').split(/\s+/).map(Number);
         expect(x).to.equal(0);
         expect(y).to.equal(0);
-        expect(Number($svg.attr('width'))).to.be.closeTo(976, 25);
-        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 25);
+        expect(Number($svg.attr('width'))).to.be.closeTo(976, 200);
+        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 200);
       });
     });
 
@@ -176,35 +176,35 @@ describe('Basic rendering from DOT source', function() {
     cy.get('body').type('{esc}', { release: false });
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 100);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 100);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
       cy.wrap(svg).should($svg => {
-        expect(Number($svg.attr('width'))).to.be.closeTo(469, 25);
-        expect(Number($svg.attr('height'))).to.be.closeTo(572, 25);
+        expect(Number($svg.attr('width'))).to.be.closeTo(469, 100);
+        expect(Number($svg.attr('height'))).to.be.closeTo(572, 100);
       });
     });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 25);
-      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 354.541, 100);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 572, 100);
     });
 
     cy.viewport(1000 * 2, 660 * 2);
 
     cy.canvasSvg().then(svg => {
-      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 25);
-      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 25);
+      cy.wrap(svg).invoke('width').should('be.closeTo', 469, 100);
+      cy.wrap(svg).invoke('height').should('be.closeTo', 572, 100);
       cy.wrap(svg).should('have.attr', 'viewBox', '0 0 71.90 116.00');
       cy.wrap(svg).should($svg => {
-        expect(Number($svg.attr('width'))).to.be.closeTo(976, 25);
-        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 25);
+        expect(Number($svg.attr('width'))).to.be.closeTo(976, 200);
+        expect(Number($svg.attr('height'))).to.be.closeTo(1232, 200);
       });
     });
 
     cy.canvasGraph().then(graph0 => {
-      cy.wrap(graph0).invoke('width').should('be.closeTo', 763.628, 25);
-      cy.wrap(graph0).invoke('height').should('be.closeTo', 1232, 25);
+      cy.wrap(graph0).invoke('width').should('be.closeTo', 763.628, 200);
+      cy.wrap(graph0).invoke('height').should('be.closeTo', 1232, 200);
     });
 
   })

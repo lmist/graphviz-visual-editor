@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dialog as BaseDialog } from '@base-ui-components/react/dialog';
 import './baseUiAriaInertShim.js';
-import { BORDERS, COLORS, SPACING } from '../../design/tokens.js';
+import { BORDERS, COLORS, SHADOWS, SPACING } from '../../design/tokens.js';
 
 const MAX_WIDTHS = {
   xs: 444,
@@ -35,7 +35,7 @@ const basePopupStyle = {
   color: COLORS.fg,
   border: BORDERS.thick,
   borderRadius: BORDERS.radius,
-  boxShadow: '8px 8px 0 #000',
+  boxShadow: SHADOWS.deep,
   display: 'flex',
   flexDirection: 'column',
   boxSizing: 'border-box',
@@ -83,19 +83,21 @@ function Dialog({
 
   return (
     <BaseDialog.Root open={open} onOpenChange={handleOpenChange}>
-      <BaseDialog.Portal>
-        <BaseDialog.Backdrop style={backdropStyle} />
-        <div style={positionerStyle}>
-          <BaseDialog.Popup
-            id={id}
-            className={className}
-            style={popupStyle}
-            {...rest}
-          >
-            {children}
-          </BaseDialog.Popup>
-        </div>
-      </BaseDialog.Portal>
+      {open && (
+        <BaseDialog.Portal>
+          <BaseDialog.Backdrop style={backdropStyle} />
+          <div style={positionerStyle}>
+            <BaseDialog.Popup
+              id={id}
+              className={className}
+              style={popupStyle}
+              {...rest}
+            >
+              {children}
+            </BaseDialog.Popup>
+          </div>
+        </BaseDialog.Portal>
+      )}
     </BaseDialog.Root>
   );
 }

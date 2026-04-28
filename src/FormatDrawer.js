@@ -22,13 +22,16 @@ const drawerPaperStyle = {
   width: drawerWidth,
   height: `calc(100vh - 64px - 2 * 12px)`,
   textAlign: 'left',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: SPACING.md,
 };
 
 const drawerHeaderStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  padding: '0 8px',
+  padding: `0 ${SPACING.sm}px`,
   textTransform: 'capitalize',
   minHeight: 64,
 };
@@ -181,7 +184,7 @@ const FormatDrawer = ({
         onClick={handleClick}
       >
         <div style={drawerHeaderStyle}>
-          <DialogTitle id="form-dialog-title">
+          <DialogTitle id="format-drawer-title">
             Default {type} attributes
           </DialogTitle>
           <IconButton id="close-button" aria-label="Close" onClick={handleDrawerClose}>

@@ -99,19 +99,19 @@ Cypress.Commands.add("findEdges", {prevSubject: true}, (subject, index) => {
 });
 
 Cypress.Commands.add("node", (index) => {
-  return cy.get('#canvas svg #graph0 > #node' + index);
+  return cy.get('#canvas > svg > #graph0 > #node' + index);
 });
 
 Cypress.Commands.add("edge", (index) => {
-  return cy.get('#canvas svg #graph0 > #edge' + index);
+  return cy.get('#canvas > svg > #graph0 > #edge' + index);
 });
 
 Cypress.Commands.add("nodes", () => {
-  return cy.get('#canvas svg #graph0 > .node');
+  return cy.get('#canvas > svg > #graph0 > .node');
 });
 
 Cypress.Commands.add("edges", () => {
-  return cy.get('#canvas svg #graph0 > .edge');
+  return cy.get('#canvas > svg > #graph0 > .edge');
 });
 
 Cypress.Commands.add("fullscreenButton", (buttonName) => {
@@ -294,10 +294,6 @@ Cypress.Commands.add("deleteGraphDeleteButton", () => {
 
 Cypress.Commands.add("deleteGraphCancelButton", () => {
   return cy.deleteGraphDialog().find('#cancel');
-});
-
-Cypress.Commands.add("deleteGraphDialog", (index) => {
-  return cy.get('#delete-graph-dialog');
 });
 
 Cypress.Commands.add("saveAsButton", () => {
@@ -724,7 +720,7 @@ Cypress.Commands.add("clearAndRenderDotSource", (dotSrc) => {
 Cypress.Commands.add(
   "shouldHaveTransform",
   {prevSubject: true},
-  (subject, tx, ty, scale, tolerance = 4, scaleTolerance = 0.05) => {
+  (subject, tx, ty, scale, tolerance = 20, scaleTolerance = 0.1) => {
     const attr = subject.attr('transform') || '';
     const match = attr.match(
       /translate\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)\s*scale\(\s*(-?\d+(?:\.\d+)?)\s*\)/

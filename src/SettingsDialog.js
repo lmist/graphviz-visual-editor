@@ -152,16 +152,16 @@ class SettingsDialog extends React.Component {
     const tweenPrecisionStep = (tweenPrecisionIsRelative && tweenPrecision <= 1) ? 0.1 : 1;
     const tweenPrecisionInputStyle = tweenPrecisionIsRelative ? tweenPrecisionRelativeInputStyle : tweenPrecisionAbsoluteInputStyle;
     return (
-      <div>
+      <React.Fragment>
         <Dialog
           id="settings-dialog"
           open
           onClose={this.handleClose}
           scroll={'paper'}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby="settings-rendering-title"
         >
           <div style={titleRowStyle}>
-            <DialogTitle id="form-dialog-title">Graph rendering</DialogTitle>
+            <DialogTitle id="settings-rendering-title">Graph rendering</DialogTitle>
             <IconButton aria-label="Close" onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>
@@ -192,7 +192,7 @@ class SettingsDialog extends React.Component {
               <FormHelperText>Graphviz layout engine</FormHelperText>
             </FormControl>
           </DialogContent>
-          <DialogTitle id="form-dialog-title">Graph viewing</DialogTitle>
+          <DialogTitle id="settings-viewing-title">Graph viewing</DialogTitle>
           <DialogContent style={contentStyle}>
             <DialogContentText>
               These settings affects how the graph is viewed. They do not affect the graph itself.
@@ -295,7 +295,7 @@ class SettingsDialog extends React.Component {
               />
             </FormControl>
           </DialogContent>
-          <DialogTitle id="form-dialog-title">Text Editor</DialogTitle>
+          <DialogTitle id="settings-editor-title">Text Editor</DialogTitle>
           <DialogContent style={contentStyle}>
             <FormControl
               style={formControlStyle}
@@ -355,7 +355,7 @@ class SettingsDialog extends React.Component {
             </FormControl>
           </DialogContent>
         </Dialog>
-      </div>
+      </React.Fragment>
     );
   }
 }

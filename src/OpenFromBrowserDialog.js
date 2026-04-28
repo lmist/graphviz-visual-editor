@@ -204,17 +204,17 @@ class OpenFromBrowserDialog extends React.Component {
     });
     const selectedName = projects[this.state.selectedName] ? this.state.selectedName : this.props.name;
     return (
-      <div>
+      <React.Fragment>
         <Dialog
           id="open-from-browser-dialog"
           maxWidth={false}
           style={rootStyle}
           open
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby="open-from-browser-title"
         >
           <div style={titleRowStyle}>
-            <DialogTitle id="form-dialog-title">Open graph from browser</DialogTitle>
+            <DialogTitle id="open-from-browser-title">Open graph from browser</DialogTitle>
             <IconButton aria-label="Close" onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>
@@ -291,7 +291,7 @@ class OpenFromBrowserDialog extends React.Component {
             onClose={this.handleDoYouWantToDeleteClose}
           />
         }
-      </div>
+      </React.Fragment>
     );
   }
 }

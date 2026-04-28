@@ -13,9 +13,9 @@ function Paper({ id, elevation, className, style, children, ...rest }) {
   const resolvedStyle = { ...baseStyle, ...style };
 
   return (
-    <section id={id} className={className} style={resolvedStyle} {...rest}>
+    <div id={id} className={className} style={resolvedStyle} {...rest}>
       {children}
-    </section>
+    </div>
   );
 }
 

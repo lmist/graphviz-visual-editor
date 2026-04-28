@@ -8,8 +8,8 @@ const baseStyle = {
   alignItems: 'center',
   height: 56,
   gap: SPACING.md,
-  paddingLeft: SPACING.md,
-  paddingRight: SPACING.md,
+  paddingLeft: SPACING.lg,
+  paddingRight: SPACING.lg,
 };
 
 function Toolbar({ id, className, style, children, ...rest }) {

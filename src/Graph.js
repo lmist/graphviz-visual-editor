@@ -14,7 +14,6 @@ import 'd3-graphviz';
 import DotGraph from './dot.js'
 
 const canvasStyle = {
-  border: '1px solid #000',
   background: '#fff',
   boxSizing: 'border-box',
 };
@@ -803,15 +802,17 @@ class Graph extends React.Component {
             in={true}
             style={{
               transitionDelay: '800ms',
+              pointerEvents: 'none',
               ...(this.props.fullscreen ? progressWhenFullscreenStyle : progressWhenNotFullscreenStyle),
             }}
             unmountOnExit
           >
-             <CircularProgress
-               id="busy-indicator"
-               size={20}
-               thickness={4.5}
-             />
+             <div id="busy-indicator">
+               <CircularProgress
+                 size={20}
+                 thickness={4.5}
+               />
+             </div>
           </Fade>
         )}
         <IconButton
