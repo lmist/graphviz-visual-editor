@@ -13,57 +13,57 @@
 .t-h1 {
   font-family: var(--font-ui);
   font-size: var(--font-size-h1);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.1;
 }
 
 .t-h2 {
   font-family: var(--font-ui);
   font-size: var(--font-size-h2);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.1;
 }
 
 .t-h3 {
   font-family: var(--font-ui);
   font-size: var(--font-size-h3);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.2;
 }
 
 .t-h4 {
   font-family: var(--font-ui);
   font-size: var(--font-size-h4);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.2;
 }
 
 .t-body {
   font-family: var(--font-ui);
   font-size: var(--font-size-body);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.4;
 }
 
 .t-caption {
   font-family: var(--font-ui);
   font-size: var(--font-size-caption);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.4;
 }
 
 .t-mono {
   font-family: var(--font-mono);
   font-size: var(--font-size-body);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.4;
 }
 
 .t-label {
   font-family: var(--font-ui);
   font-size: var(--font-size-caption);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--letter-spacing-label);
 }

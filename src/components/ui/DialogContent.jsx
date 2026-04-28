@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { SPACING } from '../../design/tokens.js';
 
 const baseStyle = {
+  display: 'grid',
+  gap: SPACING.md,
   padding: `${SPACING.md}px ${SPACING.lg}px ${SPACING.lg}px`,
   overflowY: 'auto',
   flex: '1 1 auto',

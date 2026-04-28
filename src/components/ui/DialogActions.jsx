@@ -8,7 +8,7 @@ const baseStyle = {
   justifyContent: 'flex-end',
   alignItems: 'center',
   gap: SPACING.sm,
-  padding: `${SPACING.md}px ${SPACING.lg}px`,
+  padding: `${SPACING.sm}px ${SPACING.lg}px ${SPACING.md}px`,
   borderTop: BORDERS.thin,
   flex: '0 0 auto',
 };

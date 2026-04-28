@@ -6,6 +6,7 @@ const baseStyle = {
   backgroundColor: COLORS.bg,
   border: BORDERS.thin,
   borderRadius: BORDERS.radius,
+  boxSizing: 'border-box',
 };
 
 // eslint-disable-next-line no-unused-vars

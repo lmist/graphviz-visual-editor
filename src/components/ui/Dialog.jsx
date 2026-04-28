@@ -25,7 +25,7 @@ const positionerStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: SPACING.lg,
+  padding: `${SPACING.xl}px ${SPACING.lg}px`,
   zIndex: 1300,
   pointerEvents: 'none',
 };
@@ -40,6 +40,7 @@ const basePopupStyle = {
   flexDirection: 'column',
   boxSizing: 'border-box',
   pointerEvents: 'auto',
+  minWidth: 0,
 };
 
 function resolvePopupStyle({ fullWidth, maxWidth, scroll, style }) {

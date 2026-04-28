@@ -26,9 +26,13 @@ ol {
 }
 
 body {
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  color: #242423;
-  background: #fbfaf5;
+  font-family: var(--font-ui, "Space Grotesk", system-ui, sans-serif);
+  font-size: var(--font-size-body, 0.875rem);
+  line-height: 1.45;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  color: var(--color-fg, #242423);
+  background: var(--color-bg, #fbfaf5);
 }
 
 button,
@@ -43,5 +47,5 @@ kbd,
 code,
 pre,
 samp {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
 }

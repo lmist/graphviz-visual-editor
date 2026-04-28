@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu as BaseMenu } from '@base-ui-components/react/menu';
-import { COLORS, BORDERS, SHADOWS } from '../../design/tokens.js';
+import { COLORS, BORDERS, SHADOWS, SPACING } from '../../design/tokens.js';
 
 const popupStyle = {
   background: COLORS.bg,
   border: BORDERS.thick,
   boxShadow: SHADOWS.hover,
   color: COLORS.fg,
-  padding: 0,
+  padding: `${SPACING.xs}px 0`,
   margin: 0,
   outline: 'none',
   listStyle: 'none',
+  minWidth: 184,
+};
+
+const positionerStyle = {
+  zIndex: 1500,
 };
 
 // The wrapper accepts an imperative `anchorEl` (a DOM node held by the
@@ -34,7 +39,7 @@ function Menu({ id, anchorEl, open, onClose, children }) {
   return (
     <BaseMenu.Root open={open} onOpenChange={handleOpenChange}>
       <BaseMenu.Portal>
-        <BaseMenu.Positioner anchor={anchorEl} sideOffset={4}>
+        <BaseMenu.Positioner anchor={anchorEl} sideOffset={4} style={positionerStyle}>
           <BaseMenu.Popup id={id} style={popupStyle} finalFocus={finalFocus}>
             {children}
           </BaseMenu.Popup>

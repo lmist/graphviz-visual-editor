@@ -25,15 +25,27 @@ export const SPACING = {
 };
 
 export const TYPOGRAPHY = {
+  display: 'Georgia, "Times New Roman", serif',
   ui: '"Space Grotesk", system-ui, sans-serif',
   mono: '"JetBrains Mono", ui-monospace, monospace',
   sizes: {
-    h1: 32,
-    h2: 24,
-    h3: 20,
-    h4: 16,
-    body: 14,
-    caption: 12,
+    h1: '1.625rem',
+    h2: '1.375rem',
+    h3: '1.1875rem',
+    h4: '1rem',
+    body: '0.875rem',
+    caption: '0.75rem',
+    micro: '0.6875rem',
+  },
+  weights: {
+    regular: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+  },
+  tracking: {
+    label: '0.06em',
+    metadata: '0.1em',
   },
 };
 
@@ -74,13 +86,21 @@ export const cssVariables = `:root {
   --space-xl: ${SPACING.xl}px;
 
   --font-ui: ${TYPOGRAPHY.ui};
+  --font-display: ${TYPOGRAPHY.display};
   --font-mono: ${TYPOGRAPHY.mono};
-  --font-size-h1: ${TYPOGRAPHY.sizes.h1}px;
-  --font-size-h2: ${TYPOGRAPHY.sizes.h2}px;
-  --font-size-h3: ${TYPOGRAPHY.sizes.h3}px;
-  --font-size-h4: ${TYPOGRAPHY.sizes.h4}px;
-  --font-size-body: ${TYPOGRAPHY.sizes.body}px;
-  --font-size-caption: ${TYPOGRAPHY.sizes.caption}px;
+  --font-size-h1: ${TYPOGRAPHY.sizes.h1};
+  --font-size-h2: ${TYPOGRAPHY.sizes.h2};
+  --font-size-h3: ${TYPOGRAPHY.sizes.h3};
+  --font-size-h4: ${TYPOGRAPHY.sizes.h4};
+  --font-size-body: ${TYPOGRAPHY.sizes.body};
+  --font-size-caption: ${TYPOGRAPHY.sizes.caption};
+  --font-size-micro: ${TYPOGRAPHY.sizes.micro};
+  --font-weight-regular: ${TYPOGRAPHY.weights.regular};
+  --font-weight-medium: ${TYPOGRAPHY.weights.medium};
+  --font-weight-semibold: ${TYPOGRAPHY.weights.semibold};
+  --font-weight-bold: ${TYPOGRAPHY.weights.bold};
+  --letter-spacing-label: ${TYPOGRAPHY.tracking.label};
+  --letter-spacing-metadata: ${TYPOGRAPHY.tracking.metadata};
 
   --border-thin: ${BORDERS.thin};
   --border-thick: ${BORDERS.thick};

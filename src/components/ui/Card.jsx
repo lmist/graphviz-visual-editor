@@ -6,6 +6,7 @@ const baseStyle = {
   backgroundColor: COLORS.bg,
   border: BORDERS.thin,
   borderRadius: BORDERS.radius,
+  overflow: 'hidden',
 };
 
 function Card({ id, raised = false, className, style, children, ...rest }) {
