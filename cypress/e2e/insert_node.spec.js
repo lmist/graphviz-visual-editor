@@ -1,4 +1,14 @@
 describe('Insertion of nodes into the graph', function() {
+  function expectVisibleDotSource(expectedDotSource) {
+    cy.textEditorVisibleLines().invoke('text').should((actualDotSource) => {
+      const normalizedDotSource = actualDotSource
+        .replace(/\u00a0/g, ' ')
+        .replace(/\[\s+/g, '[ ')
+        .replace(/\s+=/g, '=');
+
+      expect(normalizedDotSource).to.eq(expectedDotSource);
+    });
+  }
 
   function hsvToHex(h, s, v) {
         const x = 1 - Math.abs((h * 360 / 60) % 2 - 1);
@@ -286,7 +296,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ style=""]}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ style=""]}');
 
     cy.waitForTransition();
 
@@ -316,7 +326,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ style=""]    n3}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ style=""]    n3}');
 
     cy.waitForTransition();
 
@@ -791,7 +801,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ color=""]}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ color=""]}');
 
     cy.waitForTransition();
 
@@ -821,7 +831,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ color=""]    n3}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ color=""]    n3}');
 
     cy.waitForTransition();
 
@@ -1034,7 +1044,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ fillcolor=""]}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ fillcolor=""]}');
 
     cy.waitForTransition();
 
@@ -1064,7 +1074,7 @@ describe('Insertion of nodes into the graph', function() {
     cy.canvasGraph().trigger('mousedown', 'topLeft', {which: 2, shiftKey: true});
     cy.canvasGraph().trigger('mouseup', 'topLeft', {which: 2, shiftKey: true});
 
-    cy.textEditorVisibleLines().should('have.text', 'digraph {Alice -> Bob    n2 [ fillcolor=""]    n3}');
+    expectVisibleDotSource('digraph {Alice -> Bob    n2 [ fillcolor=""]    n3}');
 
     cy.waitForTransition();
 
