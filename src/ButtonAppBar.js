@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  ArrowClockwise,
+  ArrowCounterClockwise,
+  DownloadSimple,
+  FolderOpen,
+  FrameCorners,
+  GearSix,
+  GithubLogo,
+  List,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
+  Plus,
+  Question,
+} from '@phosphor-icons/react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Icon } from './components/ui/index.js';
-import MenuIcon from './components/icons/MenuIcon.jsx';
-import AddIcon from './components/icons/AddIcon.jsx';
-import OpenInBrowserIcon from './components/icons/OpenInBrowserIcon.jsx';
-import SaveAltIcon from './components/icons/SaveAltIcon.jsx';
-import UndoIcon from './components/icons/UndoIcon.jsx';
-import RedoIcon from './components/icons/RedoIcon.jsx';
-import ZoomInIcon from './components/icons/ZoomInIcon.jsx';
-import ZoomOutIcon from './components/icons/ZoomOutIcon.jsx';
-import ZoomOutMapIcon from './components/icons/ZoomOutMapIcon.jsx';
-import SettingsIcon from './components/icons/SettingsIcon.jsx';
-import HelpIcon from './components/icons/HelpIcon.jsx';
-import GitHubIcon from './GitHubIcon.js';
 import { BORDERS, COLORS, SPACING, TYPOGRAPHY } from './design/tokens.js';
 
 const rootStyle = { flexGrow: 1 };
@@ -158,28 +160,28 @@ function ButtonAppBar({
             aria-label="Menu"
             onClick={handleMenuButtonClick}
           >
-            <MenuIcon />
+            <List />
           </IconButton>
           <IconButton
             id="new"
             aria-label="New"
             onClick={handleNewButtonClick}
           >
-            <AddIcon />
+            <Plus />
           </IconButton>
           <IconButton
             id="open"
             aria-label="OpenInBrowser"
             onClick={handleOpenInBrowserButtonClick}
           >
-            <OpenInBrowserIcon />
+            <FolderOpen />
           </IconButton>
           <IconButton
             id="save-as"
             aria-label="SaveAlt"
             onClick={handleSaveAltButtonClick}
           >
-            <SaveAltIcon />
+            <DownloadSimple />
           </IconButton>
           <IconButton
             id="undo"
@@ -187,7 +189,7 @@ function ButtonAppBar({
             aria-label="Undo"
             onClick={handleUndoButtonClick}
           >
-            <UndoIcon />
+            <ArrowCounterClockwise />
           </IconButton>
           <IconButton
             id="redo"
@@ -195,7 +197,7 @@ function ButtonAppBar({
             aria-label="Redo"
             onClick={handleRedoButtonClick}
           >
-            <RedoIcon />
+            <ArrowClockwise />
           </IconButton>
           <Typography variant="h6" color="inherit" style={titleStyle}>
             <Icon style={logoIconStyle}>
@@ -224,21 +226,21 @@ function ButtonAppBar({
             aria-label="ZoomIn"
             onClick={handleZoomInButtonClick}
           >
-            <ZoomInIcon />
+            <MagnifyingGlassPlus />
           </IconButton>
           <IconButton
             id="zoom-out"
             aria-label="ZoomOut"
             onClick={handleZoomOutButtonClick}
           >
-            <ZoomOutIcon />
+            <MagnifyingGlassMinus />
           </IconButton>
           <IconButton
             id="zoom-out-map"
             aria-label="ZoomOutMap"
             onClick={handleZoomOutMapButtonClick}
           >
-            <ZoomOutMapIcon />
+            <FrameCorners />
           </IconButton>
           <Button id="zoom-reset" onClick={handleZoomResetButtonClick}>
             1:1
@@ -251,7 +253,7 @@ function ButtonAppBar({
             aria-label="Settings"
             onClick={handleSettingsButtonClick}
           >
-            <SettingsIcon />
+            <GearSix />
           </IconButton>
           <a
             id="github"
@@ -261,7 +263,7 @@ function ButtonAppBar({
             rel="noreferrer noopener"
           >
             <IconButton aria-label="GitHub">
-              <GitHubIcon viewBox="-2.4 -2.4 28.8 28.8" />
+              <GithubLogo />
             </IconButton>
           </a>
           <IconButton
@@ -269,7 +271,7 @@ function ButtonAppBar({
             aria-label="Help"
             onClick={handleHelpButtonClick}
           >
-            <HelpIcon />
+            <Question />
           </IconButton>
         </Toolbar>
       </AppBar>
