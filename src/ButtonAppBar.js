@@ -15,7 +15,7 @@ import {
   Question,
 } from '@phosphor-icons/react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Icon } from './components/ui/index.js';
-import { BORDERS, COLORS, SPACING, TYPOGRAPHY } from './design/tokens.js';
+import { COLORS, SPACING, TYPOGRAPHY } from './design/tokens.js';
 
 const rootStyle = { flexGrow: 1 };
 const titleStyle = {
@@ -61,46 +61,8 @@ const titleNameStyle = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
 };
-const statusClusterStyle = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  flex: '1 1 178px',
-  flexWrap: 'wrap',
-  gap: SPACING.sm,
-  marginLeft: SPACING.sm,
-  marginRight: SPACING.sm,
-  minWidth: 0,
-};
-const statusPillStyle = (tone) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: SPACING.xs,
-  minHeight: 28,
-  padding: `${SPACING.xs}px ${SPACING.sm}px`,
-  border: BORDERS.thin,
-  background: COLORS.bg,
-  color: tone === 'error' ? COLORS.error : COLORS.fg,
-  fontFamily: TYPOGRAPHY.mono,
-  fontSize: TYPOGRAPHY.sizes.micro,
-  fontWeight: TYPOGRAPHY.weights.semibold,
-  letterSpacing: TYPOGRAPHY.tracking.label,
-  lineHeight: 1,
-  textTransform: 'uppercase',
-  fontVariantNumeric: 'tabular-nums',
-  whiteSpace: 'nowrap',
-});
-const statusDotStyle = (tone) => ({
-  width: 7,
-  height: 7,
-  background: tone === 'error' ? COLORS.error : tone === 'synced' ? COLORS.accent : COLORS.muted,
-});
-
 function ButtonAppBar({
-  backendConnected = false,
-  hasError = false,
-  dotSrc = '',
   name = '',
-  nodeCount = 0,
   ...props
 }) {
   const handleMenuButtonClick = (event) => {
@@ -162,10 +124,6 @@ function ButtonAppBar({
   const handleHelpButtonClick = (event) => {
     props.onHelpButtonClick(event.currentTarget);
   };
-
-  const syncTone = hasError ? 'error' : backendConnected ? 'synced' : 'local';
-  const syncLabel = hasError ? 'Parse error' : backendConnected ? 'Synced' : 'Local only';
-  const graphLabel = dotSrc ? `${nodeCount} lines` : 'No graph';
 
   return (
     <div style={rootStyle}>
@@ -232,13 +190,6 @@ function ButtonAppBar({
               <span style={titleNameStyle}>{name || 'Untitled Graph'}</span>
             </span>
           </Typography>
-          <span style={statusClusterStyle} aria-label={`Workspace status: ${syncLabel}, ${graphLabel}`}>
-            <span style={statusPillStyle(syncTone)}>
-              <span style={statusDotStyle(syncTone)} />
-              {syncLabel}
-            </span>
-            <span style={statusPillStyle('local')}>{graphLabel}</span>
-          </span>
           <span style={toolbarGroupStyle}>
             <IconButton
               id="zoom-in"
@@ -306,11 +257,7 @@ function ButtonAppBar({
 ButtonAppBar.propTypes = {
   hasUndo: PropTypes.bool.isRequired,
   hasRedo: PropTypes.bool.isRequired,
-  backendConnected: PropTypes.bool,
-  hasError: PropTypes.bool,
-  dotSrc: PropTypes.string,
   name: PropTypes.string,
-  nodeCount: PropTypes.number,
   onMenuButtonClick: PropTypes.func.isRequired,
   onNewButtonClick: PropTypes.func.isRequired,
   onOpenInBrowserButtonClick: PropTypes.func.isRequired,

@@ -37,6 +37,7 @@
 .paneSurface {
   position: relative;
   overflow: hidden;
+  container-type: inline-size;
   background:
     linear-gradient(90deg, color-mix(in oklch, var(--color-line) 10%, transparent) 1px, transparent 1px) 0 0 / 24px 24px,
     var(--color-bg);
@@ -91,44 +92,6 @@
   text-transform: uppercase;
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
-}
-
-.statusPill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 24px;
-  padding: 3px 8px;
-  border: var(--border-thin);
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-micro);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: 1;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.statusPill::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  background: var(--status-color, var(--color-muted));
-}
-
-.statusSynced {
-  --status-color: var(--color-accent);
-}
-
-.statusError {
-  --status-color: var(--color-error);
-}
-
-.statusLocal {
-  --status-color: var(--color-muted);
 }
 
 .editorFrame {
@@ -210,25 +173,26 @@
 
 .agentStrip {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 8px;
-  align-items: center;
-  padding: 8px 12px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+  padding: 6px 8px;
   border-top: var(--border-thin);
   background: var(--color-surface);
   text-align: left;
+  min-width: 0;
 }
 
 .agentGlyph {
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: var(--border-thin);
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-display);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: var(--font-weight-bold);
   line-height: 1;
 }
@@ -255,8 +219,20 @@
   font-family: var(--font-ui);
   font-size: var(--font-size-caption);
   line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+@container (max-width: 320px) {
+  .agentStrip {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    padding: 5px 8px;
+  }
+
+  .agentGlyph {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -278,8 +254,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .canvasOverlay,
-  .statusPill {
+  .canvasOverlay {
     transition: none !important;
   }
 }

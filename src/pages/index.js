@@ -833,46 +833,30 @@ class Index extends React.Component {
   getWorkspaceStatus = () => {
     if (this.state.error) {
       return {
-        tone: 'error',
-        label: 'Parse error',
         detail: `Line ${this.state.error.line}: ${this.state.error.message}`,
       };
     }
     if (this.state.backendConnected) {
       return {
-        tone: 'synced',
-        label: 'Synced',
         detail: 'Agent and editor are reading the same graph state.',
       };
     }
     return {
-      tone: 'local',
-      label: 'Local only',
       detail: 'Backend sync is unavailable. Your browser copy remains editable.',
     };
   }
 
-  renderStatusPill = (status) => (
-    <span className={`${styles.statusPill} ${styles[`status${status.tone[0].toUpperCase()}${status.tone.slice(1)}`]}`}>
-      {status.label}
-    </span>
-  )
+  renderEditorStatus = () => {
+    if (!this.state.error) return null;
 
-  renderEditorStatus = (status) => (
-    <div className={styles.editorStatus}>
-      <div className={styles.editorStatusRow}>
-        {this.renderStatusPill(status)}
-        <span className={styles.editorStatusText}>
-          {this.getDotLineCount()} lines · {this.state.engine}
-        </span>
-      </div>
-      {this.state.error && (
+    return (
+      <div className={styles.editorStatus}>
         <div className={`${styles.editorStatusText} ${styles.errorText}`}>
           Line {this.state.error.line}: {this.state.error.message}
         </div>
-      )}
-    </div>
-  )
+      </div>
+    );
+  }
 
   renderAgentStrip = (status) => (
     <div className={styles.agentStrip}>
@@ -952,6 +936,9 @@ class Index extends React.Component {
       }
     }
     const paperPaneStyle = this.state.updatedSnackbarIsOpen ? paperWhenUpdatedSnackbarIsOpenStyle : this.state.fullscreen ? paperWhenFullscreenStyle : paperStyle;
+    const editorChromeHeight = PANE_HEADER_HEIGHT
+      + (this.state.error ? EDITOR_STATUS_HEIGHT : 0)
+      + AGENT_STRIP_HEIGHT;
     return (
       <div
         style={rootStyle}
@@ -962,11 +949,7 @@ class Index extends React.Component {
           <ButtonAppBar
             hasUndo={this.state.hasUndo}
             hasRedo={this.state.hasRedo}
-            backendConnected={this.state.backendConnected}
-            hasError={Boolean(this.state.error)}
-            dotSrc={this.state.dotSrc}
             name={this.state.name}
-            nodeCount={this.getDotLineCount()}
             onMenuButtonClick={this.handleMainMenuButtonClick}
             onNewButtonClick={this.handleNewClick}
             onUndoButtonClick={this.handleUndoButtonClick}
@@ -1085,9 +1068,6 @@ class Index extends React.Component {
                   <span className={styles.paneKicker}>I. Source</span>
                   <span className={styles.paneTitle}>DOT drafting bay</span>
                 </span>
-                <span className={styles.paneMeta}>
-                  {this.renderStatusPill(workspaceStatus)}
-                </span>
               </div>
               {this.state.nodeFormatDrawerIsOpen &&
                 <FormatDrawer
@@ -1112,10 +1092,10 @@ class Index extends React.Component {
                 />
               }
               <div style={{display: editorIsOpen ? 'block' : 'none'}}>
-                {this.renderEditorStatus(workspaceStatus)}
+                {this.renderEditorStatus()}
                 <TextEditor
                   width="100%"
-                  height={`calc(100vh - 64px - 2 * 16px - ${PANE_HEADER_HEIGHT + EDITOR_STATUS_HEIGHT + AGENT_STRIP_HEIGHT}px - ${this.state.updatedSnackbarIsOpen ? "64px" : "0px"})`}
+                  height={`calc(100vh - 64px - 2 * 16px - ${editorChromeHeight}px - ${this.state.updatedSnackbarIsOpen ? "64px" : "0px"})`}
                   dotSrc={this.state.forceNewDotSrc ? this.state.dotSrc : null}
                   onTextChange={this.handleTextChange}
                   onFocus={this.handleTextEditorFocus}
