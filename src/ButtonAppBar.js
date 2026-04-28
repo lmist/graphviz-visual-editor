@@ -13,15 +13,78 @@ import ZoomOutMapIcon from './components/icons/ZoomOutMapIcon.jsx';
 import SettingsIcon from './components/icons/SettingsIcon.jsx';
 import HelpIcon from './components/icons/HelpIcon.jsx';
 import GitHubIcon from './GitHubIcon.js';
-import { SPACING } from './design/tokens.js';
+import { BORDERS, COLORS, SPACING, TYPOGRAPHY } from './design/tokens.js';
 
 const rootStyle = { flexGrow: 1 };
-const titleStyle = { flexGrow: 1, display: 'inline-flex', alignItems: 'center', gap: SPACING.sm };
+const titleStyle = { flex: '1 0 148px', display: 'inline-flex', alignItems: 'center', gap: SPACING.sm, minWidth: 148 };
 const logoIconStyle = { width: 32, height: 32 };
 const logoImgStyle = { display: 'block', height: '100%', width: '100%' };
 const gitHubLinkStyle = { color: 'inherit', textDecoration: 'none' };
+const titleTextStyle = {
+  display: 'inline-flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  minWidth: 0,
+  overflow: 'hidden',
+};
+const titleKickerStyle = {
+  fontFamily: TYPOGRAPHY.mono,
+  fontSize: 10,
+  fontWeight: 600,
+  letterSpacing: '0.14em',
+  lineHeight: 1,
+  textTransform: 'uppercase',
+  color: COLORS.muted,
+};
+const titleNameStyle = {
+  fontFamily: 'Georgia, "Times New Roman", serif',
+  fontSize: 17,
+  fontWeight: 700,
+  lineHeight: 1.05,
+  whiteSpace: 'nowrap',
+  maxWidth: 150,
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+};
+const statusClusterStyle = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  flexShrink: 0,
+  gap: SPACING.sm,
+  marginLeft: SPACING.sm,
+  marginRight: SPACING.sm,
+};
+const statusPillStyle = (tone) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: SPACING.xs,
+  minHeight: 28,
+  padding: `${SPACING.xs}px ${SPACING.sm}px`,
+  border: BORDERS.thin,
+  background: COLORS.bg,
+  color: tone === 'error' ? COLORS.error : COLORS.fg,
+  fontFamily: TYPOGRAPHY.mono,
+  fontSize: 11,
+  fontWeight: 600,
+  letterSpacing: '0.08em',
+  lineHeight: 1,
+  textTransform: 'uppercase',
+  whiteSpace: 'nowrap',
+});
+const statusDotStyle = (tone) => ({
+  width: 7,
+  height: 7,
+  background: tone === 'error' ? COLORS.error : tone === 'synced' ? COLORS.accent : COLORS.muted,
+});
 
-function ButtonAppBar(props) {
+function ButtonAppBar({
+  backendConnected = false,
+  hasError = false,
+  dotSrc = '',
+  name = '',
+  nodeCount = 0,
+  ...props
+}) {
   const handleMenuButtonClick = (event) => {
     props.onMenuButtonClick(event.currentTarget);
   };
@@ -82,6 +145,10 @@ function ButtonAppBar(props) {
     props.onHelpButtonClick(event.currentTarget);
   };
 
+  const syncTone = hasError ? 'error' : backendConnected ? 'synced' : 'local';
+  const syncLabel = hasError ? 'Parse error' : backendConnected ? 'Synced' : 'Local only';
+  const graphLabel = dotSrc ? `${nodeCount} lines` : 'No graph';
+
   return (
     <div style={rootStyle}>
       <AppBar position="static">
@@ -140,8 +207,18 @@ function ButtonAppBar(props) {
                 alt=""
               />
             </Icon>
-            Graphviz Visual Editor
+            <span style={titleTextStyle}>
+              <span style={titleKickerStyle}>I. Agent drafting table</span>
+              <span style={titleNameStyle}>{name || 'Untitled Graph'}</span>
+            </span>
           </Typography>
+          <span style={statusClusterStyle} aria-label={`Workspace status: ${syncLabel}, ${graphLabel}`}>
+            <span style={statusPillStyle(syncTone)}>
+              <span style={statusDotStyle(syncTone)} />
+              {syncLabel}
+            </span>
+            <span style={statusPillStyle('local')}>{graphLabel}</span>
+          </span>
           <IconButton
             id="zoom-in"
             aria-label="ZoomIn"
@@ -203,6 +280,11 @@ function ButtonAppBar(props) {
 ButtonAppBar.propTypes = {
   hasUndo: PropTypes.bool.isRequired,
   hasRedo: PropTypes.bool.isRequired,
+  backendConnected: PropTypes.bool,
+  hasError: PropTypes.bool,
+  dotSrc: PropTypes.string,
+  name: PropTypes.string,
+  nodeCount: PropTypes.number,
   onMenuButtonClick: PropTypes.func.isRequired,
   onNewButtonClick: PropTypes.func.isRequired,
   onOpenInBrowserButtonClick: PropTypes.func.isRequired,

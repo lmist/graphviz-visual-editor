@@ -4,6 +4,7 @@ import { BORDERS, COLORS, MOTION, SPACING, TYPOGRAPHY } from '../../design/token
 
 const baseStyle = {
   display: 'inline-flex',
+  flexShrink: 0,
   alignItems: 'center',
   justifyContent: 'center',
   gap: SPACING.xs,

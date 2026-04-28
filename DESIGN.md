@@ -3,10 +3,13 @@ name: graphviz-visual-editor
 description: A fast, brutalist modeling workspace for inspecting and editing agent-generated Graphviz diagrams.
 colors:
   accent-cyan: "#4ed1f8"
-  paper-white: "#fff"
-  inky-black: "#000"
+  roman-paper: "#fbfaf5"
+  iron-ink: "#242423"
+  stone-surface: "#f3f0e7"
+  foundry-panel: "#ebe6db"
+  rule-line: "#34332f"
   error-red: "#ff3030"
-  muted-gray: "#666"
+  muted-gray: "#68645d"
   hover-gray: "#f0f0f0"
   graph-selection-blue: "#99ccff"
   graph-selection-stroke: "#0000dd"
@@ -53,29 +56,29 @@ spacing:
   xl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.inky-black}"
+    backgroundColor: "{colors.roman-paper}"
+    textColor: "{colors.iron-ink}"
     rounded: "{rounded.none}"
     padding: "4px 16px"
   button-primary-hover:
-    backgroundColor: "{colors.inky-black}"
-    textColor: "{colors.paper-white}"
+    backgroundColor: "{colors.iron-ink}"
+    textColor: "{colors.roman-paper}"
     rounded: "{rounded.none}"
     padding: "4px 16px"
   icon-button:
-    backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.inky-black}"
+    backgroundColor: "{colors.roman-paper}"
+    textColor: "{colors.iron-ink}"
     rounded: "{rounded.none}"
     width: "40px"
     height: "40px"
   input-field:
-    backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.inky-black}"
+    backgroundColor: "{colors.roman-paper}"
+    textColor: "{colors.iron-ink}"
     rounded: "{rounded.none}"
     padding: "4px 8px"
   switch-checked:
     backgroundColor: "{colors.accent-cyan}"
-    textColor: "{colors.inky-black}"
+    textColor: "{colors.iron-ink}"
     rounded: "{rounded.none}"
     width: "32px"
     height: "16px"
@@ -89,12 +92,12 @@ components:
 
 graphviz-visual-editor is a fast, sleek, chic modeling workspace for humans supervising agent-generated Graphviz output. The user is watching diagrams arrive through MCP, checking the DOT source, and stepping in when a model needs correction. The interface must make that supervision feel immediate: graph, code, sync state, and errors are always close to the user's eye and hand.
 
-The visual system keeps the existing brutalist discipline but aims for the cooler, sharper version of a modern Mermaid-style diagram editor. The canvas can be spacious and quiet; the chrome stays exacting, monochrome, square, and dense. Polish comes from alignment, typography, rhythm, and component consistency, not decoration.
+The visual system keeps the existing brutalist discipline but shifts the atmosphere toward flat industrial Roman drafting: stone-tinted neutrals, rule lines, serif headings, and dense tool controls. The canvas can be spacious and quiet; the chrome stays exacting, square, and dense. Polish comes from alignment, typography, rhythm, and component consistency, not decoration.
 
 The system explicitly rejects MUI / Material Design softness, Tailwind UI SaaS polish, rounded corners, soft gradients, over-animated dashboards, and anything that makes the editor feel like a marketing page instead of a working modeling surface.
 
 **Key Characteristics:**
-- Monochrome product chrome with one cyan state accent.
+- Stone-tinted product chrome with one cyan state accent.
 - Large graph canvas paired with immediate DOT access.
 - Dense, predictable controls for long modeling sessions.
 - Square geometry, strong borders, and hard offset depth.
@@ -102,14 +105,17 @@ The system explicitly rejects MUI / Material Design softness, Tailwind UI SaaS p
 
 ## 2. Colors
 
-The palette is a restrained product palette: black and white editor chrome, one electric cyan state accent, one red error color, and graph-specific selection colors reserved for the canvas.
+The palette is a restrained product palette: warm stone neutrals, one electric cyan state accent, one red error color, and graph-specific selection colors reserved for the canvas.
 
 ### Primary
 - **Electric Draft Cyan**: The only product accent. Use it for selection, focus highlight, active switches, active rows, and DOT-source markers. It should stay rare enough that it always means "look here."
 
 ### Neutral
-- **Paper White**: The default app surface, graph frame, control background, dialog surface, and menu surface.
-- **Inky Black**: The default text, icon, border, focus outline, and hard-shadow color.
+- **Roman Paper**: The default app surface, graph frame, control background, dialog surface, and menu surface.
+- **Iron Ink**: The default text, icon, and primary control color.
+- **Stone Surface**: Pane headers and quiet structural bands.
+- **Foundry Panel**: App-frame background and secondary panel atmosphere.
+- **Rule Line**: Borders, focus outlines, and hard-shadow color.
 - **Muted Gray**: Secondary text, disabled controls, helper text, and adornments.
 - **Hover Gray**: Table-row hover only. Do not promote it into a general surface color unless the token file adds it.
 
@@ -126,11 +132,11 @@ The palette is a restrained product palette: black and white editor chrome, one 
 
 ## 3. Typography
 
-**Display Font:** Space Grotesk, with system sans fallbacks.
+**Display Font:** Georgia for workspace section titles, Space Grotesk for product UI display.
 **Body Font:** Space Grotesk, with system sans fallbacks.
 **Label/Mono Font:** JetBrains Mono for code, keyboard data, and code-adjacent metadata.
 
-**Character:** Space Grotesk gives the interface a crisp technical voice without feeling generic. JetBrains Mono marks DOT, metadata, and structured values as editable material rather than prose.
+**Character:** The Roman serif gives workspace titles a drafted, institutional tone. Space Grotesk keeps controls crisp and technical. JetBrains Mono marks DOT, metadata, and structured values as editable material rather than prose.
 
 ### Hierarchy
 - **Display** (700, 32px, 1.1): Rare page-level titles only. Do not use it inside compact panels.
@@ -148,8 +154,8 @@ The palette is a restrained product palette: black and white editor chrome, one 
 Depth is structural, never atmospheric. Surfaces are separated by borders first. Hard offset shadows appear only for hover, popups, dialogs, snackbars, and intentionally raised containers. There are no blurred shadows, glass layers, or gradient depth cues.
 
 ### Shadow Vocabulary
-- **Hover Lift** (`2px 2px 0 0 #000`): Interactive lift for hoverable or raised controls, menus, snackbars, and cards.
-- **Deep Dialog Lift** (`8px 8px 0 #000`): Modal dialog emphasis only.
+- **Hover Lift** (`2px 2px 0 0 #34332f`): Interactive lift for hoverable or raised controls, menus, snackbars, and cards.
+- **Deep Dialog Lift** (`8px 8px 0 #34332f`): Modal dialog emphasis only.
 
 ### Named Rules
 **The Flat-Until-Activated Rule.** A surface is flat at rest unless it is a popup or dialog. Elevation must indicate state, stack order, or temporary focus.
@@ -157,39 +163,39 @@ Depth is structural, never atmospheric. Surfaces are separated by borders first.
 ## 5. Components
 
 ### Buttons
-- **Shape:** Square and tactile (0 radius) with a 2px black border.
-- **Primary:** Paper White background, Inky Black text, uppercase Space Grotesk label, and 4px 16px padding.
-- **Hover / Focus:** Invert to Inky Black background with Paper White text. Focus remains visible with a 2px outline offset.
+- **Shape:** Square and tactile (0 radius) with a 2px rule-line border.
+- **Primary:** Roman Paper background, Iron Ink text, uppercase Space Grotesk label, and 4px 16px padding.
+- **Hover / Focus:** Invert to Iron Ink background with Roman Paper text. Focus remains visible with a 2px outline offset.
 - **Disabled:** Preserve shape, reduce opacity, and use a not-allowed cursor.
 
 ### Icon Buttons
-- **Shape:** Fixed 40px square with centered icon and 2px black border.
+- **Shape:** Fixed 40px square with centered icon and 2px rule-line border.
 - **Behavior:** Same inversion as text buttons. Use icons for toolbar tools wherever a familiar symbol exists.
 - **Purpose:** Toolbar density. Do not replace clear tool icons with text unless the action needs a word to avoid ambiguity.
 
 ### Inputs / Fields
-- **Style:** Paper White field, Inky Black text, thin black border, 4px 8px padding.
-- **Focus:** 2px black outline with 2px offset. Never remove focus-visible affordance.
+- **Style:** Roman Paper field, Iron Ink text, thin rule-line border, 4px 8px padding.
+- **Focus:** 2px rule-line outline with 2px offset. Never remove focus-visible affordance.
 - **Adornments:** Muted Gray, compact, and aligned to the same 14px UI rhythm.
 
 ### Switches
 - **Shape:** Compact 32px by 16px square-edged track with a 12px square thumb.
-- **Checked State:** Electric Draft Cyan track, Inky Black thumb.
+- **Checked State:** Electric Draft Cyan track, Iron Ink thumb.
 - **Motion:** 80ms linear thumb translation. It should feel immediate, not animated for its own sake.
 
 ### Navigation
-- **App Bar:** White surface, black text, black bottom rule, 56px toolbar height, 64px app-frame rhythm.
-- **Menus:** White popup, 2px black border, hard hover shadow, no padding beyond menu item rhythm.
+- **App Bar:** Roman Paper surface, Iron Ink text, rule-line bottom border, 56px toolbar height, 64px app-frame rhythm.
+- **Menus:** Roman Paper popup, 2px rule-line border, hard hover shadow, no padding beyond menu item rhythm.
 - **Breadcrumbs / Titles:** Use compact title typography and preserve space for the canvas.
 
 ### Cards / Containers
 - **Corner Style:** Square (0 radius).
-- **Background:** Paper White only.
-- **Border:** 1px black for standard containers, 2px black for focus or emphasis.
+- **Background:** Roman Paper only.
+- **Border:** 1px rule-line for standard containers, 2px rule-line for focus or emphasis.
 - **Shadow Strategy:** No decorative card stacks. Use cards only for repeated items, dialogs, and framed tools.
 
 ### Dialogs
-- **Surface:** Paper White, 2px black border, deep hard offset shadow.
+- **Surface:** Roman Paper, 2px rule-line border, deep hard offset shadow.
 - **Backdrop:** Functional dimming only. Do not introduce glassmorphism.
 - **Layout:** Centered, constrained, and dense. Dialogs must carry decisions or focused editing, not replace inline flows by default.
 

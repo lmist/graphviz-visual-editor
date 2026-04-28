@@ -14,11 +14,13 @@ const baseStyle = {
   borderRadius: BORDERS.radius,
   fontFamily: TYPOGRAPHY.ui,
   fontSize: TYPOGRAPHY.sizes.body,
+  boxSizing: 'border-box',
 };
 
 const messageStyle = {
   flex: 1,
   minWidth: 0,
+  overflowWrap: 'anywhere',
 };
 
 const actionStyle = {

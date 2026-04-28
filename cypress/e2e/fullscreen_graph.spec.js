@@ -20,7 +20,8 @@ describe('Show graph only mode', function () {
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
     // Extended timeout: cypress-parallel -t 4 stalls layout past 10s (gviz-q6t).
-    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.lt', viewportWidth / 2)
+    // The graph-first workspace keeps the canvas wider than the source pane.
+    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.gt', viewportWidth / 2)
 
     cy.fullscreenButton().click();
 
@@ -32,7 +33,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.lt', viewportWidth / 2)
+    cy.get('#canvas', { timeout: 30000 }).invoke('width').should('be.gt', viewportWidth / 2)
   });
 
   it('Shows the graph only when the \'f\' key is pressed and shows the full application when it\'s pressed again', function () {
@@ -52,7 +53,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
 
     cy.canvas().click();
     cy.get('body').type('f');
@@ -65,7 +66,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
   });
 
   it('Shows the graph only when the open in full button is clicked and shows the full application again when the \'f\' key is pressed', function () {
@@ -85,7 +86,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
 
     cy.canvas().click();
     cy.fullscreenButton().click();
@@ -98,7 +99,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
   });
 
   it('Shows the graph only when the \'f\' key is pressed after a previous fullscreen has been disabled by clicking the open in full button', function () {
@@ -118,7 +119,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
 
     cy.canvas().click();
     cy.get('body').type('f');
@@ -131,7 +132,7 @@ describe('Show graph only mode', function () {
 
     cy.textEditorWrapper().should('be.visible');
     cy.toolbar().should('exist');
-    cy.canvas().invoke('width').should('be.lt', viewportWidth / 2)
+    cy.canvas().invoke('width').should('be.gt', viewportWidth / 2)
 
     cy.get('body').type('f');
 

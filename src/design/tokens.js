@@ -6,11 +6,14 @@
 // non-primitive code can read the same values via var(--token).
 
 export const COLORS = {
-  fg: '#000',
-  bg: '#fff',
+  fg: '#242423',
+  bg: '#fbfaf5',
+  surface: '#f3f0e7',
+  panel: '#ebe6db',
   accent: '#4ed1f8',
   error: '#ff3030',
-  muted: '#666',
+  muted: '#68645d',
+  line: '#34332f',
 };
 
 export const SPACING = {
@@ -35,14 +38,14 @@ export const TYPOGRAPHY = {
 };
 
 export const BORDERS = {
-  thin: '1px solid #000',
-  thick: '2px solid #000',
+  thin: `1px solid ${COLORS.line}`,
+  thick: `2px solid ${COLORS.line}`,
   radius: 0,
 };
 
 export const SHADOWS = {
-  hover: '2px 2px 0 0 #000',
-  deep: '8px 8px 0 #000',
+  hover: `2px 2px 0 0 ${COLORS.line}`,
+  deep: `8px 8px 0 ${COLORS.line}`,
 };
 
 export const MOTION = {
@@ -57,9 +60,12 @@ export const LAYOUT = {
 export const cssVariables = `:root {
   --color-fg: ${COLORS.fg};
   --color-bg: ${COLORS.bg};
+  --color-surface: ${COLORS.surface};
+  --color-panel: ${COLORS.panel};
   --color-accent: ${COLORS.accent};
   --color-error: ${COLORS.error};
   --color-muted: ${COLORS.muted};
+  --color-line: ${COLORS.line};
 
   --space-xs: ${SPACING.xs}px;
   --space-sm: ${SPACING.sm}px;

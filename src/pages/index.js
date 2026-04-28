@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper } from '../components/ui/index.js';
 import withRoot from '../withRoot.js';
+import styles from './Workspace.module.css';
 import ButtonAppBar from '../ButtonAppBar.js';
 import Graph from '../Graph.js';
 import TextEditor from '../TextEditor.js';
@@ -25,16 +26,14 @@ import UpdatedSnackbar from '../UpdatedSnackbar.js';
 import { backendGetState, backendRpc, backendSubscribe } from '../backendSync.js';
 import packageJSON from '../../package.json';
 
-const rootStyle = {
-  textAlign: 'center',
-};
+const rootStyle = { textAlign: 'center' };
 const paperStyle = {
-  // viewport height - app bar - 2 * padding
-  height: "calc(100vh - 64px - 2 * 12px)",
+  // viewport height - app bar - 2 * stage padding
+  height: "calc(100vh - 64px - 2 * 16px)",
 };
 const paperWhenUpdatedSnackbarIsOpenStyle = {
   marginTop: "64px",
-  height: "calc(100vh - 64px - 64px - 2 * 12px)",
+  height: "calc(100vh - 64px - 64px - 2 * 16px)",
 };
 const paperWhenFullscreenStyle = {
   height: "calc(100vh)",
@@ -43,6 +42,9 @@ const paperWhenFullscreenStyle = {
 
 const defaultElevation = 2;
 const focusedElevation = 8;
+const PANE_HEADER_HEIGHT = 45;
+const EDITOR_STATUS_HEIGHT = 41;
+const AGENT_STRIP_HEIGHT = 45;
 
 class Index extends React.Component {
 
@@ -90,6 +92,7 @@ class Index extends React.Component {
       defaultNodeAttributes: JSON.parse(localStorage.getItem('defaultNodeAttributes')) || {},
       defaultEdgeAttributes: JSON.parse(localStorage.getItem('defaultEdgeAttributes')) || {},
       error: null,
+      backendConnected: false,
       holdOff: localStorage.getItem('holdOff') || 0.2,
       fontSize: localStorage.getItem('fontSize') || 12,
       tabSize: +localStorage.getItem('tabSize') || 4,
@@ -194,6 +197,7 @@ class Index extends React.Component {
     try {
       const health = await backendGetState();
       this.backendConnected = true;
+      this.setState({ backendConnected: true });
       if (this.backendReconnectTimer) {
         clearTimeout(this.backendReconnectTimer);
         this.backendReconnectTimer = null;
@@ -205,6 +209,7 @@ class Index extends React.Component {
         (snapshot) => this.handleBackendSnapshot(snapshot),
         () => {
           this.backendConnected = false;
+          this.setState({ backendConnected: false });
           if (this.backendUnsubscribe) {
             this.backendUnsubscribe();
             this.backendUnsubscribe = null;
@@ -223,6 +228,7 @@ class Index extends React.Component {
       }
     } catch (error) {
       this.backendConnected = false;
+      this.setState({ backendConnected: false });
       this.scheduleBackendReconnect();
     }
   }
@@ -819,7 +825,102 @@ class Index extends React.Component {
     });
   }
 
+  getDotLineCount = () => {
+    if (!this.state.dotSrc) return 0;
+    return this.state.dotSrc.split('\n').length;
+  }
+
+  getWorkspaceStatus = () => {
+    if (this.state.error) {
+      return {
+        tone: 'error',
+        label: 'Parse error',
+        detail: `Line ${this.state.error.line}: ${this.state.error.message}`,
+      };
+    }
+    if (this.state.backendConnected) {
+      return {
+        tone: 'synced',
+        label: 'Synced',
+        detail: 'Agent and editor are reading the same graph state.',
+      };
+    }
+    return {
+      tone: 'local',
+      label: 'Local only',
+      detail: 'Backend sync is unavailable. Your browser copy remains editable.',
+    };
+  }
+
+  renderStatusPill = (status) => (
+    <span className={`${styles.statusPill} ${styles[`status${status.tone[0].toUpperCase()}${status.tone.slice(1)}`]}`}>
+      {status.label}
+    </span>
+  )
+
+  renderEditorStatus = (status) => (
+    <div className={styles.editorStatus}>
+      <div className={styles.editorStatusRow}>
+        {this.renderStatusPill(status)}
+        <span className={styles.editorStatusText}>
+          {this.getDotLineCount()} lines · {this.state.engine}
+        </span>
+      </div>
+      {this.state.error && (
+        <div className={`${styles.editorStatusText} ${styles.errorText}`}>
+          Line {this.state.error.line}: {this.state.error.message}
+        </div>
+      )}
+    </div>
+  )
+
+  renderAgentStrip = (status) => (
+    <div className={styles.agentStrip}>
+      <span className={styles.agentGlyph}>II</span>
+      <span className={styles.agentCopy}>
+        <span className={styles.agentTitle}>Agent output watch</span>
+        <span className={styles.agentBody}>{status.detail}</span>
+      </span>
+    </div>
+  )
+
+  renderCanvasOverlay = (status) => {
+    if (this.state.fullscreen && !this.state.error && this.state.dotSrc) {
+      return null;
+    }
+    if (this.state.error) {
+      return (
+        <div className={`${styles.canvasOverlay} ${styles.canvasOverlayError}`} role="status">
+          <h2 className={styles.canvasOverlayTitle}>Graph did not render</h2>
+          <p className={styles.canvasOverlayBody}>
+            Line {this.state.error.line}: fix the DOT source to resume visual sync.
+          </p>
+        </div>
+      );
+    }
+    if (!this.state.dotSrc.trim()) {
+      return (
+        <div className={styles.canvasOverlay} role="status">
+          <h2 className={styles.canvasOverlayTitle}>No graph yet</h2>
+          <p className={styles.canvasOverlayBody}>
+            Paste DOT on the left, start a new graph, or let the agent draft one through sync.
+          </p>
+        </div>
+      );
+    }
+    if (!this.state.backendConnected) {
+      return (
+        <div className={styles.canvasOverlay} role="status">
+          <h2 className={styles.canvasOverlayTitle}>Local editing mode</h2>
+          <p className={styles.canvasOverlayBody}>{status.detail}</p>
+        </div>
+      );
+    }
+    return null;
+  }
+
   render() {
+    const workspaceStatus = this.getWorkspaceStatus();
     const editorIsOpen = !this.state.nodeFormatDrawerIsOpen && !this.state.edgeFormatDrawerIsOpen && !this.state.fullscreen;
     const textEditorHasFocus = this.state.focusedPane === 'TextEditor';
     const nodeFormatDrawerHasFocus = this.state.focusedPane === 'NodeFormatDrawer';
@@ -845,19 +946,27 @@ class Index extends React.Component {
       }
     } else { /* browse */
       columns = {
-        textEditor: 6,
+        textEditor: 4,
         insertPanels: false,
-        graph: 6,
+        graph: 8,
       }
     }
     const paperPaneStyle = this.state.updatedSnackbarIsOpen ? paperWhenUpdatedSnackbarIsOpenStyle : this.state.fullscreen ? paperWhenFullscreenStyle : paperStyle;
     return (
-      <div style={rootStyle}>
+      <div
+        style={rootStyle}
+        className={`${styles.workspace} ${this.state.fullscreen ? styles.workspaceFullscreen : ''}`}
+      >
         <script src={process.env.PUBLIC_URL.replace(/\.$/, '') + "@hpcc-js/wasm/dist/graphviz.umd.js"} type="javascript/worker"></script>
         {!this.state.fullscreen &&
           <ButtonAppBar
             hasUndo={this.state.hasUndo}
             hasRedo={this.state.hasRedo}
+            backendConnected={this.state.backendConnected}
+            hasError={Boolean(this.state.error)}
+            dotSrc={this.state.dotSrc}
+            name={this.state.name}
+            nodeCount={this.getDotLineCount()}
             onMenuButtonClick={this.handleMainMenuButtonClick}
             onNewButtonClick={this.handleNewClick}
             onUndoButtonClick={this.handleUndoButtonClick}
@@ -955,6 +1064,7 @@ class Index extends React.Component {
           />
         }
         <div
+          className={`${styles.stage} ${this.state.fullscreen ? styles.stageFullscreen : ''}`}
           style={{
             display: 'grid',
             gridTemplateColumns: [
@@ -962,13 +1072,23 @@ class Index extends React.Component {
               this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen ? `minmax(0, ${columns.insertPanels}fr)` : null,
               `minmax(0, ${columns.graph}fr)`,
             ].filter(Boolean).join(' '),
-            gap: this.state.fullscreen ? 0 : '12px',
-            margin: 0,
-            width: '100%',
           }}
         >
-          <div style={{ padding: '12px', display: this.state.fullscreen ? 'none' : 'block' }}>
-            <Paper elevation={leftPaneElevation} style={paperPaneStyle}>
+          <div className={`${styles.paneShell} ${this.state.fullscreen ? styles.paneHidden : ''}`}>
+            <Paper
+              elevation={leftPaneElevation}
+              className={styles.paneSurface}
+              style={paperPaneStyle}
+            >
+              <div className={styles.paneHeader}>
+                <span>
+                  <span className={styles.paneKicker}>I. Source</span>
+                  <span className={styles.paneTitle}>DOT drafting bay</span>
+                </span>
+                <span className={styles.paneMeta}>
+                  {this.renderStatusPill(workspaceStatus)}
+                </span>
+              </div>
               {this.state.nodeFormatDrawerIsOpen &&
                 <FormatDrawer
                   type='node'
@@ -992,10 +1112,10 @@ class Index extends React.Component {
                 />
               }
               <div style={{display: editorIsOpen ? 'block' : 'none'}}>
+                {this.renderEditorStatus(workspaceStatus)}
                 <TextEditor
-                  // allocated viewport width - 2 * padding
-                  width={`calc(${columns.textEditor * 100 / 12}vw - 2 * 12px)`}
-                  height={`calc(100vh - 64px - 2 * 12px - ${this.updatedSnackbarIsOpen ? "64px" : "0px"})`}
+                  width="100%"
+                  height={`calc(100vh - 64px - 2 * 16px - ${PANE_HEADER_HEIGHT + EDITOR_STATUS_HEIGHT + AGENT_STRIP_HEIGHT}px - ${this.state.updatedSnackbarIsOpen ? "64px" : "0px"})`}
                   dotSrc={this.state.forceNewDotSrc ? this.state.dotSrc : null}
                   onTextChange={this.handleTextChange}
                   onFocus={this.handleTextEditorFocus}
@@ -1009,12 +1129,23 @@ class Index extends React.Component {
                   registerRedo={this.registerRedo}
                   registerUndoReset={this.registerUndoReset}
                 />
+                {this.renderAgentStrip(workspaceStatus)}
               </div>
             </Paper>
           </div>
           {this.state.insertPanelsAreOpen && this.state.graphInitialized && !this.state.fullscreen && (
-            <div style={{ padding: '12px' }}>
-              <Paper elevation={midPaneElevation} style={paperPaneStyle}>
+            <div className={styles.paneShell}>
+              <Paper
+                elevation={midPaneElevation}
+                className={styles.paneSurface}
+                style={paperPaneStyle}
+              >
+                <div className={styles.paneHeader}>
+                  <span>
+                    <span className={styles.paneKicker}>II. Insert</span>
+                    <span className={styles.paneTitle}>Shape inventory</span>
+                  </span>
+                </div>
                 <InsertPanels
                     onClick={this.handleInsertPanelsClick}
                     onNodeShapeClick={this.handleNodeShapeClick}
@@ -1024,39 +1155,60 @@ class Index extends React.Component {
               </Paper>
             </div>
           )}
-          <div style={{ padding: this.state.fullscreen ? 0 : '12px' }}>
-            <Paper elevation={rightPaneElevation} style={paperPaneStyle}>
-              <Graph
-                hasFocus={graphHasFocus}
-                dotSrc={this.state.dotSrc}
-                engine={this.state.engine}
-                fit={this.state.fitGraph}
-                transitionDuration={this.state.transitionDuration}
-                tweenPaths={this.state.tweenPaths}
-                tweenShapes={this.state.tweenShapes}
-                tweenPrecision={this.state.tweenPrecision}
-                defaultNodeAttributes={this.state.defaultNodeAttributes}
-                defaultEdgeAttributes={this.state.defaultEdgeAttributes}
-                fullscreen={this.state.fullscreen}
-                onFocus={this.handleGraphFocus}
-                onTextChange={this.handleTextChangeFromGraph}
-                onHelp={this.handleKeyboardShortcutsClick}
-                onSelect={this.handleGraphComponentSelect}
-                onUndo={this.undo}
-                onRedo={this.redo}
-                onToggleFullscreen={this.handleToggleFullscreen}
-                registerNodeShapeClick={this.registerNodeShapeClick}
-                registerNodeShapeDragStart={this.registerNodeShapeDragStart}
-                registerNodeShapeDragEnd={this.registerNodeShapeDragEnd}
-                registerZoomInButtonClick={this.registerZoomInButtonClick}
-                registerZoomOutButtonClick={this.registerZoomOutButtonClick}
-                registerZoomOutMapButtonClick={this.registerZoomOutMapButtonClick}
-                registerZoomResetButtonClick={this.registerZoomResetButtonClick}
-                registerGetSvg={this.registerGetSvg}
-                onInitialized={this.handleGraphInitialized}
-                onError={this.handleError}
-                test={this.state.test}
-              />
+          <div className={styles.paneShell}>
+            <Paper
+              elevation={rightPaneElevation}
+              className={styles.paneSurface}
+              style={paperPaneStyle}
+            >
+              {!this.state.fullscreen && (
+                <div className={styles.paneHeader}>
+                  <span>
+                    <span className={styles.paneKicker}>III. Graph</span>
+                    <span className={styles.paneTitle}>Visual model</span>
+                  </span>
+                  <span className={styles.paneMeta}>
+                    {this.state.selectedGraphComponents.length} selected
+                  </span>
+                </div>
+              )}
+              <div
+                className={styles.canvasFrame}
+                style={{ height: this.state.fullscreen ? '100%' : `calc(100% - ${PANE_HEADER_HEIGHT}px)` }}
+              >
+                <Graph
+                  hasFocus={graphHasFocus}
+                  dotSrc={this.state.dotSrc}
+                  engine={this.state.engine}
+                  fit={this.state.fitGraph}
+                  transitionDuration={this.state.transitionDuration}
+                  tweenPaths={this.state.tweenPaths}
+                  tweenShapes={this.state.tweenShapes}
+                  tweenPrecision={this.state.tweenPrecision}
+                  defaultNodeAttributes={this.state.defaultNodeAttributes}
+                  defaultEdgeAttributes={this.state.defaultEdgeAttributes}
+                  fullscreen={this.state.fullscreen}
+                  onFocus={this.handleGraphFocus}
+                  onTextChange={this.handleTextChangeFromGraph}
+                  onHelp={this.handleKeyboardShortcutsClick}
+                  onSelect={this.handleGraphComponentSelect}
+                  onUndo={this.undo}
+                  onRedo={this.redo}
+                  onToggleFullscreen={this.handleToggleFullscreen}
+                  registerNodeShapeClick={this.registerNodeShapeClick}
+                  registerNodeShapeDragStart={this.registerNodeShapeDragStart}
+                  registerNodeShapeDragEnd={this.registerNodeShapeDragEnd}
+                  registerZoomInButtonClick={this.registerZoomInButtonClick}
+                  registerZoomOutButtonClick={this.registerZoomOutButtonClick}
+                  registerZoomOutMapButtonClick={this.registerZoomOutMapButtonClick}
+                  registerZoomResetButtonClick={this.registerZoomResetButtonClick}
+                  registerGetSvg={this.registerGetSvg}
+                  onInitialized={this.handleGraphInitialized}
+                  onError={this.handleError}
+                  test={this.state.test}
+                />
+                {this.renderCanvasOverlay(workspaceStatus)}
+              </div>
             </Paper>
           </div>
         </div>

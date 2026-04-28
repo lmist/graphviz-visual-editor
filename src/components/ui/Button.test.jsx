@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Button from './Button.jsx';
+import { COLORS } from '../../design/tokens.js';
 
 describe('Button', () => {
   test('renders children', () => {
@@ -40,6 +41,6 @@ describe('Button', () => {
     const before = btn.style.background;
     fireEvent.mouseEnter(btn);
     expect(btn.style.background).not.toBe(before);
-    expect(btn.style.color).toBe('rgb(255, 255, 255)');
+    expect(btn).toHaveStyle({ color: COLORS.bg });
   });
 });

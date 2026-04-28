@@ -1,0 +1,282 @@
+.workspace {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(var(--color-panel), var(--color-panel)) top / 100% 64px no-repeat,
+    var(--color-bg);
+  color: var(--color-fg);
+}
+
+.workspaceFullscreen {
+  background: var(--color-bg);
+}
+
+.stage {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.stageFullscreen {
+  display: block;
+  padding: 0;
+}
+
+.paneShell {
+  min-width: 0;
+  position: relative;
+}
+
+.paneHidden {
+  display: none;
+}
+
+.paneSurface {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-line) 10%, transparent) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--color-bg);
+}
+
+.paneSurface :global(.ace_editor) {
+  max-width: 100%;
+}
+
+.paneHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-bottom: var(--border-thin);
+  background: var(--color-surface);
+}
+
+.paneKicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.paneTitle {
+  display: block;
+  margin-top: 4px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-fg);
+}
+
+.paneMeta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 3px 8px;
+  border: var(--border-thin);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.statusPill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--status-color, var(--color-muted));
+}
+
+.statusSynced {
+  --status-color: var(--color-accent);
+}
+
+.statusError {
+  --status-color: var(--color-error);
+}
+
+.statusLocal {
+  --status-color: var(--color-muted);
+}
+
+.editorFrame {
+  position: relative;
+}
+
+.editorStatus {
+  display: grid;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: var(--border-thin);
+  background: var(--color-bg);
+  text-align: left;
+}
+
+.editorStatusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.editorStatusText {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.errorText {
+  color: var(--color-error);
+}
+
+.canvasFrame {
+  position: relative;
+  height: 100%;
+}
+
+.canvasOverlay {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2;
+  max-width: min(440px, calc(100% - 32px));
+  border: var(--border-thick);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  box-shadow: var(--shadow-hover);
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.canvasOverlayTitle {
+  margin: 0 0 4px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.canvasOverlayBody {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--color-muted);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.canvasOverlayError {
+  border-color: var(--color-error);
+}
+
+.agentStrip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: var(--border-thin);
+  background: var(--color-surface);
+  text-align: left;
+}
+
+.agentGlyph {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: var(--border-thin);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.agentCopy {
+  min-width: 0;
+}
+
+.agentTitle {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.agentBody {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--color-muted);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .stage {
+    grid-template-columns: 1fr !important;
+  }
+
+  .paneSurface {
+    height: min(52vh, 520px) !important;
+  }
+
+  .paneHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .paneMeta {
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvasOverlay,
+  .statusPill {
+    transition: none !important;
+  }
+}

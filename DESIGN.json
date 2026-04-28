@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-04-28T12:48:36+03:00",
+  "generatedAt": "2026-04-28T13:12:52+03:00",
   "title": "Design System: graphviz-visual-editor",
   "extensions": {
     "colorMeta": {
@@ -10,17 +10,35 @@
         "canonical": "#4ed1f8",
         "tonalRamp": ["oklch(15% 0.035 220)", "oklch(25% 0.055 220)", "oklch(35% 0.075 220)", "oklch(45% 0.095 220)", "oklch(58% 0.115 220)", "oklch(70% 0.095 220)", "oklch(82% 0.065 220)", "oklch(95% 0.025 220)"]
       },
-      "paper-white": {
+      "roman-paper": {
         "role": "neutral",
-        "displayName": "Paper White",
-        "canonical": "#fff",
+        "displayName": "Roman Paper",
+        "canonical": "#fbfaf5",
         "tonalRamp": ["oklch(15% 0.004 250)", "oklch(25% 0.004 250)", "oklch(35% 0.004 250)", "oklch(48% 0.004 250)", "oklch(62% 0.004 250)", "oklch(76% 0.004 250)", "oklch(90% 0.004 250)", "oklch(100% 0 0)"]
       },
-      "inky-black": {
+      "iron-ink": {
         "role": "neutral",
-        "displayName": "Inky Black",
-        "canonical": "#000",
+        "displayName": "Iron Ink",
+        "canonical": "#242423",
         "tonalRamp": ["oklch(0% 0 0)", "oklch(12% 0.004 250)", "oklch(24% 0.004 250)", "oklch(36% 0.004 250)", "oklch(50% 0.004 250)", "oklch(64% 0.004 250)", "oklch(80% 0.004 250)", "oklch(95% 0.004 250)"]
+      },
+      "stone-surface": {
+        "role": "neutral",
+        "displayName": "Stone Surface",
+        "canonical": "#f3f0e7",
+        "tonalRamp": ["oklch(15% 0.006 82)", "oklch(25% 0.007 82)", "oklch(35% 0.008 82)", "oklch(48% 0.008 82)", "oklch(62% 0.008 82)", "oklch(76% 0.008 82)", "oklch(90% 0.008 82)", "oklch(95% 0.008 82)"]
+      },
+      "foundry-panel": {
+        "role": "neutral",
+        "displayName": "Foundry Panel",
+        "canonical": "#ebe6db",
+        "tonalRamp": ["oklch(15% 0.008 82)", "oklch(25% 0.009 82)", "oklch(35% 0.01 82)", "oklch(48% 0.01 82)", "oklch(62% 0.01 82)", "oklch(76% 0.01 82)", "oklch(88% 0.01 82)", "oklch(92% 0.01 82)"]
+      },
+      "rule-line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "canonical": "#34332f",
+        "tonalRamp": ["oklch(15% 0.006 250)", "oklch(23% 0.006 250)", "oklch(35% 0.006 250)", "oklch(48% 0.006 250)", "oklch(62% 0.006 250)", "oklch(76% 0.006 250)", "oklch(88% 0.006 250)", "oklch(95% 0.006 250)"]
       },
       "error-red": {
         "role": "error",
@@ -31,7 +49,7 @@
       "muted-gray": {
         "role": "neutral",
         "displayName": "Muted Gray",
-        "canonical": "#666",
+        "canonical": "#68645d",
         "tonalRamp": ["oklch(15% 0.004 250)", "oklch(25% 0.004 250)", "oklch(35% 0.004 250)", "oklch(45% 0.004 250)", "oklch(55% 0.004 250)", "oklch(68% 0.004 250)", "oklch(82% 0.004 250)", "oklch(95% 0.004 250)"]
       },
       "hover-gray": {
@@ -62,8 +80,8 @@
       "label": { "displayName": "Label", "purpose": "Form labels, compact metadata, and scan-friendly control labels." }
     },
     "shadows": [
-      { "name": "hover-lift", "value": "2px 2px 0 0 #000", "purpose": "Interactive lift for hoverable or raised controls, menus, snackbars, and cards." },
-      { "name": "deep-dialog-lift", "value": "8px 8px 0 #000", "purpose": "Modal dialog emphasis only." }
+      { "name": "hover-lift", "value": "2px 2px 0 0 #34332f", "purpose": "Interactive lift for hoverable or raised controls, menus, snackbars, and cards." },
+      { "name": "deep-dialog-lift", "value": "8px 8px 0 #34332f", "purpose": "Modal dialog emphasis only." }
     ],
     "motion": [
       { "name": "state-linear", "value": "80ms linear", "purpose": "Immediate state transitions for primitive controls." }
@@ -77,7 +95,7 @@
       "refersTo": "button-primary",
       "description": "Square, dense command button for toolbar and dialog actions.",
       "html": "<button class=\"ds-btn-primary\">INSERT</button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #000; color: #fff; outline: 2px solid #000; outline-offset: 2px; }"
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 16px; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #242423; color: #fbfaf5; outline: 2px solid #34332f; outline-offset: 2px; }"
     },
     {
       "name": "Icon Button",
@@ -85,7 +103,7 @@
       "refersTo": "icon-button",
       "description": "Fixed square toolbar control for familiar graph and editor tools.",
       "html": "<button class=\"ds-icon-button\" aria-label=\"Zoom in\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7V4z\" fill=\"currentColor\"/></svg></button>",
-      "css": ".ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-icon-button:hover, .ds-icon-button:focus-visible { background: #000; color: #fff; outline: 2px solid #000; outline-offset: 2px; }"
+      "css": ".ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-icon-button:hover, .ds-icon-button:focus-visible { background: #242423; color: #fbfaf5; outline: 2px solid #34332f; outline-offset: 2px; }"
     },
     {
       "name": "Input Field",
@@ -93,7 +111,7 @@
       "refersTo": "input-field",
       "description": "Sharp, plain text field for settings and code-adjacent values.",
       "html": "<label class=\"ds-field\"><span class=\"ds-label\">ENGINE</span><input class=\"ds-input\" value=\"dot\" /></label>",
-      "css": ".ds-field { display: inline-grid; gap: 4px; font-family: \"Space Grotesk\", system-ui, sans-serif; color: #000; } .ds-label { font-size: 12px; font-weight: 600; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; } .ds-input { width: 160px; padding: 4px 8px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 400; outline: none; } .ds-input:focus-visible { outline: 2px solid #000; outline-offset: 2px; }"
+      "css": ".ds-field { display: inline-grid; gap: 4px; font-family: \"Space Grotesk\", system-ui, sans-serif; color: #242423; } .ds-label { font-size: 12px; font-weight: 600; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; } .ds-input { width: 160px; padding: 4px 8px; border: 1px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 400; outline: none; } .ds-input:focus-visible { outline: 2px solid #34332f; outline-offset: 2px; }"
     },
     {
       "name": "Switch",
@@ -101,28 +119,28 @@
       "refersTo": "switch-checked",
       "description": "Compact binary control for editor settings and panel toggles.",
       "html": "<button class=\"ds-switch\" role=\"switch\" aria-checked=\"true\"><span class=\"ds-switch-thumb\"></span></button>",
-      "css": ".ds-switch { position: relative; width: 32px; height: 16px; border: 1px solid #000; border-radius: 0; background: #4ed1f8; padding: 0; cursor: pointer; transition: background-color 80ms linear; } .ds-switch-thumb { position: absolute; top: 1px; left: 1px; width: 12px; height: 12px; background: #000; transform: translateX(16px); transition: transform 80ms linear; } .ds-switch:focus-visible { outline: 2px solid #000; outline-offset: 2px; }"
+      "css": ".ds-switch { position: relative; width: 32px; height: 16px; border: 1px solid #34332f; border-radius: 0; background: #4ed1f8; padding: 0; cursor: pointer; transition: background-color 80ms linear; } .ds-switch-thumb { position: absolute; top: 1px; left: 1px; width: 12px; height: 12px; background: #242423; transform: translateX(16px); transition: transform 80ms linear; } .ds-switch:focus-visible { outline: 2px solid #34332f; outline-offset: 2px; }"
     },
     {
       "name": "App Bar",
       "kind": "nav",
       "description": "Single-row command surface that keeps the editor controls visible without competing with the graph.",
       "html": "<header class=\"ds-appbar\"><div class=\"ds-toolbar\"><button class=\"ds-icon-button\" aria-label=\"Menu\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z\" fill=\"currentColor\"/></svg></button><strong class=\"ds-title\">Graphviz Visual Editor</strong><button class=\"ds-btn-primary\">1:1</button></div></header>",
-      "css": ".ds-appbar { width: 100%; background: #fff; color: #000; border-bottom: 2px solid #000; } .ds-toolbar { display: flex; align-items: center; height: 56px; gap: 16px; padding: 0 24px; } .ds-title { flex: 1; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.3; } .ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-btn-primary { padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
+      "css": ".ds-appbar { width: 100%; background: #fbfaf5; color: #242423; border-bottom: 2px solid #34332f; } .ds-toolbar { display: flex; align-items: center; height: 56px; gap: 16px; padding: 0 24px; } .ds-title { flex: 1; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.3; } .ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-btn-primary { padding: 4px 16px; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
     },
     {
       "name": "Dialog Surface",
       "kind": "card",
       "description": "Focused editing or confirmation layer with structural depth.",
       "html": "<section class=\"ds-dialog\"><h2>Export as SVG</h2><p>Save the current graph as a standalone SVG file.</p><button class=\"ds-btn-primary\">EXPORT</button></section>",
-      "css": ".ds-dialog { width: 360px; display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; box-shadow: 8px 8px 0 #000; font-family: \"Space Grotesk\", system-ui, sans-serif; } .ds-dialog h2 { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.15; } .ds-dialog p { margin: 0; font-size: 14px; line-height: 1.4; } .ds-btn-primary { align-self: flex-start; padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
+      "css": ".ds-dialog { width: 360px; display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; box-shadow: 8px 8px 0 #34332f; font-family: \"Space Grotesk\", system-ui, sans-serif; } .ds-dialog h2 { margin: 0; font-family: Georgia, \"Times New Roman\", serif; font-size: 24px; font-weight: 700; line-height: 1.15; } .ds-dialog p { margin: 0; font-size: 14px; line-height: 1.4; } .ds-btn-primary { align-self: flex-start; padding: 4px 16px; border: 2px solid #34332f; border-radius: 0; background: #fbfaf5; color: #242423; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
     }
   ],
   "narrative": {
     "northStar": "The Agent Drafting Table",
-    "overview": "graphviz-visual-editor is a fast, sleek, chic modeling workspace for humans supervising agent-generated Graphviz output. The user is watching diagrams arrive through MCP, checking the DOT source, and stepping in when a model needs correction. The interface must make that supervision feel immediate: graph, code, sync state, and errors are always close to the user's eye and hand.\n\nThe visual system keeps the existing brutalist discipline but aims for the cooler, sharper version of a modern Mermaid-style diagram editor. The canvas can be spacious and quiet; the chrome stays exacting, monochrome, square, and dense. Polish comes from alignment, typography, rhythm, and component consistency, not decoration.\n\nThe system explicitly rejects MUI / Material Design softness, Tailwind UI SaaS polish, rounded corners, soft gradients, over-animated dashboards, and anything that makes the editor feel like a marketing page instead of a working modeling surface.",
+    "overview": "graphviz-visual-editor is a fast, sleek, chic modeling workspace for humans supervising agent-generated Graphviz output. The user is watching diagrams arrive through MCP, checking the DOT source, and stepping in when a model needs correction. The interface must make that supervision feel immediate: graph, code, sync state, and errors are always close to the user's eye and hand.\n\nThe visual system keeps the existing brutalist discipline but shifts the atmosphere toward flat industrial Roman drafting: stone-tinted neutrals, rule lines, serif headings, and dense tool controls. The canvas can be spacious and quiet; the chrome stays exacting, square, and dense. Polish comes from alignment, typography, rhythm, and component consistency, not decoration.\n\nThe system explicitly rejects MUI / Material Design softness, Tailwind UI SaaS polish, rounded corners, soft gradients, over-animated dashboards, and anything that makes the editor feel like a marketing page instead of a working modeling surface.",
     "keyCharacteristics": [
-      "Monochrome product chrome with one cyan state accent.",
+      "Stone-tinted product chrome with one cyan state accent.",
       "Large graph canvas paired with immediate DOT access.",
       "Dense, predictable controls for long modeling sessions.",
       "Square geometry, strong borders, and hard offset depth.",

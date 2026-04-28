@@ -8,7 +8,7 @@ const baseStyle = {
   width: '100%',
   background: COLORS.bg,
   color: COLORS.fg,
-  borderBottom: '2px solid #000',
+  borderBottom: `2px solid ${COLORS.line}`,
   boxShadow: 'none',
   boxSizing: 'border-box',
 };

@@ -6,10 +6,16 @@ const baseStyle = {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
+  flexWrap: 'nowrap',
   height: 56,
+  width: '100%',
   gap: SPACING.md,
   paddingLeft: SPACING.lg,
   paddingRight: SPACING.lg,
+  overflowX: 'auto',
+  overflowY: 'hidden',
+  scrollbarWidth: 'none',
+  boxSizing: 'border-box',
 };
 
 function Toolbar({ id, className, style, children, ...rest }) {

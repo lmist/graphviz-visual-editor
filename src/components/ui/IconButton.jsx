@@ -4,6 +4,7 @@ import { BORDERS, COLORS, MOTION } from '../../design/tokens.js';
 
 const baseStyle = {
   display: 'inline-flex',
+  flexShrink: 0,
   alignItems: 'center',
   justifyContent: 'center',
   width: 40,

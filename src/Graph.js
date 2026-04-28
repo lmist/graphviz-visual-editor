@@ -4,6 +4,7 @@ import CircularProgress from './components/ui/CircularProgress.jsx';
 import IconButton from './components/ui/IconButton.jsx';
 import OpenInFullIcon from './components/icons/OpenInFullIcon.jsx';
 import CloseFullscreenIcon from './components/icons/CloseFullscreenIcon.jsx';
+import { COLORS } from './design/tokens.js';
 import { select as d3_select} from 'd3-selection';
 import { selectAll as d3_selectAll} from 'd3-selection';
 import { transition as d3_transition} from 'd3-transition';
@@ -14,7 +15,7 @@ import 'd3-graphviz';
 import DotGraph from './dot.js'
 
 const canvasStyle = {
-  background: '#fff',
+  background: COLORS.bg,
   boxSizing: 'border-box',
 };
 
