@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-04-28T12:48:36+03:00",
+  "title": "Design System: graphviz-visual-editor",
+  "extensions": {
+    "colorMeta": {
+      "accent-cyan": {
+        "role": "primary",
+        "displayName": "Electric Draft Cyan",
+        "canonical": "#4ed1f8",
+        "tonalRamp": ["oklch(15% 0.035 220)", "oklch(25% 0.055 220)", "oklch(35% 0.075 220)", "oklch(45% 0.095 220)", "oklch(58% 0.115 220)", "oklch(70% 0.095 220)", "oklch(82% 0.065 220)", "oklch(95% 0.025 220)"]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#fff",
+        "tonalRamp": ["oklch(15% 0.004 250)", "oklch(25% 0.004 250)", "oklch(35% 0.004 250)", "oklch(48% 0.004 250)", "oklch(62% 0.004 250)", "oklch(76% 0.004 250)", "oklch(90% 0.004 250)", "oklch(100% 0 0)"]
+      },
+      "inky-black": {
+        "role": "neutral",
+        "displayName": "Inky Black",
+        "canonical": "#000",
+        "tonalRamp": ["oklch(0% 0 0)", "oklch(12% 0.004 250)", "oklch(24% 0.004 250)", "oklch(36% 0.004 250)", "oklch(50% 0.004 250)", "oklch(64% 0.004 250)", "oklch(80% 0.004 250)", "oklch(95% 0.004 250)"]
+      },
+      "error-red": {
+        "role": "error",
+        "displayName": "Sharp Error Red",
+        "canonical": "#ff3030",
+        "tonalRamp": ["oklch(15% 0.035 28)", "oklch(25% 0.065 28)", "oklch(35% 0.105 28)", "oklch(45% 0.155 28)", "oklch(58% 0.22 28)", "oklch(70% 0.16 28)", "oklch(82% 0.09 28)", "oklch(95% 0.03 28)"]
+      },
+      "muted-gray": {
+        "role": "neutral",
+        "displayName": "Muted Gray",
+        "canonical": "#666",
+        "tonalRamp": ["oklch(15% 0.004 250)", "oklch(25% 0.004 250)", "oklch(35% 0.004 250)", "oklch(45% 0.004 250)", "oklch(55% 0.004 250)", "oklch(68% 0.004 250)", "oklch(82% 0.004 250)", "oklch(95% 0.004 250)"]
+      },
+      "hover-gray": {
+        "role": "neutral",
+        "displayName": "Hover Gray",
+        "canonical": "#f0f0f0",
+        "tonalRamp": ["oklch(15% 0.004 250)", "oklch(25% 0.004 250)", "oklch(35% 0.004 250)", "oklch(48% 0.004 250)", "oklch(62% 0.004 250)", "oklch(76% 0.004 250)", "oklch(90% 0.004 250)", "oklch(95% 0.004 250)"]
+      },
+      "graph-selection-blue": {
+        "role": "canvas",
+        "displayName": "Graph Selection Blue",
+        "canonical": "#99ccff",
+        "tonalRamp": ["oklch(15% 0.035 255)", "oklch(25% 0.055 255)", "oklch(35% 0.075 255)", "oklch(48% 0.095 255)", "oklch(62% 0.105 255)", "oklch(76% 0.08 255)", "oklch(88% 0.045 255)", "oklch(95% 0.02 255)"]
+      },
+      "graph-selection-stroke": {
+        "role": "canvas",
+        "displayName": "Graph Selection Stroke",
+        "canonical": "#0000dd",
+        "tonalRamp": ["oklch(15% 0.07 265)", "oklch(25% 0.12 265)", "oklch(35% 0.17 265)", "oklch(45% 0.19 265)", "oklch(58% 0.16 265)", "oklch(70% 0.1 265)", "oklch(82% 0.06 265)", "oklch(95% 0.02 265)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Rare page-level titles only." },
+      "headline": { "displayName": "Headline", "purpose": "Dialog titles and major section headers." },
+      "title": { "displayName": "Title", "purpose": "Toolbar title, compact section labels, and panel headings." },
+      "body": { "displayName": "Body", "purpose": "Default UI text, menus, controls, and dialog copy." },
+      "mono": { "displayName": "Mono", "purpose": "DOT code, code-adjacent values, and technical text." },
+      "label": { "displayName": "Label", "purpose": "Form labels, compact metadata, and scan-friendly control labels." }
+    },
+    "shadows": [
+      { "name": "hover-lift", "value": "2px 2px 0 0 #000", "purpose": "Interactive lift for hoverable or raised controls, menus, snackbars, and cards." },
+      { "name": "deep-dialog-lift", "value": "8px 8px 0 #000", "purpose": "Modal dialog emphasis only." }
+    ],
+    "motion": [
+      { "name": "state-linear", "value": "80ms linear", "purpose": "Immediate state transitions for primitive controls." }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Square, dense command button for toolbar and dialog actions.",
+      "html": "<button class=\"ds-btn-primary\">INSERT</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #000; color: #fff; outline: 2px solid #000; outline-offset: 2px; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "Fixed square toolbar control for familiar graph and editor tools.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Zoom in\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7V4z\" fill=\"currentColor\"/></svg></button>",
+      "css": ".ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; transition: background 80ms linear, color 80ms linear; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-icon-button:hover, .ds-icon-button:focus-visible { background: #000; color: #fff; outline: 2px solid #000; outline-offset: 2px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Sharp, plain text field for settings and code-adjacent values.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-label\">ENGINE</span><input class=\"ds-input\" value=\"dot\" /></label>",
+      "css": ".ds-field { display: inline-grid; gap: 4px; font-family: \"Space Grotesk\", system-ui, sans-serif; color: #000; } .ds-label { font-size: 12px; font-weight: 600; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; } .ds-input { width: 160px; padding: 4px 8px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 400; outline: none; } .ds-input:focus-visible { outline: 2px solid #000; outline-offset: 2px; }"
+    },
+    {
+      "name": "Switch",
+      "kind": "input",
+      "refersTo": "switch-checked",
+      "description": "Compact binary control for editor settings and panel toggles.",
+      "html": "<button class=\"ds-switch\" role=\"switch\" aria-checked=\"true\"><span class=\"ds-switch-thumb\"></span></button>",
+      "css": ".ds-switch { position: relative; width: 32px; height: 16px; border: 1px solid #000; border-radius: 0; background: #4ed1f8; padding: 0; cursor: pointer; transition: background-color 80ms linear; } .ds-switch-thumb { position: absolute; top: 1px; left: 1px; width: 12px; height: 12px; background: #000; transform: translateX(16px); transition: transform 80ms linear; } .ds-switch:focus-visible { outline: 2px solid #000; outline-offset: 2px; }"
+    },
+    {
+      "name": "App Bar",
+      "kind": "nav",
+      "description": "Single-row command surface that keeps the editor controls visible without competing with the graph.",
+      "html": "<header class=\"ds-appbar\"><div class=\"ds-toolbar\"><button class=\"ds-icon-button\" aria-label=\"Menu\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z\" fill=\"currentColor\"/></svg></button><strong class=\"ds-title\">Graphviz Visual Editor</strong><button class=\"ds-btn-primary\">1:1</button></div></header>",
+      "css": ".ds-appbar { width: 100%; background: #fff; color: #000; border-bottom: 2px solid #000; } .ds-toolbar { display: flex; align-items: center; height: 56px; gap: 16px; padding: 0 24px; } .ds-title { flex: 1; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.3; } .ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; } .ds-icon-button svg { width: 24px; height: 24px; } .ds-btn-primary { padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
+    },
+    {
+      "name": "Dialog Surface",
+      "kind": "card",
+      "description": "Focused editing or confirmation layer with structural depth.",
+      "html": "<section class=\"ds-dialog\"><h2>Export as SVG</h2><p>Save the current graph as a standalone SVG file.</p><button class=\"ds-btn-primary\">EXPORT</button></section>",
+      "css": ".ds-dialog { width: 360px; display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; box-shadow: 8px 8px 0 #000; font-family: \"Space Grotesk\", system-ui, sans-serif; } .ds-dialog h2 { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.15; } .ds-dialog p { margin: 0; font-size: 14px; line-height: 1.4; } .ds-btn-primary { align-self: flex-start; padding: 4px 16px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Agent Drafting Table",
+    "overview": "graphviz-visual-editor is a fast, sleek, chic modeling workspace for humans supervising agent-generated Graphviz output. The user is watching diagrams arrive through MCP, checking the DOT source, and stepping in when a model needs correction. The interface must make that supervision feel immediate: graph, code, sync state, and errors are always close to the user's eye and hand.\n\nThe visual system keeps the existing brutalist discipline but aims for the cooler, sharper version of a modern Mermaid-style diagram editor. The canvas can be spacious and quiet; the chrome stays exacting, monochrome, square, and dense. Polish comes from alignment, typography, rhythm, and component consistency, not decoration.\n\nThe system explicitly rejects MUI / Material Design softness, Tailwind UI SaaS polish, rounded corners, soft gradients, over-animated dashboards, and anything that makes the editor feel like a marketing page instead of a working modeling surface.",
+    "keyCharacteristics": [
+      "Monochrome product chrome with one cyan state accent.",
+      "Large graph canvas paired with immediate DOT access.",
+      "Dense, predictable controls for long modeling sessions.",
+      "Square geometry, strong borders, and hard offset depth.",
+      "Light mode as the current baseline, with dark mode expected later."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Cyan is the single product accent and should occupy less than 10% of any screen.", "section": "colors" },
+      { "name": "The Canvas Exception Rule", "body": "Graph content and graph selections may use their own colors; editor chrome may not borrow those colors for decoration.", "section": "colors" },
+      { "name": "The Code-Is-Live Rule", "body": "DOT source is not documentation; it is the editable model. Treat code surfaces as primary workspace, not secondary support.", "section": "typography" },
+      { "name": "The Flat-Until-Activated Rule", "body": "A surface is flat at rest unless it is a popup or dialog. Elevation must indicate state, stack order, or temporary focus.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do make agent output inspectable through visible graph state, DOT source, sync state, and parse errors.",
+      "Do preserve both direct manipulation and direct DOT editing.",
+      "Do use Electric Draft Cyan only for active, selected, focused, or checked state.",
+      "Do keep controls dense, aligned, and predictable for long modeling sessions.",
+      "Do use Space Grotesk for UI and JetBrains Mono for code or code-adjacent metadata.",
+      "Do keep every corner sharp at 0 radius.",
+      "Do keep motion immediate and purposeful: 80ms linear for existing primitive states."
+    ],
+    "donts": [
+      "Don't use MUI / Material Design patterns, including soft corners, floating paper stacks, and generic material spacing.",
+      "Don't use Tailwind UI SaaS patterns, marketing-page composition, hero metrics, or repetitive card grids.",
+      "Don't use rounded corners, soft gradients, gradient text, blurred shadows, or decorative glassmorphism.",
+      "Don't add over-animated dashboards with bouncing curves or choreographed page-load sequences.",
+      "Don't introduce extra accent colors into editor chrome. Graph content is the exception, not the rule.",
+      "Don't hide code access, errors, or edit affordances behind modal-first flows."
+    ]
+  }
+}
